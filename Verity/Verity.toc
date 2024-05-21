@@ -10,6 +10,18 @@
 ## X-Curse-Project-ID: 1022267
 ## X-Wago-ID: CHANGEME
 
+Libs/LibStub/LibStub.lua
+Libs/AceLocale-3.0/AceLocale-3.0.xml
+
 Verity.lua
 
+Localization/enUS.lua
+
 Core/Events.lua
+
+Objects/ObjectManager.lua
+Objects/Object.lua
+Objects/Character.lua
+
+Templates/GameWindow.lua
+Templates/GameWindow.xml
