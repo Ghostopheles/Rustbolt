@@ -1,14 +1,11 @@
-Verity.CoreEvents = {};
-Verity.GameEvents = {};
+Verity.Events = {
+    SCREEN_CHANGED = "ScreenChanged",
+};
 
 local function GenerateCallbackEvents()
     local tbl = {};
 
-    for _, v in pairs(Verity.CoreEvents) do
-        tinsert(tbl, v);
-    end
-
-    for _, v in pairs(Verity.GameEvents) do
+    for _, v in pairs(Verity.Events) do
         tinsert(tbl, v);
     end
 
