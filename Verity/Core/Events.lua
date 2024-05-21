@@ -3,10 +3,12 @@ Verity.Events = {
     UI_THEME_CHANGED = "UIThemeChanged",
 };
 
-local function GenerateCallbackEvents()
+Verity.GameEvents = {};
+
+local function GenerateCallbackEvents(events)
     local tbl = {};
 
-    for _, v in pairs(Verity.Events) do
+    for _, v in pairs(events) do
         tinsert(tbl, v);
     end
 
@@ -15,4 +17,8 @@ end
 
 Verity.EventRegistry = CreateFromMixins(CallbackRegistryMixin);
 Verity.EventRegistry:OnLoad();
-Verity.EventRegistry:GenerateCallbackEvents(GenerateCallbackEvents());
+Verity.EventRegistry:GenerateCallbackEvents(GenerateCallbackEvents(Verity.Events));
+
+Verity.GameRegistry = CreateFromMixins(CallbackRegistryMixin);
+Verity.GameRegistry:OnLoad();
+Verity.GameRegistry:GenerateCallbackEvents(GenerateCallbackEvents(Verity.GameEvents));

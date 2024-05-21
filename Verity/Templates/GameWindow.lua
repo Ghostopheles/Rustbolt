@@ -5,8 +5,9 @@ local L = Verity.Strings;
 
 local SCREEN_NAMES = {
     START = "START",
+    GAME = "GAME",
 };
-Enum.GameWindowScreenName = SCREEN_NAMES;
+Enum.ScreenName = SCREEN_NAMES;
 
 VerityGameWindowMixin = {};
 
@@ -22,6 +23,7 @@ function VerityGameWindowMixin:OnLoad()
         Name = nil,
     };
 
+    self:RegisterScreen(self.GameScene, SCREEN_NAMES.GAME);
     self:RegisterScreen(self.StartScreen, SCREEN_NAMES.START);
     self:SetScreen(SCREEN_NAMES.START);
 
@@ -60,4 +62,9 @@ end
 
 function VerityGameWindowMixin:GetScreen()
     return self.CurrentScreen;
+end
+
+SLASH_VRT1 = "/verity";
+SlashCmdList.VRT = function(msg)
+    VerityGameWindow:SetScreen(msg);
 end

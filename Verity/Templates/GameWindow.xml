@@ -11,6 +11,7 @@
 
         <Frames>
             <Frame parentKey="StartScreen" inherits="VerityStartScreenTemplate" hidden="true" />
+            <ModelScene parentKey="GameScene" inherits="VerityGameSceneTemplate" hidden="true" />
         </Frames>
 
         <Scripts>

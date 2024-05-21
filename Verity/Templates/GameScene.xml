@@ -1,0 +1,25 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+
+    <ModelScene name="VerityGameSceneTemplate" mixin="VerityGameSceneMixin"
+        virtual="true">
+
+        <Anchors>
+            <Anchor point="TOPLEFT" x="5" y="-5" />
+            <Anchor point="BOTTOMRIGHT" y="5" />
+        </Anchors>
+
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="Background" />
+            </Layer>
+        </Layers>
+
+        <Scripts>
+            <OnLoad method="OnLoad" />
+            <OnShow method="OnShow" />
+            <OnHide method="OnHide" />
+        </Scripts>
+    </ModelScene>
+
+</Ui>

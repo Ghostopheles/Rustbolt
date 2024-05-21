@@ -28,5 +28,8 @@ Objects/Character.lua
 Templates/StartScreen.lua
 Templates/StartScreen.xml
 
+Templates/GameScene.lua
+Templates/GameScene.xml
+
 Templates/GameWindow.lua
 Templates/GameWindow.xml

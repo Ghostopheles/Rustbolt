@@ -3,6 +3,11 @@
 
     <Frame name="VerityStartScreenTemplate"
         mixin="VerityStartScreenMixin" setAllPoints="true" virtual="true">
+        <Anchors>
+            <Anchor point="TOPLEFT" x="5" y="-5" />
+            <Anchor point="BOTTOMRIGHT" y="5" />
+        </Anchors>
+
         <Layers>
             <Layer level="ARTWORK">
                 <FontString parentKey="Title" font="Game48FontShadow">
@@ -17,12 +22,7 @@
                 </FontString>
             </Layer>
             <Layer level="BACKGROUND">
-                <Texture parentKey="Background">
-                    <Anchors>
-                        <Anchor point="TOPLEFT" x="5" y="-5" />
-                        <Anchor point="BOTTOMRIGHT" y="5" />
-                    </Anchors>
-                </Texture>
+                <Texture parentKey="Background" />
             </Layer>
         </Layers>
 
