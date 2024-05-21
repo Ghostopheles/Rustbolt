@@ -18,10 +18,14 @@ Verity.lua
 Localization/enUS.lua
 
 Core/Events.lua
+Core/Animations.lua
 
 Objects/ObjectManager.lua
 Objects/Object.lua
 Objects/Character.lua
+
+Templates/StartScreen.lua
+Templates/StartScreen.xml
 
 Templates/GameWindow.lua
 Templates/GameWindow.xml
