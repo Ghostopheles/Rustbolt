@@ -1,0 +1,12 @@
+## Interface: 100207, 110000
+## Title: CHANGEME
+## Notes: CHANGEME
+## Author: CHANGEME
+## Version: @project-version@
+
+## X-License: Public Domain
+## X-Category: Development Tools
+
+## X-Curse-Project-ID: CHANGEME
+## X-Wago-ID: CHANGEME
+

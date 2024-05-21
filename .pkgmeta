@@ -1,0 +1,17 @@
+package-as: CHANGEME
+enable-nolib-creation: no
+
+license-output: LICENSE
+
+ignore:
+  - CHANGEME/Libs/*/*.rockspec
+  - CHANGEME/Libs/*/*.toc
+  - CHANGEME/Libs/*/changelog.*
+  - CHANGEME/Libs/*/CHANGELOG.*
+  - CHANGEME/Libs/*/docs
+  - CHANGEME/Libs/*/examples
+  - CHANGEME/Libs/*/README.*
+  - CHANGEME/Libs/*/tests
+  - CHANGEME/Libs/*/.pkgmeta
+  - CHANGELOG.md
+  - README.md
