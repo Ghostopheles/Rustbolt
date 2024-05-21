@@ -1,5 +1,6 @@
 Verity.Events = {
     SCREEN_CHANGED = "ScreenChanged",
+    UI_THEME_CHANGED = "UIThemeChanged",
 };
 
 local function GenerateCallbackEvents()

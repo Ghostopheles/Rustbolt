@@ -1,3 +1,4 @@
+local Enum = Verity.Enum;
 local Events = Verity.Events;
 local Registry = Verity.EventRegistry;
 local L = Verity.Strings;
@@ -5,7 +6,7 @@ local L = Verity.Strings;
 local SCREEN_NAMES = {
     START = "START",
 };
-Verity.Enum.GameWindowScreenName = SCREEN_NAMES;
+Enum.GameWindowScreenName = SCREEN_NAMES;
 
 VerityGameWindowMixin = {};
 
@@ -23,6 +24,8 @@ function VerityGameWindowMixin:OnLoad()
 
     self:RegisterScreen(self.StartScreen, SCREEN_NAMES.START);
     self:SetScreen(SCREEN_NAMES.START);
+
+    self.DefaultScreen = SCREEN_NAMES.START;
 end
 
 function VerityGameWindowMixin:Toggle()

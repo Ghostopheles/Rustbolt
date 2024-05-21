@@ -16,22 +16,82 @@
                     </Anchors>
                 </FontString>
             </Layer>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="Background">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="5" y="-5" />
+                        <Anchor point="BOTTOMRIGHT" y="5" />
+                    </Anchors>
+                </Texture>
+            </Layer>
         </Layers>
 
         <Frames>
-            <Button parentKey="StartButton" inherits="SharedGoldRedButtonLargeTemplate">
-                <Size x="200" y="40" />
+            <Frame parentKey="ButtonStack">
+                <Size x="300" />
                 <Anchors>
-                    <Anchor point="CENTER" y="-100" />
+                    <Anchor point="TOP" relativePoint="CENTER" y="-50" />
+                    <Anchor point="BOTTOM" y="50" />
                 </Anchors>
-            </Button>
-            <Button parentKey="SettingsButton" inherits="SharedButtonTemplate">
-                <Size x="165" y="30" />
-                <Anchors>
-                    <Anchor point="TOP" relativeKey="$parent.StartButton" relativePoint="BOTTOM"
-                        y="-10" />
-                </Anchors>
-            </Button>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <FontString parentKey="Author" font="Game18Font">
+                            <Anchors>
+                                <Anchor point="BOTTOM" y="25" />
+                            </Anchors>
+                        </FontString>
+                        <FontString parentKey="Version" font="Game20Font">
+                            <Anchors>
+                                <Anchor point="BOTTOM" relativeKey="$parent.Author"
+                                    relativePoint="TOP" y="10" />
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                    <Layer level="BACKGROUND">
+                        <Texture parentKey="Background" />
+                    </Layer>
+                </Layers>
+                <Frames>
+                    <Button parentKey="StartButton" inherits="SharedGoldRedButtonLargeTemplate">
+                        <Size x="200" y="40" />
+                        <Anchors>
+                            <Anchor point="TOP" y="-25" />
+                        </Anchors>
+                    </Button>
+                    <Button parentKey="LoadButton" inherits="SharedButtonTemplate">
+                        <Size x="165" y="30" />
+                        <Anchors>
+                            <Anchor point="TOP" relativeKey="$parent.StartButton"
+                                relativePoint="BOTTOM"
+                                y="-10" />
+                        </Anchors>
+                    </Button>
+                    <Button parentKey="SettingsButton" inherits="SharedButtonTemplate">
+                        <Size x="165" y="30" />
+                        <Anchors>
+                            <Anchor point="TOP" relativeKey="$parent.LoadButton"
+                                relativePoint="BOTTOM"
+                                y="-10" />
+                        </Anchors>
+                    </Button>
+                    <Button parentKey="HelpButton" inherits="SharedButtonTemplate">
+                        <Size x="165" y="30" />
+                        <Anchors>
+                            <Anchor point="TOP" relativeKey="$parent.SettingsButton"
+                                relativePoint="BOTTOM"
+                                y="-10" />
+                        </Anchors>
+                    </Button>
+                    <Button parentKey="CreditsButton" inherits="SharedButtonTemplate">
+                        <Size x="165" y="30" />
+                        <Anchors>
+                            <Anchor point="TOP" relativeKey="$parent.HelpButton"
+                                relativePoint="BOTTOM"
+                                y="-10" />
+                        </Anchors>
+                    </Button>
+                </Frames>
+            </Frame>
         </Frames>
 
         <Scripts>

@@ -19,6 +19,7 @@ Localization/enUS.lua
 
 Core/Events.lua
 Core/Animations.lua
+Core/Themes.lua
 
 Objects/ObjectManager.lua
 Objects/Object.lua

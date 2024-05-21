@@ -10,7 +10,7 @@
         </Anchors>
 
         <Frames>
-            <Frame parentKey="StartScreen" inherits="VerityStartScreenTemplate" />
+            <Frame parentKey="StartScreen" inherits="VerityStartScreenTemplate" hidden="true" />
         </Frames>
 
         <Scripts>
