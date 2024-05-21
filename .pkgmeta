@@ -1,7 +1,10 @@
 package-as: Verity
-enable-nolib-creation: no
 
 license-output: LICENSE
+
+externals:
+  Verity/Libs/LibStub: https://repos.wowace.com/wow/libstub/trunk
+  Verity/Libs/AceLocale-3.0: https://repos.curseforge.com/wow/ace3/trunk/AceLocale-3.0
 
 ignore:
   - Verity/Libs/*/*.rockspec
