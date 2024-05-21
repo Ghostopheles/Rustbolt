@@ -1,17 +1,17 @@
-package-as: CHANGEME
+package-as: Verity
 enable-nolib-creation: no
 
 license-output: LICENSE
 
 ignore:
-  - CHANGEME/Libs/*/*.rockspec
-  - CHANGEME/Libs/*/*.toc
-  - CHANGEME/Libs/*/changelog.*
-  - CHANGEME/Libs/*/CHANGELOG.*
-  - CHANGEME/Libs/*/docs
-  - CHANGEME/Libs/*/examples
-  - CHANGEME/Libs/*/README.*
-  - CHANGEME/Libs/*/tests
-  - CHANGEME/Libs/*/.pkgmeta
+  - Verity/Libs/*/*.rockspec
+  - Verity/Libs/*/*.toc
+  - Verity/Libs/*/changelog.*
+  - Verity/Libs/*/CHANGELOG.*
+  - Verity/Libs/*/docs
+  - Verity/Libs/*/examples
+  - Verity/Libs/*/README.*
+  - Verity/Libs/*/tests
+  - Verity/Libs/*/.pkgmeta
   - CHANGELOG.md
   - README.md

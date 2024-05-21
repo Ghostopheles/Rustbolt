@@ -1,7 +1,7 @@
 ## Interface: 100207, 110000
-## Title: CHANGEME
+## Title: Verity
 ## Notes: CHANGEME
-## Author: CHANGEME
+## Author: Ghostopheles
 ## Version: @project-version@
 
 ## X-License: Public Domain
