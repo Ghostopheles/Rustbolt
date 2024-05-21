@@ -22,6 +22,8 @@ function VerityStartScreenMixin:OnLoad()
 
     ThemeManager:RegisterThemedTexture(self.Background, "START_SCREEN_BG");
     ThemeManager:RegisterThemedTexture(self.ButtonStack.Background, "START_SCREEN_BUTTON_STACK_BG");
+
+    stack.StartButton:SetScript("OnClick", function() self:GetParent():SetScreen(Verity.Enum.ScreenName.GAME); end);
 end
 
 function VerityStartScreenMixin:OnShow()

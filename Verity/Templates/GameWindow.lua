@@ -23,7 +23,7 @@ function VerityGameWindowMixin:OnLoad()
         Name = nil,
     };
 
-    self:RegisterScreen(self.GameScene, SCREEN_NAMES.GAME);
+    self:RegisterScreen(self.GameCanvas, SCREEN_NAMES.GAME);
     self:RegisterScreen(self.StartScreen, SCREEN_NAMES.START);
     self:SetScreen(SCREEN_NAMES.START);
 

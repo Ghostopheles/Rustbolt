@@ -3,7 +3,7 @@
 
     <Frame name="VerityGameWindow" inherits="PortraitFrameFlatTemplate"
         mixin="VerityGameWindowMixin" parent="UIParent" movable="true" enableMouse="true"
-        dontSavePosition="true" hidden="false">
+        dontSavePosition="true" toplevel="true" hidden="false">
         <Size x="1600" y="900" />
         <Anchors>
             <Anchor point="CENTER" />
@@ -11,7 +11,7 @@
 
         <Frames>
             <Frame parentKey="StartScreen" inherits="VerityStartScreenTemplate" hidden="true" />
-            <ModelScene parentKey="GameScene" inherits="VerityGameSceneTemplate" hidden="true" />
+            <Frame parentKey="GameCanvas" inherits="VerityGameCanvasTemplate" hidden="true" />
         </Frames>
 
         <Scripts>
