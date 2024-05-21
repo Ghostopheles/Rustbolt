@@ -8,6 +8,11 @@
         <Anchors>
             <Anchor point="CENTER" />
         </Anchors>
+
+        <Frames>
+            <Frame parentKey="StartScreen" inherits="VerityStartScreenTemplate" />
+        </Frames>
+
         <Scripts>
             <OnLoad method="OnLoad" />
         </Scripts>
