@@ -22,14 +22,23 @@ local function InDevMode()
     return VerityDevTools and Verity.Globals.Version == "dev";
 end
 
+local function GetSelectedAsset()
+    return VerityAssetPicker:GetSelectedAsset();
+end
+
+------------
+
 VerityGameTileMixin = {};
+
+function VerityGameTileMixin:OnKeyDown(key)
+end
 
 function VerityGameTileMixin:OnMouseDown()
     if not InDevMode() then
         return;
     end
 
-    local tile = VerityDevTools.SelectedTile;
+    local tile = GetSelectedAsset();
     if tile then
         self:EditTile(tile);
     end
@@ -47,7 +56,7 @@ function VerityGameTileMixin:OnEnter()
     parent:SetHighlighted(self);
 
     if IsMouseButtonDown("LeftButton") then
-        local tile = VerityDevTools.SelectedTile;
+        local tile = GetSelectedAsset();
         if tile then
             self:EditTile(tile);
         end
@@ -70,7 +79,11 @@ function VerityGameTileMixin:EditTile(tile)
         };
     end
 
-    VerityDevMap.Tiles[self.layoutIndex] = tile;
+    VerityDevMap.Tiles[self.layoutIndex] = {
+        AssetName = tile,
+        Walkable = false,
+        Buildable = true,
+    };
     local asset = AssetManager:GetAssetPath(tile);
     self:SetTileTexture(asset);
 end
@@ -138,6 +151,12 @@ function VerityGameCanvasMixin:LoadMap(mapID)
 
     local map = MapManager:GetMap(mapID);
 
+    if not map then
+        map = {
+            Fill = AssetManager:GetAssetPath("Fill"),
+        };
+    end
+
     local tiles = {};
     for i=1, MAX_TILES do
         local tile = self.TilePool:Acquire();
@@ -145,11 +164,16 @@ function VerityGameCanvasMixin:LoadMap(mapID)
 
         local texture;
         if map.Tiles and map.Tiles[i] then
-            local assetName = map.Tiles[i];
+            local assetName = map.Tiles[i].AssetName;
             texture = AssetManager:GetAssetPath(assetName);
         else
             texture = map.Fill;
         end
+
+        if not texture then
+            texture = AssetManager:GetAssetPath("Fill");
+        end
+
         tile:Init(texture);
 
         tinsert(tiles, tile);

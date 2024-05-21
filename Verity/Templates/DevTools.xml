@@ -22,24 +22,10 @@
                         y="-5" />
                 </Anchors>
             </Button>
-            <Button parentKey="Dirt" inherits="SharedButtonTemplate">
+            <Button parentKey="Assets" inherits="SharedButtonTemplate">
                 <Size x="165" y="30" />
                 <Anchors>
                     <Anchor point="TOP" relativeKey="$parent.SwitchScreen" relativePoint="BOTTOM"
-                        y="-5" />
-                </Anchors>
-            </Button>
-            <Button parentKey="Grass" inherits="SharedButtonTemplate">
-                <Size x="165" y="30" />
-                <Anchors>
-                    <Anchor point="TOP" relativeKey="$parent.Dirt" relativePoint="BOTTOM"
-                        y="-5" />
-                </Anchors>
-            </Button>
-            <Button parentKey="Water" inherits="SharedButtonTemplate">
-                <Size x="165" y="30" />
-                <Anchors>
-                    <Anchor point="TOP" relativeKey="$parent.Grass" relativePoint="BOTTOM"
                         y="-5" />
                 </Anchors>
             </Button>

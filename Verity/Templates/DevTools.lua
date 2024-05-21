@@ -8,14 +8,6 @@ function VerityDevToolsMixin:OnLoad()
     self.SwitchScreen:SetScript("OnClick", function() VerityGameWindow:SetScreen(self.ScreenName:GetText()); end);
     self.SwitchScreen:SetText("Set Screen");
 
-    self.SelectedTile = nil;
-
-    self.Dirt:SetText("Dirt");
-    self.Dirt:SetScript("OnClick", function() self.SelectedTile = "Dirt" end);
-
-    self.Grass:SetText("Grass");
-    self.Grass:SetScript("OnClick", function() self.SelectedTile = "Grass" end);
-
-    self.Water:SetText("Water");
-    self.Water:SetScript("OnClick", function() self.SelectedTile = "Water" end);
+    self.Assets:SetText("Assets");
+    self.Assets:SetScript("OnClick", function() VerityAssetPicker:Toggle(); end);
 end

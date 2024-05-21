@@ -1,0 +1,40 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+
+    <Button name="VerityAssetButtonTemplate" mixin="VerityAssetButtonMixin" virtual="true">
+        <Size x="64" y="64" />
+        <Layers>
+            <Layer level="HIGHLIGHT">
+                <Texture parentKey="HighlightTexture" atlas="Upgrade-Highlight" setAllPoints="true" />
+            </Layer>
+            <Layer level="OVERLAY">
+                <Texture parentKey="SelectedTexture" atlas="wowlabs-spell-icon-frame-highlight"
+                    setAllPoints="true" hidden="true" />
+            </Layer>
+            <Layer level="ARTWORK">
+                <Texture parentKey="Texture" setAllPoints="true" />
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad method="OnLoad" />
+            <OnClick method="OnClick" />
+        </Scripts>
+    </Button>
+
+    <Frame name="VerityAssetPicker" inherits="PortraitFrameFlatTemplate"
+        mixin="VerityAssetPickerMixin" parent="VerityGameWindow" enableMouse="true" movable="true"
+        toplevel="true" hidden="true">
+        <Size x="300" y="300" />
+        <Anchors>
+            <Anchor point="TOPLEFT" x="10" y="-10" />
+        </Anchors>
+
+        <Scripts>
+            <OnLoad method="OnLoad" />
+            <OnShow method="OnShow" />
+            <OnMouseDown method="OnMouseDown" />
+            <OnMouseUp method="OnMouseUp" />
+        </Scripts>
+    </Frame>
+
+</Ui>
