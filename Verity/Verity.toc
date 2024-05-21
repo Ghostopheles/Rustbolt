@@ -7,6 +7,9 @@
 ## X-License: Public Domain
 ## X-Category: Development Tools
 
-## X-Curse-Project-ID: CHANGEME
+## X-Curse-Project-ID: 1022267
 ## X-Wago-ID: CHANGEME
 
+Verity.lua
+
+Core/Events.lua

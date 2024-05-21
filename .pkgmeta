@@ -15,3 +15,6 @@ ignore:
   - Verity/Libs/*/.pkgmeta
   - CHANGELOG.md
   - README.md
+
+move-folders:
+  Verity/Verity: Verity
