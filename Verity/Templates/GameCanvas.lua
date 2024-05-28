@@ -1,3 +1,7 @@
+local Constants = Verity.Constants;
+
+local InputManager = Verity.InputManager;
+
 local Events = Verity.Events;
 local Registry = Verity.EventRegistry;
 
@@ -6,17 +10,33 @@ local GameRegistry = Verity.GameRegistry;
 
 local Enum = Verity.Enum;
 local MapManager = Verity.MapManager;
+
 local AssetManager = Verity.AssetManager;
+
 local Animations = Verity.AnimationManager;
 local ThemeManager = Verity.ThemeManager;
 local L = Verity.Strings;
 
-local MAX_TILES = 1400;
-local MAX_TILES_Y = 50;
-local TILE_SIZE = 32; -- 32x32
+local MAX_TILES = Constants.Map.MaxTileCount;
+local MAX_TILES_X = Constants.Map.MaxTilesX;
+local TILE_SIZE = Constants.Map.TileSize; -- 32x32
 
 local EMPTY_TILE_COLOR = CreateColor(0.25, 0.25, 0.25, 1);
 local TILE_TEMPLATE = "VerityGameTileTemplate";
+
+local KEY_TOGGLE_WALKABLE = "R";
+local KEY_TOGGLE_BUILDABLE = "T";
+local KEY_TOGGLE_WATER = "F";
+
+local CONSUME_KEYS = {
+    [KEY_TOGGLE_WALKABLE] = true,
+    [KEY_TOGGLE_BUILDABLE] = true,
+    [KEY_TOGGLE_WATER] = true,
+};
+
+local function ShouldPropagateKey(key)
+    return not CONSUME_KEYS[key];
+end
 
 local function InDevMode()
     return VerityDevTools and Verity.Globals.Version == "dev";
@@ -26,11 +46,40 @@ local function GetSelectedAsset()
     return VerityAssetPicker:GetSelectedAsset();
 end
 
+local function CalculateCoordinatesFromIndex(index)
+    return MathUtil.CalculateCoordinatesFromIndex(index, Constants.Map.MaxTilesX);
+end
+
 ------------
 
 VerityGameTileMixin = {};
 
+---@param tile VerityMapTile
+function VerityGameTileMixin:Init(tile)
+    self:ClearAllPoints();
+    self:SetSize(TILE_SIZE, TILE_SIZE);
+
+    self.Tile = tile;
+
+    self:SetTileAsset(tile.AssetName);
+    self:SetWalkable(tile.Walkable);
+    self:SetBuildable(tile.Buildable);
+    self:SetWater(tile.Water);
+    self:SetLocation(tile.Location);
+end
+
 function VerityGameTileMixin:OnKeyDown(key)
+    if key == KEY_TOGGLE_WALKABLE then
+        self:SetWalkable(not self:IsWalkable());
+    elseif key == KEY_TOGGLE_BUILDABLE then
+        self:SetBuildable(not self:IsBuildable());
+    elseif key == KEY_TOGGLE_WATER then
+        self:SetWater(not self:IsWater());
+    end
+end
+
+function VerityGameTileMixin:OnKeyUp(key)
+    print(key);
 end
 
 function VerityGameTileMixin:OnMouseDown()
@@ -61,6 +110,14 @@ function VerityGameTileMixin:OnEnter()
             self:EditTile(tile);
         end
     end
+
+    local fmt = "X: %d Y: %d\nAsset: %s\nWalkable: %s\nBuildable: %s\nWater: %s";
+    local location = self:GetLocation();
+    local tooltipText = format(fmt, location.X, location.Y, self.Asset.Name, tostring(self:IsWalkable()), tostring(self:IsBuildable()), tostring(self:IsWater()));
+
+    GameTooltip:SetOwner(self, "ANCHOR_CURSOR_RIGHT");
+    GameTooltip:SetText(tooltipText, 1, 1, 1, 1);
+    GameTooltip:Show();
 end
 
 function VerityGameTileMixin:OnLeave()
@@ -70,6 +127,8 @@ function VerityGameTileMixin:OnLeave()
 
     local parent = self:GetParent();
     parent:ClearHighlight();
+
+    GameTooltip:FadeOut();
 end
 
 function VerityGameTileMixin:EditTile(tile)
@@ -79,32 +138,68 @@ function VerityGameTileMixin:EditTile(tile)
         };
     end
 
-    VerityDevMap.Tiles[self.layoutIndex] = {
-        AssetName = tile,
-        Walkable = false,
-        Buildable = true,
-    };
+    if not VerityDevMap.Tiles[self.layoutIndex] then
+        VerityDevMap.Tiles[self.layoutIndex] = {
+            AssetName = tile,
+            Walkable = false,
+            Buildable = true,
+        };
+    else
+        VerityDevMap.Tiles[self.layoutIndex].AssetName = tile;
+    end
+
     local asset = AssetManager:GetAsset(tile);
     self:SetTileAsset(asset);
 end
 
-function VerityGameTileMixin:Init(asset)
-    self:ClearAllPoints();
-    self:SetSize(TILE_SIZE, TILE_SIZE);
-    self:SetTileAsset(asset);
-end
-
 function VerityGameTileMixin:SetTileAsset(asset)
-    if asset then
-        asset:Apply(self);
-    else
-        self:MakeEmpty();
+    if type(asset) ~= "table" then
+        asset = AssetManager:GetAsset(asset);
     end
+    asset:Apply(self);
     self.Asset = asset;
 end
 
 function VerityGameTileMixin:MakeEmpty()
     self:SetColorTexture(EMPTY_TILE_COLOR:GetRGB());
+end
+
+function VerityGameTileMixin:SetWalkable(walkable)
+    self.Walkable = walkable;
+    VerityDevMap.Tiles[self.layoutIndex]["Walkable"] = walkable;
+    self:SetDesaturated(walkable);
+    self:SetBuildable(false);
+end
+
+function VerityGameTileMixin:IsWalkable()
+    return self.Walkable;
+end
+
+function VerityGameTileMixin:SetBuildable(buildable)
+    self.Buildable = buildable;
+    VerityDevMap.Tiles[self.layoutIndex]["Buildable"] = buildable;
+end
+
+function VerityGameTileMixin:IsBuildable()
+    return self.Buildable;
+end
+
+function VerityGameTileMixin:SetWater(water)
+    self.Water = water;
+    VerityDevMap.Tiles[self.layoutIndex]["Water"] = water;
+end
+
+function VerityGameTileMixin:IsWater()
+    return self.Water;
+end
+
+function VerityGameTileMixin:SetLocation(location)
+    self.Location = location;
+    VerityDevMap.Tiles[self.layoutIndex]["Location"] = location;
+end
+
+function VerityGameTileMixin:GetLocation()
+    return self.Location;
 end
 
 ------------
@@ -118,12 +213,35 @@ function VerityGameCanvasMixin:OnLoad()
     self.DisplayedMapID = 0;
 
     Registry:RegisterCallback(Events.SCREEN_CHANGED, self.OnScreenChanged, self);
+
+    InputManager:RegisterInputListener(KEY_TOGGLE_WALKABLE, self.OnKeyDown, self, Enum.ScreenName.GAME);
+    InputManager:RegisterInputListener(KEY_TOGGLE_BUILDABLE, self.OnKeyDown, self, Enum.ScreenName.GAME);
+    InputManager:RegisterInputListener(KEY_TOGGLE_WATER, self.OnKeyDown, self, Enum.ScreenName.GAME);
 end
 
 function VerityGameCanvasMixin:OnShow()
 end
 
 function VerityGameCanvasMixin:OnHide()
+end
+
+function VerityGameCanvasMixin:OnKeyDown(key)
+    if self.SelectedTile then
+        local tile = self.SelectedTile;
+        if key == KEY_TOGGLE_WALKABLE then
+            tile:SetWalkable(not tile:IsWalkable());
+        elseif key == KEY_TOGGLE_BUILDABLE then
+            tile:SetBuildable(not tile:IsBuildable());
+        elseif key == KEY_TOGGLE_WATER then
+            tile:SetWater(not tile:IsWater());
+        end
+    end
+end
+
+function VerityGameCanvasMixin:OnKeyUp(...)
+    if self.SelectedTile then
+        self.SelectedTile:OnKeyUp(...);
+    end
 end
 
 function VerityGameCanvasMixin:OnScreenChanged(screenName)
@@ -134,10 +252,12 @@ end
 
 function VerityGameCanvasMixin:SetHighlighted(tile)
     self.TileHighlight:SetAllPoints(tile);
+    self.SelectedTile = tile;
 end
 
 function VerityGameCanvasMixin:ClearHighlight()
     self.TileHighlight:ClearAllPoints();
+    self.SelectedTile = nil;
 end
 
 function VerityGameCanvasMixin:Clear()
@@ -153,9 +273,7 @@ function VerityGameCanvasMixin:LoadMap(mapID)
     local map = MapManager:GetMap(mapID);
 
     if not map then
-        map = {
-            Fill = "Fill",
-        };
+        return;
     end
 
     local tiles = {};
@@ -163,22 +281,18 @@ function VerityGameCanvasMixin:LoadMap(mapID)
         local tile = self.TilePool:Acquire();
         tile.layoutIndex = i;
 
-        local asset;
-        if map.Tiles and map.Tiles[i] then
-            local assetName = map.Tiles[i].AssetName;
-            asset = AssetManager:GetAsset(assetName);
+        local tileData = map:GetTileByIndex(i);
+
+        if not tileData then
+            local x, y = CalculateCoordinatesFromIndex(i);
+            MapManager:CreatePlaceholderMapTile(x, y);
         end
 
-        if not asset then
-            asset = AssetManager:GetAsset(map.Fill or "Fill");
-        end
-
-        tile:Init(asset);
-
+        tile:Init(tileData);
         tinsert(tiles, tile);
     end
 
-    local layout = AnchorUtil.CreateGridLayout(GridLayoutMixin.Direction.TopLeftToBottomRight, MAX_TILES_Y);
+    local layout = AnchorUtil.CreateGridLayout(GridLayoutMixin.Direction.TopLeftToBottomRight, MAX_TILES_X);
 
     local initialAnchor = AnchorUtil.CreateAnchor("TOPLEFT", self, "TOPLEFT", 0, 0);
     AnchorUtil.GridLayout(tiles, initialAnchor, layout);

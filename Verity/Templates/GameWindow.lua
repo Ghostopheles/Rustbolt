@@ -1,3 +1,4 @@
+local Input = Verity.InputManager;
 local Enum = Verity.Enum;
 local Events = Verity.Events;
 local Registry = Verity.EventRegistry;
@@ -28,6 +29,19 @@ function VerityGameWindowMixin:OnLoad()
     self:SetScreen(SCREEN_NAMES.START);
 
     self.DefaultScreen = SCREEN_NAMES.START;
+end
+
+function VerityGameWindowMixin:OnKeyDown(key)
+    if Input:ShouldPropagateKey(key) then
+        self:SetPropagateKeyboardInput(true);
+    else
+        self:SetPropagateKeyboardInput(false);
+        Input:OnKeyDown(key);
+    end
+end
+
+function VerityGameWindowMixin:OnKeyUp(key)
+    Input:OnKeyUp(key);
 end
 
 function VerityGameWindowMixin:Toggle()
@@ -62,9 +76,4 @@ end
 
 function VerityGameWindowMixin:GetScreen()
     return self.CurrentScreen;
-end
-
-SLASH_VRT1 = "/verity";
-SlashCmdList.VRT = function(msg)
-    VerityGameWindow:SetScreen(msg);
 end

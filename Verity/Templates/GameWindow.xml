@@ -16,6 +16,8 @@
 
         <Scripts>
             <OnLoad method="OnLoad" />
+            <OnKeyDown method="OnKeyDown" />
+            <OnKeyUp method="OnKeyUp" />
         </Scripts>
     </Frame>
 
