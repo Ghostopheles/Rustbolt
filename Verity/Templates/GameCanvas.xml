@@ -4,6 +4,7 @@
     <Texture name="VerityGameTileTemplate" mixin="VerityGameTileMixin" enableMouse="true"
         virtual="true">
         <Scripts>
+            <OnLoad method="OnLoad" />
             <OnMouseDown method="OnMouseDown" />
             <OnMouseUp method="OnMouseUp" />
             <OnEnter method="OnEnter" />

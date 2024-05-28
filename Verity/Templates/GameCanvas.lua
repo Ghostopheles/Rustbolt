@@ -28,18 +28,8 @@ local KEY_TOGGLE_WALKABLE = "R";
 local KEY_TOGGLE_BUILDABLE = "T";
 local KEY_TOGGLE_WATER = "F";
 
-local CONSUME_KEYS = {
-    [KEY_TOGGLE_WALKABLE] = true,
-    [KEY_TOGGLE_BUILDABLE] = true,
-    [KEY_TOGGLE_WATER] = true,
-};
-
-local function ShouldPropagateKey(key)
-    return not CONSUME_KEYS[key];
-end
-
 local function InDevMode()
-    return VerityDevTools and Verity.Globals.Version == "dev";
+    return VerityDevTools:IsDevModeActive();
 end
 
 local function GetSelectedAsset()
@@ -53,6 +43,10 @@ end
 ------------
 
 VerityGameTileMixin = {};
+
+function VerityGameTileMixin:OnLoad()
+    Registry:RegisterCallback(Events.DEV_STATE_CHANGED, self.OnDevStateChanged, self);
+end
 
 ---@param tile VerityMapTile
 function VerityGameTileMixin:Init(tile)
@@ -160,6 +154,12 @@ function VerityGameTileMixin:SetTileAsset(asset)
     self.Asset = asset;
 end
 
+function VerityGameTileMixin:OnDevStateChanged(inDevMode)
+    if not inDevMode and GameTooltip:GetOwner() == self then
+        GameTooltip:Hide();
+    end
+end
+
 function VerityGameTileMixin:MakeEmpty()
     self:SetColorTexture(EMPTY_TILE_COLOR:GetRGB());
 end
@@ -213,10 +213,13 @@ function VerityGameCanvasMixin:OnLoad()
     self.DisplayedMapID = 0;
 
     Registry:RegisterCallback(Events.SCREEN_CHANGED, self.OnScreenChanged, self);
+    Registry:RegisterCallback(Events.DEV_STATE_CHANGED, self.OnDevStateChanged, self);
 
     InputManager:RegisterInputListener(KEY_TOGGLE_WALKABLE, self.OnKeyDown, self, Enum.ScreenName.GAME, InDevMode);
     InputManager:RegisterInputListener(KEY_TOGGLE_BUILDABLE, self.OnKeyDown, self, Enum.ScreenName.GAME, InDevMode);
     InputManager:RegisterInputListener(KEY_TOGGLE_WATER, self.OnKeyDown, self, Enum.ScreenName.GAME, InDevMode);
+
+    self.TileHighlight:Hide();
 end
 
 function VerityGameCanvasMixin:OnShow()
@@ -248,6 +251,10 @@ function VerityGameCanvasMixin:OnScreenChanged(screenName)
     if screenName == Enum.ScreenName.GAME then
         self:LoadMap(1);
     end
+end
+
+function VerityGameCanvasMixin:OnDevStateChanged(inDevMode)
+    self.TileHighlight:SetShown(inDevMode);
 end
 
 function VerityGameCanvasMixin:SetHighlighted(tile)
