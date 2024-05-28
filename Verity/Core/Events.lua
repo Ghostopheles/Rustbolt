@@ -2,6 +2,8 @@ Verity.Events = {
     SCREEN_CHANGED = "ScreenChanged",
     UI_THEME_CHANGED = "UIThemeChanged",
     ASSET_PICKER_ASSET_CHANGED = "AssetPickerAssetChanged",
+    TILE_ATTRIBUTE_CHANGED = "GameTileAttributeChanged",
+    DEV_STATE_CHANGED = "DevStateChanged",
 };
 
 Verity.GameEvents = {};
