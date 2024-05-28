@@ -12,6 +12,12 @@ Constants.Map = Map;
 
 Constants.SpritesheetSize = 512;
 
+---@class VerityInputConstants
+local Input = {};
+Input.DoubleTapTimeout = 0.5;
+
+Constants.Input = Input;
+
 ------------
 
 Verity.Constants = Constants;

@@ -1,5 +1,5 @@
 local SCREENS_ALL = "all";
-local DOUBLE_TAP_TIMEOUT = 0.25;
+local DOUBLE_TAP_TIMEOUT = Verity.Constants.Input.DoubleTapTimeout;
 
 ---@class VerityInputContext
 local InputContextBase = {
