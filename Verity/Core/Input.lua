@@ -159,7 +159,6 @@ function InputManager:OnKeyDown(key)
         local context = listener.Context;
         if self:EvaluateContext(context, key, false) then
             local success, result = pcall(listener.Callback, listener.Owner, key);
-            print(success, result);
             if not success then self:HandleInputError(key, result); end;
         end
     end

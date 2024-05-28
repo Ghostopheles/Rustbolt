@@ -65,7 +65,6 @@ function MapBase:Init(fill, tiles, startPos, endPos)
 
     for index, tile in pairs(tiles) do
         local x, y = CalculateCoordinatesFromIndex(index);
-        print(x, y);
         if not self.Tiles[x] then
             self.Tiles[x] = {};
         end
