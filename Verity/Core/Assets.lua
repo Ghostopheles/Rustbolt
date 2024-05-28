@@ -1,5 +1,7 @@
-local TILE_SIZE = 32;
-local SHEET_SIZE = 512;
+local Constants = Verity.Constants;
+
+local TILE_SIZE = Constants.Map.TileSize; -- 32x32
+local SHEET_SIZE = Constants.SpritesheetSize; -- 512x512
 
 local function FilePath(fileName)
     return format("Interface/AddOns/Verity/Assets/%s.png", fileName);
@@ -43,26 +45,6 @@ end
 local AssetManager = {};
 
 AssetManager.Assets = {
-    Grass = {
-        Path = FilePath("EnvironmentSheet"),
-        Row = 1,
-        Column = 4
-    },
-    GrassClear = {
-        Path = FilePath("EnvironmentSheet"),
-        Row = 1,
-        Column = 5
-    },
-    Water = {
-        Path = FilePath("EnvironmentSheet"),
-        Row = 1,
-        Column = 7
-    },
-    WaterClear = {
-        Path = FilePath("EnvironmentSheet"),
-        Row = 1,
-        Column = 6
-    },
     Dirt = {
         Path = FilePath("EnvironmentSheet"),
         Row = 1,
@@ -78,18 +60,45 @@ AssetManager.Assets = {
         Row = 1,
         Column = 3
     },
+    DirtGrass2 = {
+        Path = FilePath("EnvironmentSheet"),
+        Row = 1,
+        Column = 4
+    },
     DirtWater = {
+        Path = FilePath("EnvironmentSheet"),
+        Row = 1,
+        Column = 5
+    },
+    WaterClear = {
+        Path = FilePath("EnvironmentSheet"),
+        Row = 1,
+        Column = 6
+    },
+    WaterRough = {
+        Path = FilePath("EnvironmentSheet"),
+        Row = 1,
+        Column = 7
+    },
+    GrassRough = {
         Path = FilePath("EnvironmentSheet"),
         Row = 1,
         Column = 8
     },
-    Rocks = {
+    GrassClear = {
         Path = FilePath("EnvironmentSheet"),
         Row = 1,
         Column = 9
     },
-    Fill = {
-        Path = FilePath("PHTile"),
+    Rocks = {
+        Path = FilePath("EnvironmentSheet"),
+        Row = 1,
+        Column = 10
+    },
+    MissingNo = {
+        Path = FilePath("EnvironmentSheet"),
+        Row = 16,
+        Column = 16,
     },
 };
 
@@ -118,7 +127,9 @@ end
 ---@return VerityAsset
 function AssetManager:GetAsset(assetName)
     local asset = self.Assets[assetName];
-    assert(asset, "Missing asset '" .. assetName .. "'");
+    if not asset then
+        asset = self.Assets.MissingNo;
+    end
 
     local path = asset.Path;
 
