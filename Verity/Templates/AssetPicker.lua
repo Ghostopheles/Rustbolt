@@ -7,7 +7,7 @@ local Animations = Verity.AnimationManager;
 local ThemeManager = Verity.ThemeManager;
 local L = Verity.Strings;
 
-local ASSET_PICKER_STRIDE = 3;
+local ASSET_PICKER_STRIDE = 4;
 local ASSET_PICKER_BUTTON_SIZE = 64; -- 64x64;
 
 ------------
@@ -19,25 +19,18 @@ function VerityAssetButtonMixin:OnLoad()
 end
 
 function VerityAssetButtonMixin:OnClick()
-    local parent = self:GetParent();
-    parent:SetSelectedAsset(self.Asset);
+    VerityAssetPicker:SetSelectedAsset(self.Asset.Name);
 end
 
-function VerityAssetButtonMixin:Init(assetName, assetPath)
-    self:ClearAllPoints();
+function VerityAssetButtonMixin:Init(assetName)
     self:SetSize(ASSET_PICKER_BUTTON_SIZE, ASSET_PICKER_BUTTON_SIZE);
 
-    self.Asset = assetName;
-    assetPath = assetPath or AssetManager:GetAssetPath(assetName);
-    self:SetTexture(assetPath);
+    self.Asset = AssetManager:GetAsset(assetName);
+    self:SetTexture(self.Asset);
 end
 
-function VerityAssetButtonMixin:Reset(self)
-    self.Asset = nil;
-end
-
-function VerityAssetButtonMixin:SetTexture(texture)
-    self.Texture:SetTexture(texture);
+function VerityAssetButtonMixin:SetTexture(asset)
+    asset:Apply(self.Texture);
 end
 
 function VerityAssetButtonMixin:OnSelectedAssetChanged(selected)
@@ -45,7 +38,7 @@ function VerityAssetButtonMixin:OnSelectedAssetChanged(selected)
         return;
     end
 
-    self.SelectedTexture:SetShown(selected == self.Asset);
+    self.SelectedTexture:SetShown(selected == self.Asset.Name);
 end
 
 ------------
@@ -56,12 +49,50 @@ function VerityAssetPickerMixin:OnLoad()
     ButtonFrameTemplate_HidePortrait(self);
     self:SetTitle("Assets");
 
-    self.AssetButtonPool = CreateFramePool("Button", self, "VerityAssetButtonTemplate", VerityAssetButtonMixin.Reset);
-    self.AssetButtonPool:SetResetDisallowedIfNew(true);
+    self.AssetButtonTemplate = "VerityAssetButtonTemplate";
+
+    self.DataProvider = CreateDataProvider();
+
+    local stride = ASSET_PICKER_STRIDE;
+    local topPadding = 0;
+    local bottomPadding = 0;
+    local leftPadding = 0;
+    local rightPadding = 0;
+    self.ScrollView = CreateScrollBoxListGridView(
+        stride,
+        topPadding,
+        bottomPadding,
+        leftPadding,
+        rightPadding
+    );
+
+    self.ScrollView:SetDataProvider(self.DataProvider);
+    self.ScrollView:SetPanExtent(ASSET_PICKER_BUTTON_SIZE);
+    self.ScrollView:SetElementExtent(ASSET_PICKER_BUTTON_SIZE);
+
+    local function Initializer(frame, data)
+        frame:Init(data);
+    end
+
+    self.ScrollView:SetElementInitializer(self.AssetButtonTemplate, Initializer);
+
+    ScrollUtil.InitScrollBoxListWithScrollBar(self.ScrollBox, self.ScrollBar, self.ScrollView);
+
+    local anchorsWithScrollBar = {
+        CreateAnchor("TOPLEFT", self, "TOPLEFT", 20, -30);
+        CreateAnchor("BOTTOMRIGHT", self.ScrollBar, -13, 4),
+    };
+
+    local anchorsWithoutScrollBar = {
+        anchorsWithScrollBar[1],
+        CreateAnchor("BOTTOMRIGHT", self, "BOTTOMRIGHT", -4, 4);
+    };
+
+    ScrollUtil.AddManagedScrollBarVisibilityBehavior(self.ScrollBox, self.ScrollBar, anchorsWithScrollBar, anchorsWithoutScrollBar);
 end
 
 function VerityAssetPickerMixin:OnShow()
-    if self.AssetButtonPool:GetNumActive() == 0 then
+    if self.DataProvider:GetSize() == 0 then
         self:PopulateAssets();
     end
 end
@@ -77,19 +108,9 @@ end
 function VerityAssetPickerMixin:PopulateAssets()
     local assets = AssetManager:GetAllAssets();
 
-    local buttons = {};
-    for assetName, assetPath in pairs(assets) do
-        local button = self.AssetButtonPool:Acquire();
-        button:Init(assetName, assetPath);
-
-        tinsert(buttons, button);
+    for assetName, _ in pairs(assets) do
+        self.DataProvider:Insert(assetName);
     end
-
-    local spacing = ASSET_PICKER_BUTTON_SIZE + 20;
-    local layout = AnchorUtil.CreateGridLayout(GridLayoutMixin.Direction.TopLeftToBottomRight, ASSET_PICKER_STRIDE, nil, nil, spacing, spacing);
-
-    local initialAnchor = AnchorUtil.CreateAnchor("TOPLEFT", self, "TOPLEFT", 20, -35);
-    AnchorUtil.GridLayout(buttons, initialAnchor, layout);
 end
 
 function VerityAssetPickerMixin:SetSelectedAsset(assetName)

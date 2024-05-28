@@ -29,6 +29,11 @@
             <Anchor point="TOPLEFT" x="10" y="-10" />
         </Anchors>
 
+        <Frames>
+            <Frame parentKey="ScrollBox" inherits="WowScrollBoxList" />
+            <EventFrame parentKey="ScrollBar" inherits="MinimalScrollBar" />
+        </Frames>
+
         <Scripts>
             <OnLoad method="OnLoad" />
             <OnShow method="OnShow" />

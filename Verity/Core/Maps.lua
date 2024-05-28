@@ -1,3 +1,7 @@
+---@class VerityCoordinate
+---@field X number
+---@field Y number
+
 ---@class VerityMapTile
 ---@field AssetName string
 ---@field Walkable boolean
@@ -5,7 +9,9 @@
 
 ---@class VerityMap
 ---@field Fill? string
----@field Tiles? table<number, VerityMapTile>
+---@field Tiles? table<VerityMapTile>
+---@field Start table<VerityMapTile>
+---@field End table<VerityMapTile>
 
 ---@class VerityMapManager
 local MapManager = {};

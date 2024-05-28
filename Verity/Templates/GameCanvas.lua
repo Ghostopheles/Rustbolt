@@ -84,22 +84,23 @@ function VerityGameTileMixin:EditTile(tile)
         Walkable = false,
         Buildable = true,
     };
-    local asset = AssetManager:GetAssetPath(tile);
-    self:SetTileTexture(asset);
+    local asset = AssetManager:GetAsset(tile);
+    self:SetTileAsset(asset);
 end
 
-function VerityGameTileMixin:Init(texture)
+function VerityGameTileMixin:Init(asset)
     self:ClearAllPoints();
     self:SetSize(TILE_SIZE, TILE_SIZE);
-    self:SetTileTexture(texture);
+    self:SetTileAsset(asset);
 end
 
-function VerityGameTileMixin:SetTileTexture(texture, ...)
-    if texture then
-        self:SetTexture(texture, ...);
+function VerityGameTileMixin:SetTileAsset(asset)
+    if asset then
+        asset:Apply(self);
     else
         self:MakeEmpty();
     end
+    self.Asset = asset;
 end
 
 function VerityGameTileMixin:MakeEmpty()
@@ -153,7 +154,7 @@ function VerityGameCanvasMixin:LoadMap(mapID)
 
     if not map then
         map = {
-            Fill = AssetManager:GetAssetPath("Fill"),
+            Fill = "Fill",
         };
     end
 
@@ -162,19 +163,17 @@ function VerityGameCanvasMixin:LoadMap(mapID)
         local tile = self.TilePool:Acquire();
         tile.layoutIndex = i;
 
-        local texture;
+        local asset;
         if map.Tiles and map.Tiles[i] then
             local assetName = map.Tiles[i].AssetName;
-            texture = AssetManager:GetAssetPath(assetName);
-        else
-            texture = map.Fill;
+            asset = AssetManager:GetAsset(assetName);
         end
 
-        if not texture then
-            texture = AssetManager:GetAssetPath("Fill");
+        if not asset then
+            asset = AssetManager:GetAsset(map.Fill or "Fill");
         end
 
-        tile:Init(texture);
+        tile:Init(asset);
 
         tinsert(tiles, tile);
     end
