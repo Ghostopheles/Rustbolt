@@ -146,7 +146,6 @@ function InputManager:EvaluateContext(context, key, keyUp)
 end
 
 function InputManager:OnKeyDown(key)
-    local start = debugprofilestop();
     self.HandlingKeyDown = true;
 
     local listeners = self.Keys[key];
@@ -165,7 +164,6 @@ function InputManager:OnKeyDown(key)
 
     self:SetLastKey(key);
     self.HandlingKeyDown = false;
-    print(format("Handled input in %.4fms", debugprofilestop() - start))
 end
 
 function InputManager:OnKeyUp(key)
@@ -177,9 +175,3 @@ end
 ------------
 
 Verity.InputManager = InputManager;
-
-local owner = {
-    Callback = function() error("uwu") end,
-};
-
-InputManager:RegisterInputListener("Z", owner.Callback, owner);
