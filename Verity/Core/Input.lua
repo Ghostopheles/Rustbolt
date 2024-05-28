@@ -6,14 +6,16 @@ local InputContextBase = {
     OnUp = false,
     Hold = false,
     DoubleTap = false,
-    Screens = {}
+    Screens = {},
+    Gate = nil,
 };
 
-function InputContextBase:Init(onUp, hold, doubleTap, screens)
+function InputContextBase:Init(onUp, hold, doubleTap, screens, gate)
     self.OnUp = onUp or false;
     self.Hold = hold or false;
     self.DoubleTap = doubleTap or false;
     self.Screens = screens or SCREENS_ALL;
+    self.Gate = gate or nil;
 end
 
 ------------
@@ -47,8 +49,8 @@ local InputManager = {
 ---@param doubleTap? boolean
 ---@param screens? table | string
 ---@return VerityInputContext
-function InputManager:CreateInputContext(onUp, hold, doubleTap, screens)
-    return CreateAndInitFromMixin(InputContextBase, onUp, hold, doubleTap, screens);
+function InputManager:CreateInputContext(onUp, hold, doubleTap, screens, func)
+    return CreateAndInitFromMixin(InputContextBase, onUp, hold, doubleTap, screens, func);
 end
 
 ---@param context VerityInputContext
@@ -63,7 +65,7 @@ end
 ---@param key string
 ---@param callback function
 ---@param owner table
----@param context? VerityInputContext | string
+---@param context? VerityInputContext | string | function
 ---@return VerityInputListener
 function InputManager:RegisterInputListener(key, callback, owner, context)
     if not self.Keys[key] then
@@ -73,13 +75,13 @@ function InputManager:RegisterInputListener(key, callback, owner, context)
     if type(context) == "string" then
         local screens = context ~= SCREENS_ALL and {[context] = true} or SCREENS_ALL;
         context = self:CreateInputContext(nil, nil, nil, screens);
+    elseif type(context) == "function" then
+        context = self:CreateInputContext(nil, nil, nil, nil, context);
     end
 
     if not context then
         context = self:CreateInputContext();
     end
-
-    DevTools_Dump(context);
 
     local listener = self:CreateInputListener(context, callback, owner);
     tinsert(self.Keys[key], listener);
@@ -90,8 +92,6 @@ end
 function InputManager:HandleInputError(key, message)
     print("Error handling input for key '" .. key .. "'\n" .. message);
 end
-
-
 
 function InputManager:ShouldPropagateKey(key)
     return not self.Keys[key];
@@ -114,39 +114,62 @@ function InputManager:IsDoubleTap(key)
     return key == self.LastKey and not self.KeyTimeout;
 end
 
+--- Evaluates a context against the current input state
+---@param context VerityInputContext
+---@param keyUp? boolean
+---@return boolean success
+function InputManager:EvaluateContext(context, key, keyUp)
+    local currentScreen = VerityGameWindow:GetScreen().Name;
+    if context.Screens ~= SCREENS_ALL and not context.Screens[currentScreen] then
+        return false;
+    end
+
+    if context.OnUp and not keyUp then
+        return false;
+    end
+
+    if context.Hold then
+        return false; -- TODO: implement
+    end
+
+    if context.DoubleTap and not self:IsDoubleTap(key) then
+        return false;
+    end
+
+    if context.Gate then
+        local success, result = pcall(context.Gate);
+        if not success then self:HandleInputError(key, result); end;
+        return success;
+    end
+
+    return true;
+end
+
 function InputManager:OnKeyDown(key)
+    local start = debugprofilestop();
     self.HandlingKeyDown = true;
-
-    local isDoubleTap = self:IsDoubleTap(key);
-
-    print(key .. "_DOWN");
 
     local listeners = self.Keys[key];
     if not listeners then
         return false;
     end
 
-    local currentScreenName = VerityGameWindow:GetScreen().Name;
     for _, listener in pairs(listeners) do
         local context = listener.Context;
-        if not context.OnUp and not context.Hold then
-            if context.DoubleTap == isDoubleTap then
-                if context.Screens == SCREENS_ALL or context.Screens[currentScreenName] then
-                    local success, result = pcall(listener.Callback, listener.Owner, key);
-                    if not success then self:HandleInputError(key, result); end;
-                end
-            end
+        if self:EvaluateContext(context, key, false) then
+            local success, result = pcall(listener.Callback, listener.Owner, key);
+            print(success, result);
+            if not success then self:HandleInputError(key, result); end;
         end
     end
 
     self:SetLastKey(key);
     self.HandlingKeyDown = false;
+    print(format("Handled input in %.4fms", debugprofilestop() - start))
 end
 
 function InputManager:OnKeyUp(key)
     self.HandlingKeyUp = true;
-
-    print(key .. "_UP");
 
     self.HandlingKeyUp = false;
 end
@@ -154,3 +177,9 @@ end
 ------------
 
 Verity.InputManager = InputManager;
+
+local owner = {
+    Callback = function() error("uwu") end,
+};
+
+InputManager:RegisterInputListener("Z", owner.Callback, owner);

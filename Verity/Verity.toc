@@ -18,10 +18,10 @@ Verity.lua
 
 Localization/enUS.lua
 
-Core/Input.lua
 Core/Constants.lua
 Core/MathUtil.lua
 Core/ClassUtil.lua
+Core/Input.lua
 Core/Events.lua
 Core/Animations.lua
 Core/Themes.lua
