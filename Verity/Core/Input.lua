@@ -48,9 +48,10 @@ local InputManager = {
 ---@param hold? boolean
 ---@param doubleTap? boolean
 ---@param screens? table | string
+---@param gate? function
 ---@return VerityInputContext
-function InputManager:CreateInputContext(onUp, hold, doubleTap, screens, func)
-    return CreateAndInitFromMixin(InputContextBase, onUp, hold, doubleTap, screens, func);
+function InputManager:CreateInputContext(onUp, hold, doubleTap, screens, gate)
+    return CreateAndInitFromMixin(InputContextBase, onUp, hold, doubleTap, screens, gate);
 end
 
 ---@param context VerityInputContext
@@ -65,9 +66,10 @@ end
 ---@param key string
 ---@param callback function
 ---@param owner table
----@param context? VerityInputContext | string | function
+---@param context? VerityInputContext | string
+---@param gate? function
 ---@return VerityInputListener
-function InputManager:RegisterInputListener(key, callback, owner, context)
+function InputManager:RegisterInputListener(key, callback, owner, context, gate)
     if not self.Keys[key] then
         self.Keys[key] = {};
     end
@@ -75,8 +77,8 @@ function InputManager:RegisterInputListener(key, callback, owner, context)
     if type(context) == "string" then
         local screens = context ~= SCREENS_ALL and {[context] = true} or SCREENS_ALL;
         context = self:CreateInputContext(nil, nil, nil, screens);
-    elseif type(context) == "function" then
-        context = self:CreateInputContext(nil, nil, nil, nil, context);
+    elseif gate then
+        context = self:CreateInputContext(nil, nil, nil, context, gate);
     end
 
     if not context then

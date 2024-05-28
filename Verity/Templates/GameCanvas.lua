@@ -214,9 +214,9 @@ function VerityGameCanvasMixin:OnLoad()
 
     Registry:RegisterCallback(Events.SCREEN_CHANGED, self.OnScreenChanged, self);
 
-    InputManager:RegisterInputListener(KEY_TOGGLE_WALKABLE, self.OnKeyDown, self, Enum.ScreenName.GAME);
-    InputManager:RegisterInputListener(KEY_TOGGLE_BUILDABLE, self.OnKeyDown, self, Enum.ScreenName.GAME);
-    InputManager:RegisterInputListener(KEY_TOGGLE_WATER, self.OnKeyDown, self, Enum.ScreenName.GAME);
+    InputManager:RegisterInputListener(KEY_TOGGLE_WALKABLE, self.OnKeyDown, self, Enum.ScreenName.GAME, InDevMode);
+    InputManager:RegisterInputListener(KEY_TOGGLE_BUILDABLE, self.OnKeyDown, self, Enum.ScreenName.GAME, InDevMode);
+    InputManager:RegisterInputListener(KEY_TOGGLE_WATER, self.OnKeyDown, self, Enum.ScreenName.GAME, InDevMode);
 end
 
 function VerityGameCanvasMixin:OnShow()
