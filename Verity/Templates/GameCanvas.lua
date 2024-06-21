@@ -208,8 +208,6 @@ VerityGameCanvasMixin = {};
 
 function VerityGameCanvasMixin:OnLoad()
     self.TilePool = CreateTexturePool(self, "ARTWORK", -1, TILE_TEMPLATE);
-    self.TilePool:SetResetDisallowedIfNew(true);
-
     self.DisplayedMapID = 0;
 
     Registry:RegisterCallback(Events.SCREEN_CHANGED, self.OnScreenChanged, self);
@@ -296,6 +294,7 @@ function VerityGameCanvasMixin:LoadMap(mapID)
         end
 
         tile:Init(tileData);
+        tile:Show();
         tinsert(tiles, tile);
     end
 
