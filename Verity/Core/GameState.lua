@@ -111,6 +111,7 @@ function GameState:EndPlay()
 
     self:SetStatus(GameStatus.ENDED);
     self.World:EndPlay();
+
     self:StopTicker();
 end
 

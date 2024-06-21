@@ -32,4 +32,6 @@ function VerityDevToolsMixin:ToggleDevMode()
     self.DevMode = devModeActive;
 
     Registry:TriggerEvent(Events.DEV_STATE_CHANGED, self.DevMode);
+
+    self:SetShown(self.DevMode);
 end

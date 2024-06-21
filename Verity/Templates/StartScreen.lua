@@ -1,3 +1,4 @@
+local Engine = Verity.Engine;
 local Animations = Verity.AnimationManager;
 local ThemeManager = Verity.ThemeManager;
 local L = Verity.Strings;
@@ -23,7 +24,7 @@ function VerityStartScreenMixin:OnLoad()
     ThemeManager:RegisterThemedTexture(self.Background, "START_SCREEN_BG");
     ThemeManager:RegisterThemedTexture(self.ButtonStack.Background, "START_SCREEN_BUTTON_STACK_BG");
 
-    stack.StartButton:SetScript("OnClick", function() self:GetParent():SetScreen(Verity.Enum.ScreenName.GAME); end);
+    stack.StartButton:SetScript("OnClick", function() self:OnStartButtonClick(); end);
 end
 
 function VerityStartScreenMixin:OnShow()
@@ -32,4 +33,15 @@ end
 
 function VerityStartScreenMixin:OnHide()
     self.BouncingText:StopBounce();
+end
+
+function VerityStartScreenMixin:OnStartButtonClick()
+    local campaign = Engine:StartNewCampaign("TestCampaign1");
+    if not campaign then
+        return; --TODO: handle this
+    end
+
+    local window = self:GetParent();
+    window:SetScreen(Verity.Enum.ScreenName.GAME);
+    window:SetTitle(format(L.CAMPAIGN_WINDOW_TITLE, campaign.Name));
 end

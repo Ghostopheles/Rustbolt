@@ -3,7 +3,9 @@
 ## Notes: CHANGEME
 ## Author: Ghostopheles
 ## Version: @project-version@
-## SavedVariables: VerityDevMap
+## SavedVariables: VerityDevMap, VeritySaveData, VerityState
+
+## RequiredDeps: Blizzard_EventTrace
 
 ## X-License: Public Domain
 ## X-Category: Development Tools
@@ -27,10 +29,14 @@ Core/Animations.lua
 Core/Themes.lua
 Core/Assets.lua
 Core/Maps.lua
+Core/GameState.lua
+Core/Saves.lua
+Core/Engine.lua
 
 Objects/ObjectManager.lua
 Objects/Object.lua
 Objects/Character.lua
+Objects/World.lua
 
 Templates/StartScreen.lua
 Templates/StartScreen.xml
