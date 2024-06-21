@@ -113,10 +113,12 @@ local MapManager = {};
 MapManager.Maps = {};
 
 ---@param mapID number
----@return VerityMap map
+---@return VerityMap? map
 function MapManager:GetMap(mapID)
     local map = self.Maps[mapID];
-    return CreateAndInitFromMixin(MapBase, map.Fill, map.Tiles, map.Start, map.End);
+    if map then
+        return CreateAndInitFromMixin(MapBase, map.Fill, map.Tiles, map.Start, map.End);
+    end
 end
 
 ---@param assetName string
@@ -141,4 +143,20 @@ end
 
 Verity.MapManager = MapManager;
 
-EventUtil.ContinueOnAddOnLoaded("Verity", function() MapManager.Maps[1] = VerityDevMap; end);
+EventUtil.ContinueOnAddOnLoaded("Verity", function()
+    if not VerityDevMap then
+        VerityDevMap = {
+            Tiles = {},
+        };
+    end
+
+    for i=1, MapConstants.MaxTileCount do
+        tinsert(VerityDevMap.Tiles, {
+            AssetName = "MissingNo",
+            Walkable = false,
+            Buildable = true,
+        });
+    end
+
+    MapManager.Maps[1] = VerityDevMap;
+end);
