@@ -4,22 +4,14 @@ local Object = {
     Parent = nil,
     Children = {},
     World = nil,
+    DoTick = false,
 };
 
-function Object:OnBeginPlay()
-end
-
-function Object:OnEndPlay()
-end
-
-function Object:OnTick(deltaTime)
-end
-
-function Object:OnCreate()
-end
-
-function Object:OnDestroy()
-end
+Object.OnBeginPlay = nop;
+Object.OnEndPlay = nop;
+Object.OnTick = nop;
+Object.OnCreate = nop;
+Object.OnDestroy = nop;
 
 function Object:SetWorld(world)
     self.World = world;

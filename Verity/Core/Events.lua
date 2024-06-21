@@ -6,7 +6,9 @@ Verity.Events = {
     DEV_STATE_CHANGED = "DevStateChanged",
 };
 
-Verity.GameEvents = {};
+Verity.GameEvents = {
+    GAME_STATUS_CHANGED = "GameStatusChanged"
+};
 
 local function GenerateCallbackEvents(events)
     local tbl = {};
