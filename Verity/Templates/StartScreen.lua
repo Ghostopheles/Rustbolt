@@ -28,7 +28,9 @@ function VerityStartScreenMixin:OnLoad()
 end
 
 function VerityStartScreenMixin:OnShow()
-    Animations:ApplyBounce(self.BouncingText, 10, 0.25);
+    local bounceHeight = 10;
+    local duration = 0.25;
+    Animations:ApplyBounce(self.BouncingText, bounceHeight, duration);
 end
 
 function VerityStartScreenMixin:OnHide()

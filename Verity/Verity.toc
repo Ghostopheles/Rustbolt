@@ -5,8 +5,6 @@
 ## Version: @project-version@
 ## SavedVariables: VerityDevMap, VeritySaveData, VerityState
 
-## RequiredDeps: Blizzard_EventTrace
-
 ## X-License: Public Domain
 ## X-Category: Development Tools
 

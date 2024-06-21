@@ -31,7 +31,7 @@ Verity.GameRegistry = CreateFromMixins(CallbackRegistryMixin);
 Verity.GameRegistry:OnLoad();
 Verity.GameRegistry:GenerateCallbackEvents(GenerateCallbackEvents(Verity.GameEvents));
 
-Verity.EventDebug = true;
+Verity.EventDebug = false;
 
 local RegistryNames = {
     [Verity.EventRegistry] = "Engine",
