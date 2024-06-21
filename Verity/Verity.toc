@@ -27,14 +27,15 @@ Core/Animations.lua
 Core/Themes.lua
 Core/Assets.lua
 Core/Maps.lua
-Core/GameState.lua
-Core/Saves.lua
-Core/Engine.lua
 
 Objects/ObjectManager.lua
 Objects/Object.lua
 Objects/Character.lua
 Objects/World.lua
+
+Core/GameState.lua
+Core/Saves.lua
+Core/Engine.lua
 
 Templates/StartScreen.lua
 Templates/StartScreen.xml

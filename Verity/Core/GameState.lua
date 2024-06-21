@@ -55,6 +55,10 @@ function GameState:Init(mapID, worldSettings, gameSettings)
     self.World:ApplyWorldSettings(worldSettings);
 
     self:ApplyGameSettings(gameSettings);
+
+    Verity.Engine:LoadMap(mapID);
+
+    self:SetStatus(GameStatus.READY);
 end
 
 ---@param status VerityGameStatus
@@ -80,6 +84,15 @@ function GameState:GetWorld()
     return self.World;
 end
 
+function GameState:LoadSave(data)
+    local character = self.World:CreateObject("PlayerCharacter", "Character");
+
+    ---@cast character VerityCharacterObject
+    character:SetDoTick(true);
+    character:SetInputEnabled(true);
+    character:SetPosition(32, 32, 1);
+end
+
 function GameState:StartTicker()
     self.Ticker = C_Timer.NewTicker(0, function() self:Tick(); end);
     return self.Ticker;
@@ -96,7 +109,7 @@ function GameState:Tick()
 end
 
 --- called to begin the game loop
-function GameState:BeginPlay()
+function GameState:Start()
     assert(self:GetStatus() == GameStatus.READY, "Attempt to begin game loop while game state is not ready");
 
     self:SetStatus(GameStatus.RUNNING);
@@ -105,7 +118,7 @@ function GameState:BeginPlay()
     self:StartTicker();
 end
 
-function GameState:EndPlay()
+function GameState:End()
     local status = self:GetStatus();
     assert(status == GameStatus.RUNNING or GameStatus.PAUSED, "Attempt to end a non-healthy game loop");
 
@@ -128,3 +141,7 @@ function GameState:Resume()
     self:SetStatus(GameStatus.RUNNING);
     self:StartTicker();
 end
+
+------------
+
+Verity.GameState = GameState;

@@ -45,6 +45,14 @@ function Engine:GetActiveCampaign()
     return self.ActiveCampaign;
 end
 
+function Engine:GetGameState()
+    return Verity.GameState;
+end
+
+function Engine:LoadMap(mapID)
+    VerityGameWindow.GameCanvas:LoadMap(mapID);
+end
+
 ------------
 
 Verity.Engine = Engine;

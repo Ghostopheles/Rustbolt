@@ -46,4 +46,9 @@ function VerityStartScreenMixin:OnStartButtonClick()
     local window = self:GetParent();
     window:SetScreen(Verity.Enum.ScreenName.GAME);
     window:SetTitle(format(L.CAMPAIGN_WINDOW_TITLE, campaign.Name));
+
+    local gameState = Engine:GetGameState();
+    gameState:Init(1);
+    gameState:LoadSave();
+    gameState:Start();
 end
