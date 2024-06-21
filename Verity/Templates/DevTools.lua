@@ -18,7 +18,8 @@ function VerityDevToolsMixin:OnLoad()
 
     self.DevMode = false;
 
-    local context = InputManager:CreateInputContext(false, false, true);
+    local onUp, hold, doubleTap = false, false, true;
+    local context = InputManager:CreateInputContext(onUp, hold, doubleTap);
     InputManager:RegisterInputListener("Z", self.ToggleDevMode, self, context);
 end
 
