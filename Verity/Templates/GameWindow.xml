@@ -3,7 +3,7 @@
 
     <Frame name="VerityGameWindow" inherits="PortraitFrameFlatTemplate"
         mixin="VerityGameWindowMixin" parent="UIParent" movable="true" enableMouse="true"
-        dontSavePosition="true" hidden="false">
+        dontSavePosition="true" hidden="false" frameStrata="FULLSCREEN">
         <Size x="1600" y="900" />
         <Anchors>
             <Anchor point="CENTER" />
