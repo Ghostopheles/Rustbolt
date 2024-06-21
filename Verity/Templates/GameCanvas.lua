@@ -305,3 +305,7 @@ function VerityGameCanvasMixin:LoadMap(mapID)
 
     self.DisplayedMapID = mapID;
 end
+
+function VerityGameCanvasMixin:GetMapID()
+    return self.DisplayedMapID;
+end
