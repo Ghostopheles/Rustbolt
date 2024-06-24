@@ -28,9 +28,29 @@ function CVar:Init(name, type, category, defaultValue)
     self.Value = defaultValue;
 end
 
+function CVar:GetName()
+    return self.Name;
+end
+
+function CVar:GetType()
+    return self.Type;
+end
+
+function CVar:GetCategory()
+    return self.Category;
+end
+
+function CVar:GetDefaultValue()
+    return self.DefaultValue;
+end
+
 ---@param value any
----@param noEvent boolean If true, does not fire the CVAR_VALUE_CHANGED event.
+---@param noEvent? boolean If true, does not fire the CVAR_VALUE_CHANGED event.
 function CVar:SetValue(value, noEvent)
+    if value == self:GetValue() then
+        return;
+    end
+
     self.Value = value;
 
     if not noEvent then
@@ -53,6 +73,47 @@ local CVarManager = {
     CVars = {},
 };
 
+function CVarManager:ValidateSavedVars()
+    if not RustboltConfig then
+        RustboltConfig = {};
+    end
+
+    if not RustboltConfig.CVars then
+        RustboltConfig.CVars = {};
+    end
+end
+
+function CVarManager:OnAddonLoaded()
+    self:ValidateSavedVars();
+
+    for _, v in pairs(RustboltConfig.CVars) do
+        if self.CVars[v.Name] then
+            -- cvar has already been registered from elsewhere
+            self.CVars[v.Name]:SetValue(v.Value);
+        else
+            -- cvar hasn't been registered, so create it from saved variables
+            local cvar = CreateCVar(v.Name, v.Type, v.Category, v.DefaultValue);
+            local noEvent = true;
+            cvar:SetValue(v.Value, noEvent);
+            CVarManager.CVars[v.Name] = cvar;
+        end
+    end
+end
+
+function CVarManager:OnAddonUnloading()
+    for _, cvar in pairs(self.CVars) do
+        RustboltConfig.CVars[cvar:GetName()] = {
+            Name = cvar:GetName(),
+            Type = cvar:GetType(),
+            Category = cvar:GetCategory(),
+            DefaultValue = cvar:GetDefaultValue(),
+            Value = cvar:GetValue(),
+        };
+    end
+end
+
+---@param category any
+---@return boolean isValidCategory
 function CVarManager:IsCategoryValid(category)
     return I_CVarCategory[category] ~= nil;
 end
@@ -62,9 +123,12 @@ end
 ---@param type string
 ---@param category RustboltCVarCategory
 ---@param defaultValue any
----@return RustboltCVar
+---@return RustboltCVar?
 function CVarManager:RegisterCVar(name, type, category, defaultValue)
-    assert(self.CVars[name] == nil, "Attempt to create duplicate cvar");
+    if self.CVars[name] then
+        return;
+    end
+
     assert(self:IsCategoryValid(category), "Invalid CVar category");
 
     local cvar = CreateCVar(name, type, category, defaultValue);
@@ -80,24 +144,39 @@ function CVarManager:GetAllCVars()
     return self.CVars;
 end
 
----Returns a CVar object. To retrieve only the CVar value, use :GetCVarValue
+---Returns a CVar object. To retrieve only the CVar value, use :GetCVar
 ---@param name string
 ---@return RustboltCVar? cvar
-function CVarManager:GetCVar(name)
+function CVarManager:GetCVarObject(name)
     return self.CVars[name];
 end
 
----Returns a CVar value. To retrieve the whole CVar object, use :GetCVar
+---Returns a CVar value
 ---@param name string
 ---@return any cvarValue
-function CVarManager:GetCVarValue(name)
-    local cvar = self:GetCVar(name);
+function CVarManager:GetCVar(name)
+    local cvar = self:GetCVarObject(name);
     if cvar then
         return cvar:GetValue();
     end
 end
 
+---Sets the value of a CVar
+---@param name string CVar name
+---@param value any CVar value
+function CVarManager:SetCVar(name, value, noEvent)
+    local cvar = self:GetCVarObject(name);
+    if cvar then
+        cvar:SetValue(value, noEvent);
+    end
+end
+
+Registry:RegisterCallback(Events.ADDON_LOADED, CVarManager.OnAddonLoaded, CVarManager);
+Registry:RegisterCallback(Events.ADDON_UNLOADING, CVarManager.OnAddonUnloading, CVarManager);
+
 ------------
 
 Rustbolt.CVarCategory = CVarCategory;
 Rustbolt.CVarManager = CVarManager;
+
+Registry:TriggerEvent(Events.CVAR_MANAGER_LOADED);

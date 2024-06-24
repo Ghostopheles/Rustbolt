@@ -1,9 +1,14 @@
+local addonName = ...;
+
 Rustbolt.Events = {
+	ADDON_LOADED = "AddonLoaded",
+	ADDON_UNLOADING = "AddonUnloading",
     SCREEN_CHANGED = "ScreenChanged",
     UI_THEME_CHANGED = "UIThemeChanged",
     ASSET_PICKER_ASSET_CHANGED = "AssetPickerAssetChanged",
     TILE_ATTRIBUTE_CHANGED = "GameTileAttributeChanged",
     DEV_STATE_CHANGED = "DevStateChanged",
+	CVAR_MANAGER_LOADED = "CVarManagerLoaded",
 	CVAR_CREATED = "CVarCreated",
 	CVAR_VALUE_CHANGED = "CVarValueChanged"
 };
@@ -29,21 +34,29 @@ Rustbolt.EventRegistry = CreateFromMixins(CallbackRegistryMixin);
 Rustbolt.EventRegistry:OnLoad();
 Rustbolt.EventRegistry:GenerateCallbackEvents(GenerateCallbackEvents(Rustbolt.Events));
 
+EventUtil.ContinueOnAddOnLoaded(addonName, function()
+	Rustbolt.EventRegistry:TriggerEvent(Rustbolt.Events.ADDON_LOADED);
+end);
+
+EventUtil.RegisterOnceFrameEventAndCallback("PLAYER_LOGOUT", function()
+	Rustbolt.EventRegistry:TriggerEvent(Rustbolt.Events.ADDON_UNLOADING);
+end);
+
 Rustbolt.GameRegistry = CreateFromMixins(CallbackRegistryMixin);
 Rustbolt.GameRegistry:OnLoad();
 Rustbolt.GameRegistry:GenerateCallbackEvents(GenerateCallbackEvents(Rustbolt.GameEvents));
-
-Rustbolt.EventDebug = true;
 
 local RegistryNames = {
     [Rustbolt.EventRegistry] = "Engine",
     [Rustbolt.GameRegistry] = "Game"
 };
 
-local EventTracingRegistries = setmetatable({}, { __mode = "kv" });
-
 local function OnCallbackEventFired(registry, event, ...)
 	if not EventTrace or not EventTrace.LogLine then
+		return;
+	end
+
+	if not Rustbolt.CVarManager or not Rustbolt.CVarManager:GetCVar("bPushEventsToRegistry") then
 		return;
 	end
 
@@ -66,14 +79,14 @@ local function OnCallbackEventFired(registry, event, ...)
 	EventTrace:LogLine(elementData);
 end
 
-if Rustbolt.EventDebug then
-	if EventTracingRegistries[Rustbolt.EventRegistry] == nil then
-		hooksecurefunc(Rustbolt.EventRegistry, "TriggerEvent", OnCallbackEventFired);
-	end
-	EventTracingRegistries[Rustbolt.EventRegistry] = true;
+hooksecurefunc(Rustbolt.EventRegistry, "TriggerEvent", OnCallbackEventFired);
+hooksecurefunc(Rustbolt.GameRegistry, "TriggerEvent", OnCallbackEventFired);
 
-    if EventTracingRegistries[Rustbolt.GameRegistry] == nil then
-		hooksecurefunc(Rustbolt.GameRegistry, "TriggerEvent", OnCallbackEventFired);
-	end
-	EventTracingRegistries[Rustbolt.GameRegistry] = true;
-end
+Rustbolt.EventRegistry:RegisterCallback(Rustbolt.Events.CVAR_MANAGER_LOADED, function()
+	local cvarManager = Rustbolt.CVarManager;
+	local name = "bPushEventsToRegistry";
+	local type = "boolean";
+	local category = Rustbolt.CVarCategory.DEBUG;
+	local defaultValue = false;
+	cvarManager:RegisterCVar(name, type, category, defaultValue);
+end);
