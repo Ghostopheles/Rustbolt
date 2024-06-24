@@ -1,23 +1,23 @@
-package-as: Verity
+package-as: Rustbolt
 
 license-output: LICENSE
 
 externals:
-  Verity/Libs/LibStub: https://repos.wowace.com/wow/libstub/trunk
-  Verity/Libs/AceLocale-3.0: https://repos.curseforge.com/wow/ace3/trunk/AceLocale-3.0
+  Rustbolt/Libs/LibStub: https://repos.wowace.com/wow/libstub/trunk
+  Rustbolt/Libs/AceLocale-3.0: https://repos.curseforge.com/wow/ace3/trunk/AceLocale-3.0
 
 ignore:
-  - Verity/Libs/*/*.rockspec
-  - Verity/Libs/*/*.toc
-  - Verity/Libs/*/changelog.*
-  - Verity/Libs/*/CHANGELOG.*
-  - Verity/Libs/*/docs
-  - Verity/Libs/*/examples
-  - Verity/Libs/*/README.*
-  - Verity/Libs/*/tests
-  - Verity/Libs/*/.pkgmeta
+  - Rustbolt/Libs/*/*.rockspec
+  - Rustbolt/Libs/*/*.toc
+  - Rustbolt/Libs/*/changelog.*
+  - Rustbolt/Libs/*/CHANGELOG.*
+  - Rustbolt/Libs/*/docs
+  - Rustbolt/Libs/*/examples
+  - Rustbolt/Libs/*/README.*
+  - Rustbolt/Libs/*/tests
+  - Rustbolt/Libs/*/.pkgmeta
   - CHANGELOG.md
   - README.md
 
 move-folders:
-  Verity/Verity: Verity
+  Rustbolt/Rustbolt: Rustbolt

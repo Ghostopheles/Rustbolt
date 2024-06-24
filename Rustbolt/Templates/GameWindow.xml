@@ -1,0 +1,24 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+
+    <Frame name="RustboltGameWindow" inherits="PortraitFrameFlatTemplate"
+        mixin="RustboltGameWindowMixin" parent="UIParent" movable="true" enableMouse="true"
+        dontSavePosition="true" hidden="false" frameStrata="FULLSCREEN">
+        <Size x="1600" y="900" />
+        <Anchors>
+            <Anchor point="CENTER" />
+        </Anchors>
+
+        <Frames>
+            <Frame parentKey="StartScreen" inherits="RustboltStartScreenTemplate" hidden="true" />
+            <Frame parentKey="GameCanvas" inherits="RustboltGameCanvasTemplate" hidden="true" />
+        </Frames>
+
+        <Scripts>
+            <OnLoad method="OnLoad" />
+            <OnKeyDown method="OnKeyDown" />
+            <OnKeyUp method="OnKeyUp" />
+        </Scripts>
+    </Frame>
+
+</Ui>
