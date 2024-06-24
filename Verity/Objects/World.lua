@@ -21,7 +21,7 @@ function World:ValidateHandler(handler)
 end
 
 function World:ShouldTick(object)
-    return object.DoTick and self:ValidateHandler(object.OnTick);
+    return object.ShouldTick and object:ShouldTick();
 end
 
 function World:TickObjects(deltaTime)
