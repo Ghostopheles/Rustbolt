@@ -33,7 +33,7 @@ end
 
 ---@return boolean doTick
 function Object:ShouldTick()
-    return self.DoTick and self.OnTick ~= nop and type(self.OnTick) == "function";
+    return self.DoTick;
 end
 
 ---@param world RustboltWorld

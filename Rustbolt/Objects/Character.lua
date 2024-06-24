@@ -7,13 +7,12 @@ local InputManager = Rustbolt.InputManager;
 local CharacterObject = Rustbolt.ObjectManager:CreateObject("Object");
 
 function CharacterObject:OnBeginPlay()
-    self.MovementSpeed = 100;
+    self.MovementSpeed = 1000;
     self:SetupControls();
 end
 
 function CharacterObject:OnTick(deltaTime)
-    local position = self:GetPosition();
-    print(format("X: %d, Y: %d, Z: %d", position.x, position.y, position.z));
+    --print(format("X: %d, Y: %d, Z: %d", position.x, position.y, position.z));
 end
 
 function CharacterObject:IsInputEnabled()
@@ -27,23 +26,35 @@ end
 function CharacterObject:SetupControls()
     local gate = function() return self:IsInputEnabled(); end;
 
-    InputManager:RegisterInputListener("W", self.MoveY, self, nil, gate);
-    InputManager:RegisterInputListener("S", self.MoveY, self, nil, gate);
-    InputManager:RegisterInputListener("A", self.MoveX, self, nil, gate);
-    InputManager:RegisterInputListener("D", self.MoveX, self, nil, gate);
+    local function HandleW()
+        self:MoveY(1);
+    end
+
+    local function HandleS()
+        self:MoveY(-1);
+    end
+
+    local function HandleA()
+        self:MoveX(-1);
+    end
+
+    local function HandleD()
+        self:MoveX(1);
+    end
+
+    InputManager:RegisterInputListener("W", HandleW, self, nil, gate);
+    InputManager:RegisterInputListener("S", HandleS, self, nil, gate);
+    InputManager:RegisterInputListener("A", HandleA, self, nil, gate);
+    InputManager:RegisterInputListener("D", HandleD, self, nil, gate);
 end
 
 function CharacterObject:MoveY(direction)
-    direction = 1;
-
     local x, y, z = self:GetPosition():GetXYZ();
     local delta = (direction * self.MovementSpeed) * GetTickTime();
     self:SetPosition(x, y + delta, z);
 end
 
 function CharacterObject:MoveX(direction)
-    direction = 1;
-
     local x, y, z = self:GetPosition():GetXYZ();
     local delta = (direction * self.MovementSpeed) * GetTickTime();
     self:SetPosition(x + delta, y, z);

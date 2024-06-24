@@ -8,13 +8,13 @@ function Mesh2D:Init(asset, width, height)
     self.Texture = Rustbolt.Engine:CreateTexture();
     self.Texture:SetAtlas(asset);
     self.Texture:SetSize(width, height);
+    self.Texture:SetVertexColor(0.9, 0, 0.8);
+
+    self:SetDoTick(true);
 end
 
 function Mesh2D:OnTick(deltaTime)
     self:UpdatePosition();
-end
-
-function Mesh2D:OnAttach(owner)
 end
 
 function Mesh2D:UpdatePosition()

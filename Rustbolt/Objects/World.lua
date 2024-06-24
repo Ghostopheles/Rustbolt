@@ -16,46 +16,61 @@ function World:ApplyWorldSettings(worldSettings)
     self.Settings = worldSettings;
 end
 
+local _Ticked = {};
 function World:ShouldTick(object)
-    return object.ShouldTick and object:ShouldTick();
+    return not _Ticked[object] and object.ShouldTick and object:ShouldTick();
 end
 
+
 function World:TickObjects(deltaTime, objects)
+    if not objects then
+        _Ticked = {};
+    end
+
     objects = objects or self.Objects;
 
     for _, object in pairs(objects) do
         if self:ShouldTick(object) then
             object:OnTick(deltaTime);
+            _Ticked[object] = true;
             if object.Children and #object.Children > 0 then
-                self:TickObjects(deltaTime, object.Children);
+                return self:TickObjects(deltaTime, object.Children);
             end
         end
     end
 end
 
+local _BeginPlay;
 function World:BeginPlay(objects)
+    if not objects then
+        _BeginPlay = {};
+    end
+
     objects = objects or self.Objects;
 
     for _, object in pairs(objects) do
-        if object.Water ~= nil then
-            if object.OnBeginPlay then
-                object:OnBeginPlay();
-            end
+        if not _BeginPlay[object] then
+            object:OnBeginPlay();
+            _BeginPlay[object] = true;
             if object.Children and #object.Children > 0 then
-                self:BeginPlay(object.Children);
+                return self:BeginPlay(object.Children);
             end
         end
     end
 end
 
+local _EndPlay;
 function World:EndPlay(objects)
+    if not objects then
+        _EndPlay = {};
+    end
+
     objects = objects or self.Objects;
 
     for _, object in pairs(objects) do
-        if object.Water ~= nil then
-            if object.OnEndPlay then
-                object:OnEndPlay();
-            end
+        if not _EndPlay[object] then
+            object:OnEndPlay();
+            _EndPlay[object] = true;
             if object.Children and #object.Children > 0 then
                 self:EndPlay(object.Children);
             end
