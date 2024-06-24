@@ -18,6 +18,7 @@ Rustbolt.lua
 
 Localization/enUS.lua
 
+Core/CVars.lua
 Core/Constants.lua
 Core/MathUtil.lua
 Core/ClassUtil.lua

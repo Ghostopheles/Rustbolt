@@ -4,6 +4,8 @@ Rustbolt.Events = {
     ASSET_PICKER_ASSET_CHANGED = "AssetPickerAssetChanged",
     TILE_ATTRIBUTE_CHANGED = "GameTileAttributeChanged",
     DEV_STATE_CHANGED = "DevStateChanged",
+	CVAR_CREATED = "CVarCreated",
+	CVAR_VALUE_CHANGED = "CVarValueChanged"
 };
 
 Rustbolt.GameEvents = {
