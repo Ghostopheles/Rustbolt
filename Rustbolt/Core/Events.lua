@@ -10,6 +10,7 @@ Rustbolt.Events = {
     DEV_STATE_CHANGED = "DevStateChanged",
 	CVAR_MANAGER_LOADED = "CVarManagerLoaded",
 	CVAR_CREATED = "CVarCreated",
+	CVAR_DELETED = "CVarDeleted",
 	CVAR_VALUE_CHANGED = "CVarValueChanged"
 };
 
@@ -84,7 +85,7 @@ hooksecurefunc(Rustbolt.GameRegistry, "TriggerEvent", OnCallbackEventFired);
 
 Rustbolt.EventRegistry:RegisterCallback(Rustbolt.Events.CVAR_MANAGER_LOADED, function()
 	local cvarManager = Rustbolt.CVarManager;
-	local name = "bPushEventsToRegistry";
+	local name = "bPushEventsToEventTrace";
 	local type = "boolean";
 	local category = Rustbolt.CVarCategory.DEBUG;
 	local defaultValue = false;

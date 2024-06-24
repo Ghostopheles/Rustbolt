@@ -18,14 +18,16 @@ local I_CVarCategory = tInvert(CVarCategory);
 ---@field protected Category RustboltCVarCategory
 ---@field protected DefaultValue any
 ---@field protected Value any
+---@field protected Ephemeral boolean
 local CVar = {};
 
-function CVar:Init(name, type, category, defaultValue)
+function CVar:Init(name, type, category, defaultValue, ephemeral)
     self.Name = name;
     self.Type = type;
     self.Category = category;
     self.DefaultValue = defaultValue;
     self.Value = defaultValue;
+    self.Ephemeral = ephemeral;
 end
 
 function CVar:GetName()
@@ -42,6 +44,10 @@ end
 
 function CVar:GetDefaultValue()
     return self.DefaultValue;
+end
+
+function CVar:GetEphemeral()
+    return self.Ephemeral;
 end
 
 ---@param value any
@@ -64,8 +70,8 @@ end
 
 ------------
 
-local function CreateCVar(name, type, category, defaultValue)
-    return CreateAndInitFromMixin(CVar, name, type, category, defaultValue);
+local function CreateCVar(name, type, category, defaultValue, ephemeral)
+    return CreateAndInitFromMixin(CVar, name, type, category, defaultValue, ephemeral);
 end
 
 ---@class RustboltCVarManager
@@ -102,13 +108,15 @@ end
 
 function CVarManager:OnAddonUnloading()
     for _, cvar in pairs(self.CVars) do
-        RustboltConfig.CVars[cvar:GetName()] = {
-            Name = cvar:GetName(),
-            Type = cvar:GetType(),
-            Category = cvar:GetCategory(),
-            DefaultValue = cvar:GetDefaultValue(),
-            Value = cvar:GetValue(),
-        };
+        if not cvar:GetEphemeral() then
+            RustboltConfig.CVars[cvar:GetName()] = {
+                Name = cvar:GetName(),
+                Type = cvar:GetType(),
+                Category = cvar:GetCategory(),
+                DefaultValue = cvar:GetDefaultValue(),
+                Value = cvar:GetValue(),
+            };
+        end
     end
 end
 
@@ -123,15 +131,16 @@ end
 ---@param type string
 ---@param category RustboltCVarCategory
 ---@param defaultValue any
+---@param ephemeral? boolean
 ---@return RustboltCVar?
-function CVarManager:RegisterCVar(name, type, category, defaultValue)
+function CVarManager:RegisterCVar(name, type, category, defaultValue, ephemeral)
     if self.CVars[name] then
         return;
     end
 
     assert(self:IsCategoryValid(category), "Invalid CVar category");
 
-    local cvar = CreateCVar(name, type, category, defaultValue);
+    local cvar = CreateCVar(name, type, category, defaultValue, ephemeral);
     self.CVars[name] = cvar;
 
     Registry:TriggerEvent(Events.CVAR_CREATED, cvar);
@@ -140,6 +149,7 @@ end
 
 function CVarManager:DeleteCVar(name)
     self.CVars[name] = nil;
+    Registry:TriggerEvent(Events.CVAR_DELETED, name);
 end
 
 ---Returns a table containing all registered CVars
