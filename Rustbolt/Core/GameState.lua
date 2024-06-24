@@ -90,7 +90,8 @@ function GameState:LoadSave(data)
     ---@cast character RustboltCharacterObject
     character:SetDoTick(true);
     character:SetInputEnabled(true);
-    character:SetPosition(32, 32, 1);
+    character:SetPosition(0, 0, 0);
+    character:CreateSubObject("Mesh2D", "dragonriding_sgvigor_mask", 12, 12);
 end
 
 function GameState:StartTicker()

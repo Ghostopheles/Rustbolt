@@ -1,6 +1,6 @@
 local InputManager = Rustbolt.InputManager;
 
----@class RustboltCharacterObject : RustboltObjectBase
+---@class RustboltCharacterObject : RustboltObject
 ---@field InputEnabled boolean
 ---@field ControlsSetup boolean
 ---@field MovementSpeed number

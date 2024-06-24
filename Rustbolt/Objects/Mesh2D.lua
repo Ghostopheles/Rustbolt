@@ -1,13 +1,40 @@
----@class RustboltMesh2D : RustboltObjectBase
+---@class RustboltMesh2D : RustboltObject
+---@field private LastX number
+---@field private LastY number
+---@field private LastZ number
 local Mesh2D = Rustbolt.ObjectManager:CreateObject("Object");
 
-function Mesh2D:Init(asset)
-    self.Texture = UIParent:CreateTexture(nil, "OVERLAY");
+function Mesh2D:Init(asset, width, height)
+    self.Texture = Rustbolt.Engine:CreateTexture();
+    self.Texture:SetAtlas(asset);
+    self.Texture:SetSize(width, height);
 end
 
-function Mesh2D:OnAttach(parent)
-    self.Parent = parent;
+function Mesh2D:OnTick(deltaTime)
+    self:UpdatePosition();
+end
+
+function Mesh2D:OnAttach(owner)
+end
+
+function Mesh2D:UpdatePosition()
+    local owner = self:GetOwner();
+    if not owner then
+        return;
+    end
+
+    local ownerPos = owner:GetPosition();
+    local x, y, z = ownerPos:GetXYZ();
+    if self.LastX == x and self.LastY == y and self.LastZ == z then
+        return;
+    end
+
+    self.LastX = x;
+    self.LastY = y;
+    self.LastZ = z;
+
+    Rustbolt.Engine:PositionObjectByWorldCoords(self.Texture, x, y, z);
 end
 
 
-Rustbolt.ObjectManager:RegisterObjectType("Character", Rustbolt.ObjectType.OBJECT, Mesh2D);
+Rustbolt.ObjectManager:RegisterObjectType("Mesh2D", Rustbolt.ObjectType.OBJECT, Mesh2D);

@@ -207,7 +207,7 @@ end
 RustboltGameCanvasMixin = {};
 
 function RustboltGameCanvasMixin:OnLoad()
-    self.TilePool = CreateTexturePool(self, "ARTWORK", -1, TILE_TEMPLATE);
+    self.TilePool = CreateTexturePool(self, "ARTWORK", -2, TILE_TEMPLATE);
     self.DisplayedMapID = 0;
 
     Registry:RegisterCallback(Events.SCREEN_CHANGED, self.OnScreenChanged, self);
@@ -308,4 +308,8 @@ end
 
 function RustboltGameCanvasMixin:GetMapID()
     return self.DisplayedMapID;
+end
+
+function RustboltGameCanvasMixin:AddTexture(name)
+    return self:CreateTexture(name, "ARTWORK");
 end

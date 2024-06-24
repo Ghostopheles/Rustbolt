@@ -8,12 +8,23 @@ local Object = {
     Children = {}
 };
 
-Object.OnBeginPlay = nop;
-Object.OnEndPlay = nop;
-Object.OnTick = nop;
-Object.OnCreate = nop;
-Object.OnDestroy = nop;
-Object.OnAdopt = nop;
+function Object:OnBeginPlay()
+end
+
+function Object:OnEndPlay()
+end
+
+function Object:OnTick(deltaTime)
+end
+
+function Object:OnCreate()
+end
+
+function Object:OnDestroy()
+end
+
+function Object:OnAdopt()
+end
 
 ---@param doTick boolean
 function Object:SetDoTick(doTick)
@@ -40,6 +51,10 @@ function Object:SetOwner(owner)
     self.Owner = owner;
 end
 
+function Object:GetOwner()
+    return self.Owner;
+end
+
 ---@return Vector3DMixin position
 function Object:GetPosition()
     return self.Position;
@@ -61,7 +76,7 @@ end
 ---@param componentName string
 ---@param ... any
 ---@return RustboltObject
-function Object:CreateSubobject(componentName, ...)
+function Object:CreateSubObject(componentName, ...)
     local component = Rustbolt.ObjectManager:CreateObject(componentName, ...);
     component:SetOwner(self);
     component:OnAdopt();

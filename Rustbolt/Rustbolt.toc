@@ -33,6 +33,7 @@ Objects/ObjectManager.lua
 Objects/Object.lua
 Objects/Character.lua
 Objects/World.lua
+Objects/Mesh2D.lua
 
 Core/GameState.lua
 Core/Saves.lua

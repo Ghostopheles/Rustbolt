@@ -16,34 +16,49 @@ function World:ApplyWorldSettings(worldSettings)
     self.Settings = worldSettings;
 end
 
-function World:ValidateHandler(handler)
-    return handler ~= nop and type(handler) == "function";
-end
-
 function World:ShouldTick(object)
     return object.ShouldTick and object:ShouldTick();
 end
 
-function World:TickObjects(deltaTime)
-    for _, object in pairs(self.Objects) do
+function World:TickObjects(deltaTime, objects)
+    objects = objects or self.Objects;
+
+    for _, object in pairs(objects) do
         if self:ShouldTick(object) then
             object:OnTick(deltaTime);
+            if object.Children and #object.Children > 0 then
+                self:TickObjects(deltaTime, object.Children);
+            end
         end
     end
 end
 
-function World:BeginPlay()
-    for _, object in pairs(self.Objects) do
-        if self:ValidateHandler(object.OnBeginPlay) then
-            object:OnBeginPlay();
+function World:BeginPlay(objects)
+    objects = objects or self.Objects;
+
+    for _, object in pairs(objects) do
+        if object.Water ~= nil then
+            if object.OnBeginPlay then
+                object:OnBeginPlay();
+            end
+            if object.Children and #object.Children > 0 then
+                self:BeginPlay(object.Children);
+            end
         end
     end
 end
 
-function World:EndPlay()
-    for _, object in pairs(self.Objects) do
-        if self:ValidateHandler(object.OnEndPlay) then
-            object:OnEndPlay();
+function World:EndPlay(objects)
+    objects = objects or self.Objects;
+
+    for _, object in pairs(objects) do
+        if object.Water ~= nil then
+            if object.OnEndPlay then
+                object:OnEndPlay();
+            end
+            if object.Children and #object.Children > 0 then
+                self:EndPlay(object.Children);
+            end
         end
     end
 end
@@ -56,6 +71,7 @@ end
 function World:CreateObject(name, objectTypeName, ...)
     local object = ObjectManager:CreateObject(objectTypeName, ...);
     object:SetWorld(self);
+    object:OnCreate(); -- trigger objects OnCreate callback
 
     self.Objects[name] = object;
     return object;

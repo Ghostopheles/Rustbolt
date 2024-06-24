@@ -53,6 +53,19 @@ function Engine:LoadMap(mapID)
     RustboltGameWindow.GameCanvas:LoadMap(mapID);
 end
 
+function Engine:CreateTexture(...)
+    local canvas = RustboltGameWindow.GameCanvas;
+    return canvas:AddTexture(...);
+end
+
+function Engine:PositionObjectByWorldCoords(object, x, y, z)
+    local canvas = RustboltGameWindow.GameCanvas;
+    local scale = 10;
+    local xOffset, yOffset = x * scale, y * scale;
+
+    object:SetPoint("CENTER", canvas, "CENTER", xOffset, yOffset);
+end
+
 ------------
 
 Rustbolt.Engine = Engine;
