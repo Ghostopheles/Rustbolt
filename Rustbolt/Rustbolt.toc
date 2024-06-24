@@ -1,9 +1,9 @@
 ## Interface: 100207, 110000
 ## Title: Rustbolt
-## Notes: CHANGEME
+## Notes: An open-source game engine designed for World of Warcraft
 ## Author: Ghostopheles
 ## Version: @project-version@
-## SavedVariables: RustboltDevMap, RustboltSaveData, RustboltState
+## SavedVariables: RustboltDevMap, RustboltSaveData, RustboltState, RustboltConfig
 
 ## X-License: Public Domain
 ## X-Category: Development Tools
