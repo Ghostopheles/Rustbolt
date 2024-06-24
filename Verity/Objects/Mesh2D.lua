@@ -3,7 +3,6 @@ local Mesh2D = Verity.ObjectManager:CreateObject("Object");
 
 function Mesh2D:Init(asset)
     self.Texture = UIParent:CreateTexture(nil, "OVERLAY");
-    
 end
 
 function Mesh2D:OnAttach(parent)

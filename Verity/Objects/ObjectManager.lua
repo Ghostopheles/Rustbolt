@@ -28,7 +28,7 @@ end
 
 ---@param objectName string Object type name
 ---@param ... any Arguments passed to object constructor
----@return VerityObjectBase object
+---@return VerityObject object
 function ObjectManager:CreateObject(objectName, ...)
     local parent = self.Constructors[objectName];
     assert(parent, "Cannot create invalid object type");

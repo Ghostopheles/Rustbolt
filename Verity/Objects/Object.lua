@@ -1,8 +1,7 @@
----@class VerityObjectBase : VerityObject
----@field Context nil
----@field Owner VerityObject
----@field Children table<VerityObjectBase>
----@field World? VerityWorld
+---@class VerityObject
+---@field protected Owner VerityObject
+---@field protected Children table<VerityObject>
+---@field protected World? VerityWorld
 ---@field DoTick boolean
 ---@field Position Vector3DMixin
 local Object = {
@@ -36,7 +35,7 @@ function Object:GetWorld()
     return self.World;
 end
 
----@param owner VerityObjectBase
+---@param owner VerityObject
 function Object:SetOwner(owner)
     self.Owner = owner;
 end
@@ -61,7 +60,7 @@ end
 ---Creates a subobject on this object
 ---@param componentName string
 ---@param ... any
----@return VerityObjectBase
+---@return VerityObject
 function Object:CreateSubobject(componentName, ...)
     local component = Verity.ObjectManager:CreateObject(componentName, ...);
     component:SetOwner(self);
