@@ -138,6 +138,10 @@ function CVarManager:RegisterCVar(name, type, category, defaultValue)
     return cvar;
 end
 
+function CVarManager:DeleteCVar(name)
+    self.CVars[name] = nil;
+end
+
 ---Returns a table containing all registered CVars
 ---@return table<RustboltCVar>
 function CVarManager:GetAllCVars()
