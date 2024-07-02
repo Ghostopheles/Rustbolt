@@ -59,4 +59,6 @@ function CharacterObject:MoveX(direction)
     self:SetPosition(x + delta, y, z);
 end
 
+------------
+
 Rustbolt.ObjectManager:RegisterObjectType("Character", Rustbolt.ObjectType.OBJECT, CharacterObject);

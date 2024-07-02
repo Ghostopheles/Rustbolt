@@ -36,5 +36,6 @@ function Mesh2D:UpdatePosition()
     Rustbolt.Engine:PositionObjectByWorldCoords(self.Texture, x, y, z);
 end
 
+------------
 
 Rustbolt.ObjectManager:RegisterObjectType("Mesh2D", Rustbolt.ObjectType.OBJECT, Mesh2D);
