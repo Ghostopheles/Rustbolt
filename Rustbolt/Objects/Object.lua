@@ -1,30 +1,10 @@
 ---@class RustboltObject
----@field protected Owner RustboltObject
----@field protected Children table<RustboltObject>
----@field protected World? RustboltWorld
----@field DoTick boolean
----@field Position Vector3DMixin
 local Object = {
-    Children = {}
+    Children = {},
+    DoTick = true,
+    Position = CreateVector3D(0, 0, 0),
+    Replicated = false,
 };
-
-function Object:OnBeginPlay()
-end
-
-function Object:OnEndPlay()
-end
-
-function Object:OnTick(deltaTime)
-end
-
-function Object:OnCreate()
-end
-
-function Object:OnDestroy()
-end
-
-function Object:OnAdopt()
-end
 
 ---@param doTick boolean
 function Object:SetDoTick(doTick)
@@ -55,6 +35,15 @@ function Object:GetOwner()
     return self.Owner;
 end
 
+---@param name string
+function Object:SetName(name)
+    self.Name = name;
+end
+
+function Object:GetName()
+    return self.Name;
+end
+
 ---@return Vector3DMixin position
 function Object:GetPosition()
     return self.Position;
@@ -79,14 +68,32 @@ end
 function Object:CreateSubObject(componentName, ...)
     local component = Rustbolt.ObjectManager:CreateObject(componentName, ...);
     component:SetOwner(self);
-    component:OnAdopt();
 
+    Rustbolt.Engine:DispatchEventForObject(component, "Adopt");
     tinsert(self.Children, component);
     return component;
 end
 
-function Object:Super(funcOrAttribute)
-    return Object[funcOrAttribute];
+---Returns a copy of the base 'Object' that all objects inherit from. Probably shouldn't be used.
+function Object:Super()
+    return CopyTable(Object);
 end
 
-Rustbolt.ObjectManager:RegisterObjectType("Object", Rustbolt.ObjectType.OBJECT, Object);
+------------
+
+local ObjectMeta = {
+    __mode = "kv"
+};
+
+function ObjectMeta:__newindex(key, value)
+    if string.sub(key, 1, 2) == "On" then
+        local eventName = string.sub(key, 3);
+        Rustbolt.Engine:RegisterForEvent(self, eventName);
+    end
+
+    rawset(self, key, value);
+end
+
+------------
+
+Rustbolt.ObjectManager:RegisterObjectType("Object", Rustbolt.ObjectType.OBJECT, Object, ObjectMeta);

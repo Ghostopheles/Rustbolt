@@ -14,16 +14,23 @@ ObjectManager.Constructors = {};
 ---@type table<string, RustboltObjectType>
 ObjectManager.ObjectTypes = {};
 
+---@type table<string, table>
+ObjectManager.ObjectMetatables = {};
+
 ---@param name string Object name
 ---@param objectType RustboltObjectType Object type
 ---@param objectOrConstructor table | function Parent table to inherit or constructor function
-function ObjectManager:RegisterObjectType(name, objectType, objectOrConstructor)
+---@param metatable? table Metatable that will be applied to newly created objects
+function ObjectManager:RegisterObjectType(name, objectType, objectOrConstructor, metatable)
     local t = type(objectOrConstructor);
     assert(t == "table" or t == "function", "Invalid object base or constructor");
     assert(not self.Constructors[name] and not self.ObjectTypes[name], "Attempt to register duplicate object type");
 
     self.Constructors[name] = objectOrConstructor;
     self.ObjectTypes[name] = objectType;
+    if metatable and type(metatable) == "table" then
+        self.ObjectMetatables[name] = metatable;
+    end
 end
 
 ---@param objectName string Object type name
@@ -41,6 +48,11 @@ function ObjectManager:CreateObject(objectName, ...)
     else
         obj = CreateFromMixins(parent);
     end
+
+    if self.ObjectMetatables[objectName] then
+        setmetatable(obj, self.ObjectMetatables[objectName]);
+    end
+
     return obj;
 end
 

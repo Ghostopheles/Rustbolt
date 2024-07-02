@@ -61,4 +61,58 @@ end
 
 ------------
 
+--[[
+the engine is going to handle all the event propagations for our components and objects
+]]
+
+---Dispatches an event to all objects registered for it
+---@param event string
+---@param ... any
+function Engine:DispatchEvent(event, ...)
+    local listeners = self:GetListenersForEvent(event);
+    if not listeners or #listeners == 0 then
+        return;
+    end
+
+    for i=1, #listeners do
+        self:DispatchEventForObject(listeners[i], event);
+    end
+end
+
+---Dispatches an event local to the provided object, with the given arguments
+---@param object RustboltObject
+---@param event string
+---@param ... any
+function Engine:DispatchEventForObject(object, event, ...)
+    local handlerName = "On" .. event;
+    local handler = object[handlerName];
+    if not handler or type(handler) ~= "function" then
+        return;
+    end
+
+    handler(object, ...);
+end
+
+---@param event string
+---@return table<RustboltObject>?
+function Engine:GetListenersForEvent(event)
+    return self.EventListeners[event];
+end
+
+---@param object RustboltObject
+---@param event string
+function Engine:RegisterForEvent(object, event)
+    if not self.EventListeners[event] then
+        self.EventListeners[event] = {};
+    end
+
+    local listeners = self.EventListeners[event];
+    local lookup = self.EventListenerLookup[event];
+    if not lookup[object] then
+        tinsert(listeners, object);
+    end
+end
+
+------------
+
 Rustbolt.Engine = Engine;

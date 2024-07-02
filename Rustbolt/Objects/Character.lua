@@ -12,7 +12,6 @@ function CharacterObject:OnBeginPlay()
 end
 
 function CharacterObject:OnTick(deltaTime)
-    --print(format("X: %d, Y: %d, Z: %d", position.x, position.y, position.z));
 end
 
 function CharacterObject:IsInputEnabled()
