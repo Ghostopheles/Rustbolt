@@ -36,7 +36,6 @@ Objects/World.lua
 Objects/Mesh2D.lua
 
 Core/GameState.lua
-Core/Saves.lua
 Core/Engine.lua
 
 Templates/StartScreen.lua
