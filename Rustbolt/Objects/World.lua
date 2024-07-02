@@ -16,12 +16,6 @@ function World:ApplyWorldSettings(worldSettings)
     self.Settings = worldSettings;
 end
 
-function World:BeginPlay(objects)
-end
-
-function World:EndPlay(objects)
-end
-
 ---Creates and initializes an object in the world
 ---@param name string
 ---@param objectTypeName string
