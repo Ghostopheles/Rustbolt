@@ -96,4 +96,5 @@ end
 
 ------------
 
-Rustbolt.ObjectManager:RegisterObjectType("Object", Rustbolt.ObjectType.OBJECT, Object, ObjectMeta);
+Rustbolt.ObjectManager:SetObjectTypeMetatable(Rustbolt.ObjectType.OBJECT, ObjectMeta);
+Rustbolt.ObjectManager:RegisterObjectType("Object", Rustbolt.ObjectType.OBJECT, Object);
