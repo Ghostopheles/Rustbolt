@@ -21,7 +21,7 @@ L["START_SCREEN_HELP"] = "$Help$";
 L["START_SCREEN_CREDITS"] = "$Credits$";
 
 L["CAMPAIGN_NEW_PH"] = "New Campaign";
-L["CAMPAIGN_WINDOW_TITLE"] = "$Playing Campaign: %s$";
+L["CAMPAIGN_WINDOW_TITLE"] = "Playing: %s";
 
 -- END LOCALIZATION
 
