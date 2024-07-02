@@ -8,8 +8,8 @@
 ## X-License: Public Domain
 ## X-Category: Development Tools
 
-## X-Curse-Project-ID: 1022267
-## X-Wago-ID: CHANGEME
+## X-Curse-Project-ID: 1055837
+## X-Wago-ID: j6jzwm6R
 
 Libs/LibStub/LibStub.lua
 Libs/AceLocale-3.0/AceLocale-3.0.xml
