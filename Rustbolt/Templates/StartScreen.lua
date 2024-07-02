@@ -38,17 +38,12 @@ function RustboltStartScreenMixin:OnHide()
 end
 
 function RustboltStartScreenMixin:OnStartButtonClick()
-    local campaign = Engine:StartNewCampaign("TestCampaign1");
-    if not campaign then
-        return; --TODO: handle this
-    end
-
     local window = self:GetParent();
     window:SetScreen(Rustbolt.Enum.ScreenName.GAME);
-    window:SetTitle(format(L.CAMPAIGN_WINDOW_TITLE, campaign.Name));
+    window:SetTitle(format(L.CAMPAIGN_WINDOW_TITLE, "TEST MODE"));
 
     local gameState = Engine:GetGameState();
     gameState:Init(1);
-    gameState:LoadSave();
+    gameState:LoadGame();
     gameState:Start();
 end

@@ -81,9 +81,7 @@ end
 
 ------------
 
-local ObjectMeta = {
-    __mode = "kv"
-};
+local ObjectMeta = {};
 
 function ObjectMeta:__newindex(key, value)
     if string.sub(key, 1, 2) == "On" then

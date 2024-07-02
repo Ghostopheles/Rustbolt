@@ -106,8 +106,13 @@ function Engine:RegisterForEvent(object, event)
         self.EventListeners[event] = {};
     end
 
+    if not self.EventListenerLookup[event] then
+        self.EventListenerLookup[event] = {};
+    end
+
     local listeners = self.EventListeners[event];
     local lookup = self.EventListenerLookup[event];
+
     if not lookup[object] then
         tinsert(listeners, object);
     end
