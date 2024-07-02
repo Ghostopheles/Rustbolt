@@ -84,7 +84,7 @@ function GameState:GetWorld()
     return self.World;
 end
 
-function GameState:LoadSave(data)
+function GameState:LoadGame(data)
     local character = self.World:CreateObject("PlayerCharacter", "Character");
 
     ---@cast character RustboltCharacterObject
@@ -106,7 +106,7 @@ end
 --- main game loop
 function GameState:Tick()
     local deltaTime = GetTickTime();
-    self.World:TickObjects(deltaTime);
+    Rustbolt.Engine:DispatchEvent("Tick", deltaTime);
 end
 
 --- called to begin the game loop
@@ -114,7 +114,7 @@ function GameState:Start()
     assert(self:GetStatus() == GameStatus.READY, "Attempt to begin game loop while game state is not ready");
 
     self:SetStatus(GameStatus.RUNNING);
-    self.World:BeginPlay();
+    Rustbolt.Engine:DispatchEvent("BeginPlay");
 
     self:StartTicker();
 end
@@ -124,7 +124,7 @@ function GameState:End()
     assert(status == GameStatus.RUNNING or GameStatus.PAUSED, "Attempt to end a non-healthy game loop");
 
     self:SetStatus(GameStatus.ENDED);
-    self.World:EndPlay();
+    Rustbolt.Engine:DispatchEvent("EndPlay");
 
     self:StopTicker();
 end

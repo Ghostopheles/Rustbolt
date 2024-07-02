@@ -75,7 +75,7 @@ function Engine:DispatchEvent(event, ...)
     end
 
     for i=1, #listeners do
-        self:DispatchEventForObject(listeners[i], event);
+        self:DispatchEventForObject(listeners[i], event, ...);
     end
 end
 
