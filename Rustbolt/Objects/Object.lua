@@ -75,8 +75,8 @@ function Object:CreateSubObject(componentName, ...)
 end
 
 ---Returns a copy of the base 'Object' that all objects inherit from. Probably shouldn't be used.
-function Object:Super()
-    return CopyTable(Object);
+function Object:Super(methodName, ...)
+    return CopyTable(Object)[methodName](self, ...);
 end
 
 ------------
