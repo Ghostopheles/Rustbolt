@@ -50,6 +50,10 @@ need it later
 ---@param worldSettings table
 ---@param gameSettings table
 function GameState:Init(mapID, worldSettings, gameSettings)
+    Rustbolt.Engine:DeclareEvent("Tick");
+    Rustbolt.Engine:DeclareEvent("BeginPlay");
+    Rustbolt.Engine:DeclareEvent("EndPlay");
+
     self.World = Rustbolt.World:NewWorld();
     self.World:SetMapID(mapID);
     self.World:ApplyWorldSettings(worldSettings);
