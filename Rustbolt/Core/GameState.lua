@@ -91,7 +91,8 @@ function GameState:LoadGame(data)
     character:SetDoTick(true);
     character:SetInputEnabled(true);
     character:SetPosition(0, 0, 0);
-    character:CreateSubObject("Mesh2D", "dragonriding_sgvigor_mask", 35, 35);
+    local mesh = character:CreateSubObject("Mesh2D", "dragonriding_sgvigor_mask", 35, 35);
+    mesh:SetDoTick(true);
 end
 
 function GameState:StartTicker()

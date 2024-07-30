@@ -9,11 +9,13 @@ function Mesh2D:Init(asset, width, height)
     self.Texture:SetAtlas(asset);
     self.Texture:SetSize(width, height);
     self.Texture:SetVertexColor(0.9, 0, 0.8);
-
-    self:SetDoTick(true);
 end
 
 function Mesh2D:OnTick(deltaTime)
+    if not self.DoTick then
+        return;
+    end
+
     self:UpdatePosition();
 end
 
