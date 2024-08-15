@@ -1,0 +1,34 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+
+    <Script file="Basement.lua" />
+
+    <Frame name="RustboltBasementTemplate" mixin="RustboltBasementMixin" virtual="true">
+        <Size y="24" />
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="Background" atlas="common-gray-button-entrybox-center"
+                    setAllPoints="true" />
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame parentKey="ContainerLeft">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" />
+                    <Anchor point="TOPRIGHT" relativePoint="TOP" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="ContainerRight">
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" />
+                    <Anchor point="TOPLEFT" relativePoint="TOP" />
+                </Anchors>
+            </Frame>
+        </Frames>
+        <Scripts>
+            <OnLoad method="OnLoad" />
+            <OnShow method="OnShow" />
+            <OnHide method="OnHide" />
+        </Scripts>
+    </Frame>
+</Ui>
