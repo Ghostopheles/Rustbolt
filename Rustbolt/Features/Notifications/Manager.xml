@@ -8,7 +8,7 @@
         virtual="true">
 
         <Frames>
-            <Button parentKey="ClearButton" inherits="UIButtonTemplate">
+            <Button parentKey="ClearButton" inherits="UIButtonTemplate" frameLevel="515">
                 <Size x="24" y="24" />
                 <Anchors>
                     <Anchor point="RIGHT" relativeKey="$parent.CloseButton" relativePoint="LEFT"
