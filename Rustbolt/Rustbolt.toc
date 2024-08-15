@@ -38,6 +38,7 @@ Features/Basement/Button.xml
 Features/Basement/Basement.xml
 
 Features/Notifications/Notifications.xml
+Features/Notifications/Manager.xml
 
 Objects/ObjectManager.lua
 Objects/Object.lua

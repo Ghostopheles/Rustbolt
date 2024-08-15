@@ -48,12 +48,4 @@
         </Scripts>
     </Frame>
 
-    <!--<Frame
-    name="NotifTest" inherits="RustboltNotificationPopupTemplate" parent="UIParent"
-        hidden="true">
-        <Anchors>
-            <Anchor point="CENTER" />
-        </Anchors>
-    </Frame>-->
-
 </Ui>
