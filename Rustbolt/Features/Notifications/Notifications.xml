@@ -1,0 +1,59 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+
+    <Script file="Notifications.lua" />
+
+    <Frame name="RustboltNotificationPopupTemplate" mixin="RustboltNotificationPopupMixin"
+        virtual="true">
+        <Size x="263" y="91" />
+        <Frames>
+            <Button parentKey="ExitButton" inherits="BigRedExitButtonTemplate">
+                <Size x="26" y="26" />
+                <Anchors>
+                    <Anchor point="TOPRIGHT" x="-13" y="-13" />
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        CallMethodOnNearestAncestor(self, "OnCloseButtonClicked");
+                    </OnClick>
+                </Scripts>
+            </Button>
+        </Frames>
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString parentKey="TitleText" font="GameFontWhite">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="12" y="-15" />
+                    </Anchors>
+                </FontString>
+                <FontString parentKey="InfoText" font="GameFontWhiteSmall" maxLines="5"
+                    wordwrap="true" justifyH="LEFT" justifyV="TOP">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="LEFT" x="12" y="8" />
+                        <Anchor point="BOTTOMRIGHT" x="-12" y="8" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="Background" atlas="plunderstorm-scenariotracker-waiting"
+                    useAtlasSize="true" setAllPoints="true" />
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad method="OnLoad" />
+            <OnShow method="OnShow" />
+            <OnHide method="OnHide" />
+            <OnEnter method="OnEnter" />
+            <OnLeave method="OnLeave" />
+        </Scripts>
+    </Frame>
+
+    <!--<Frame
+    name="NotifTest" inherits="RustboltNotificationPopupTemplate" parent="UIParent"
+        hidden="true">
+        <Anchors>
+            <Anchor point="CENTER" />
+        </Anchors>
+    </Frame>-->
+
+</Ui>

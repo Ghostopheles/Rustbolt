@@ -11,7 +11,9 @@ Rustbolt.Events = {
 	CVAR_MANAGER_LOADED = "CVarManagerLoaded",
 	CVAR_CREATED = "CVarCreated",
 	CVAR_DELETED = "CVarDeleted",
-	CVAR_VALUE_CHANGED = "CVarValueChanged"
+	CVAR_VALUE_CHANGED = "CVarValueChanged",
+	NOTIFICATION_ADDED = "NotificationAdded",
+	NOTIFICATION_REMOVED = "NotificationRemoved"
 };
 
 Rustbolt.GameEvents = {

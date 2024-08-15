@@ -1,17 +1,34 @@
 local ANIM_TYPE_BASE = "Animation";
+local ANIM_TYPE_TRANSLATE = "Translation";
+local ANIM_TYPE_ALPHA = "Alpha";
 
 ---@enum RustboltAnimType
 Rustbolt.AnimationType = {
     Bounce = 1,
+    SlideIn = 2,
 };
 local ANIM_TYPE = Rustbolt.AnimationType;
+
+---@enum RustboltSlideInSide
+Rustbolt.SlideInSide = {
+    LEFT = 1,
+    RIGHT = 2,
+    TOP = 3,
+    BOTTOM = 4,
+};
 
 local ANIM_DEFAULTS = {
     [ANIM_TYPE.Bounce] = {
         BounceHeight = 50,
         Duration = 0.5,
         Smoothing = "OUT",
-    };
+    },
+    [ANIM_TYPE.SlideIn] = {
+        FromSide = Rustbolt.SlideInSide.BOTTOM,
+        Distance = 100,
+        Duration = 0.35,
+        Smoothing = "OUT_IN",
+    },
 };
 
 ---@class RustboltAnimationManager
@@ -28,7 +45,7 @@ function AnimationManager:ApplyBounce(object, bounceHeight, duration, smoothing,
     local defaults = ANIM_DEFAULTS[ANIM_TYPE.Bounce];
 
     local point, relativeTo, relativePoint, offsetX, offsetY = object:GetPointByName("CENTER");
-    local animGroup = object.AnimGroup or object:CreateAnimationGroup();
+    local animGroup = object.BounceAnimGroup or object:CreateAnimationGroup();
     animGroup:SetLooping("BOUNCE");
     animGroup.Anim = animGroup.Anim or animGroup:CreateAnimation(ANIM_TYPE_BASE);
 
@@ -64,6 +81,78 @@ function AnimationManager:ApplyBounce(object, bounceHeight, duration, smoothing,
     end
 
     StartBounce();
+end
+
+---@param object any
+---@param fromSide? RustboltSlideInSide
+---@param duration? number
+---@param distance? number
+---@param smoothing? string
+---@param doNotStart? boolean
+function AnimationManager:ApplySlideIn(object, fromSide, duration, distance, smoothing, doNotStart)
+    local defaults = ANIM_DEFAULTS[ANIM_TYPE.SlideIn];
+
+    local animGroup = object.SlideInAnimGroup or object:CreateAnimationGroup();
+    animGroup.Translate = animGroup.Translate or animGroup:CreateAnimation(ANIM_TYPE_TRANSLATE);
+    animGroup.Alpha = animGroup.Alpha or animGroup:CreateAnimation(ANIM_TYPE_ALPHA);
+
+    local translate = animGroup.Translate;
+    translate:SetDuration(duration or defaults.Duration);
+    translate:SetSmoothing(smoothing or defaults.Smoothing);
+    translate:SetTarget(object);
+
+    fromSide = fromSide or defaults.FromSide;
+    distance = distance or defaults.Distance;
+    local offsetX, offsetY;
+    if fromSide == Rustbolt.SlideInSide.BOTTOM then
+        offsetX = 0;
+        offsetY = -distance;
+    elseif fromSide == Rustbolt.SlideInSide.TOP then
+        offsetX = 0;
+        offsetY = distance;
+    elseif fromSide == Rustbolt.SlideInSide.LEFT then
+        offsetX = -distance;
+        offsetY = 0;
+    elseif fromSide == Rustbolt.SlideInSide.RIGHT then
+        offsetX = distance;
+        offsetY = 0;
+    end
+
+    translate:SetOffset(offsetX, offsetY);
+
+    local alpha = animGroup.Alpha;
+    alpha:SetDuration(duration or defaults.Duration);
+    alpha:SetSmoothing(smoothing or defaults.Smoothing);
+    alpha:SetTarget(object);
+    alpha:SetToAlpha(0);
+    alpha:SetFromAlpha(1);
+
+    local function SlideIn()
+        object:Show();
+        animGroup:Play(true);
+    end
+
+    local function StopSlideIn()
+        animGroup:Stop();
+    end
+
+    local function SlideOut()
+        animGroup:SetScript("OnFinished", function()
+            object:Hide();
+            animGroup:SetScript("OnFinished", nil);
+        end);
+        animGroup:Play(false);
+    end
+
+    object.SlideIn = SlideIn;
+    object.StopSlideIn = StopSlideIn;
+    object.SlideOut = SlideOut;
+
+    if doNotStart then
+        return;
+    end
+
+    StartSlideIn();
 end
 
 ------------

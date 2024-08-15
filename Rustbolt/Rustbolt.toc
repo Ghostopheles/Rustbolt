@@ -1,4 +1,4 @@
-## Interface: 100207, 110000
+## Interface: 110002
 ## Title: Rustbolt
 ## Notes: An open-source game engine designed for World of Warcraft
 ## Author: Ghostopheles
@@ -31,6 +31,8 @@ Core/Maps.lua
 
 Core/GameState.lua
 Core/Engine.lua
+
+Features/Notifications/Notifications.xml
 
 Objects/ObjectManager.lua
 Objects/Object.lua
