@@ -19,7 +19,7 @@ function RustboltStartScreenMixin:OnLoad()
     stack.Version:SetText(format(L.GAME_VERSION_FORMAT, Rustbolt.Globals.Version));
     stack.Author:SetText(L.GAME_AUTHOR);
 
-    stack.LoadButton:Disable(); -- TODO: update enable state w/ num of saves or something
+    stack.LoadButton:Disable();
 
     ThemeManager:RegisterThemedTexture(self.Background, "START_SCREEN_BG");
     ThemeManager:RegisterThemedTexture(self.ButtonStack.Background, "START_SCREEN_BUTTON_STACK_BG");
