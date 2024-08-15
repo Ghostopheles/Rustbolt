@@ -5,6 +5,8 @@
 ## Version: @project-version@
 ## SavedVariables: RustboltDevMap, RustboltSaveData, RustboltState, RustboltConfig
 
+## AddonCompartmentFunc: Rustbolt_OnAddonCompartmentClick
+
 ## X-License: Public Domain
 ## X-Category: Development Tools
 
@@ -31,6 +33,9 @@ Core/Maps.lua
 
 Core/GameState.lua
 Core/Engine.lua
+
+Features/Basement/Button.xml
+Features/Basement/Basement.xml
 
 Features/Notifications/Notifications.xml
 
