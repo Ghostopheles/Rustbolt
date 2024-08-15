@@ -92,7 +92,7 @@ function InputManager:RegisterInputListener(key, callback, owner, context, gate)
 end
 
 function InputManager:HandleInputError(key, message)
-    print("Error handling input for key '" .. key .. "'\n" .. message);
+    print("Error handling input for key '" .. key .. "'\n" .. message); -- TODO: use an actual error handler here
 end
 
 function InputManager:ShouldPropagateKey(key)
