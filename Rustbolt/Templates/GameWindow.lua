@@ -5,6 +5,7 @@ local Registry = Rustbolt.EventRegistry;
 local L = Rustbolt.Strings;
 
 local SCREEN_NAMES = {
+    EMPTY = "EMPTY",
     START = "START",
     GAME = "GAME",
 };
@@ -24,11 +25,12 @@ function RustboltGameWindowMixin:OnLoad()
         Name = nil,
     };
 
+    self:RegisterScreen(self.Empty, SCREEN_NAMES.EMPTY);
     self:RegisterScreen(self.GameCanvas, SCREEN_NAMES.GAME);
     self:RegisterScreen(self.StartScreen, SCREEN_NAMES.START);
-    self:SetScreen(SCREEN_NAMES.START);
+    self:SetScreen(SCREEN_NAMES.EMPTY);
 
-    self.DefaultScreen = SCREEN_NAMES.START;
+    self.DefaultScreen = SCREEN_NAMES.EMPTY;
 end
 
 function RustboltGameWindowMixin:OnKeyDown(key)

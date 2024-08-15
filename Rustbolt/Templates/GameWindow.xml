@@ -10,6 +10,7 @@
         </Anchors>
 
         <Frames>
+            <Frame parentKey="Empty" />
             <Frame parentKey="StartScreen" inherits="RustboltStartScreenTemplate" hidden="true" />
             <Frame parentKey="GameCanvas" inherits="RustboltGameCanvasTemplate" hidden="true" />
         </Frames>
