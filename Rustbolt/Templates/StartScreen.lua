@@ -15,8 +15,8 @@ function RustboltStartScreenMixin:OnLoad()
     stack.HelpButton:SetText(L.START_SCREEN_HELP);
     stack.CreditsButton:SetText(L.START_SCREEN_CREDITS);
 
-    stack.Version:SetText(format(L.GAME_VERSION_FORMAT, Rustbolt.Globals.Version));
-    stack.Author:SetText(L.GAME_AUTHOR);
+    stack.Version:SetText(format(L.VERSION_FORMAT, Rustbolt.Globals.Version));
+    stack.Author:SetText(L.AUTHOR);
 
     stack.LoadButton:Disable();
 
