@@ -34,8 +34,8 @@ Core/Maps.lua
 Core/GameState.lua
 Core/Engine.lua
 
-Features/Basement/Button.xml
-Features/Basement/Basement.xml
+Features/Toolbar/Button.xml
+Features/Toolbar/Toolbar.xml
 
 Features/Notifications/Notifications.xml
 Features/Notifications/Manager.xml

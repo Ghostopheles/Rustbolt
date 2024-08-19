@@ -8,6 +8,7 @@ local SCREEN_NAMES = {
     EMPTY = "EMPTY",
     START = "START",
     GAME = "GAME",
+    EDITOR_HOME = "EDITOR_HOME"
 };
 Enum.ScreenName = SCREEN_NAMES;
 
@@ -26,11 +27,12 @@ function RustboltGameWindowMixin:OnLoad()
     };
 
     self:RegisterScreen(self.Empty, SCREEN_NAMES.EMPTY);
+    self:RegisterScreen(self.EditorHome, SCREEN_NAMES.EDITOR_HOME);
     self:RegisterScreen(self.GameCanvas, SCREEN_NAMES.GAME);
     self:RegisterScreen(self.StartScreen, SCREEN_NAMES.START);
-    self:SetScreen(SCREEN_NAMES.EMPTY);
+    self:SetScreen(SCREEN_NAMES.EDITOR_HOME);
 
-    self.DefaultScreen = SCREEN_NAMES.EMPTY;
+    self.DefaultScreen = SCREEN_NAMES.EDITOR_HOME;
 end
 
 function RustboltGameWindowMixin:OnKeyDown(key)

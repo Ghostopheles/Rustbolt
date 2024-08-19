@@ -1,8 +1,8 @@
-RustboltBasementButtonMixin = {};
+RustboltToolbarButtonMixin = {};
 
-function RustboltBasementButtonMixin:OnLoad()
+function RustboltToolbarButtonMixin:OnLoad()
 end
 
-function RustboltBasementButtonMixin:SetText(text)
+function RustboltToolbarButtonMixin:SetText(text)
     self.Text:SetTextToFit(text);
 end

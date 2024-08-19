@@ -11,22 +11,9 @@
 
         <Frames>
             <Frame parentKey="Empty" />
+            <Frame parentKey="EditorHome" inherits="RustboltEditorHomeTemplate" hidden="true" />
             <Frame parentKey="StartScreen" inherits="RustboltStartScreenTemplate" hidden="true" />
             <Frame parentKey="GameCanvas" inherits="RustboltGameCanvasTemplate" hidden="true" />
-
-            <Frame parentKey="Basement" inherits="RustboltToolbarTemplate">
-                <Anchors>
-                    <Anchor point="BOTTOMLEFT" x="6" />
-                    <Anchor point="BOTTOMRIGHT" />
-                </Anchors>
-            </Frame>
-
-            <Frame parentKey="Basement" inherits="RustboltToolbarTemplate">
-                <Anchors>
-                    <Anchor point="BOTTOMLEFT" x="6" />
-                    <Anchor point="BOTTOMRIGHT" />
-                </Anchors>
-            </Frame>
         </Frames>
 
         <Scripts>

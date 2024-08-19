@@ -3,7 +3,7 @@
 
     <Script file="Button.lua" />
 
-    <Button name="RustboltBasementButtonTemplate" mixin="RustboltBasementButtonMixin" virtual="true">
+    <Button name="RustboltToolbarButtonTemplate" mixin="RustboltToolbarButtonMixin" virtual="true">
         <Size x="50" y="20" />
         <Layers>
             <Layer level="ARTWORK">
