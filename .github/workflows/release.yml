@@ -6,7 +6,12 @@ on:
       - '!**-dev**'
 
 jobs:
-  build:
+  closeouts:
+    uses: ./.github/workflows/closeouts.yml
+
+  deploy:
+    needs:
+      - tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
