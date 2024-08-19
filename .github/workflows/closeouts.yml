@@ -1,0 +1,47 @@
+---
+name: Closeouts
+on: 
+  - pull_request
+  - workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Run Luacheck
+        uses: nebularg/actions-luacheck@v1
+        with:
+          args: --no-color -q
+          files: $(git ls-files '*.lua' ':!:Rustbolt/Libs/*' ':!:Rustbolt/Localization/????.lua' ':!:Rustbolt/Types/*')
+          annotate: warning
+
+      - name: Run editorconfig-checker
+        uses: wow-rp-addons/actions-editorconfig-check@v1.0.2
+        with:
+          args: -no-color
+          files: $(git ls-files '*.lua' '*.sh' '*.xml' ':!:Rustbolt/Libs/*' ':!:Rustbolt/Localization/????.lua')
+
+      - name: Create Package
+        uses: BigWigsMods/packager@v2
+        with:
+          args: -dz
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Rustbolt-PR-${{ github.event.number }}
+          path: .release/
+
+      - name: Send Webhook Notification
+        if: failure()
+        run: |
+          git clone https://github.com/DiscordHooks/github-actions-discord-webhook.git webhook
+          bash webhook/send.sh $JOB_STATUS $WEBHOOK_URL
+        env:
+          JOB_STATUS: ${{ job.status }}
+          HOOK_OS_NAME: ${{ runner.os }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          WORKFLOW_NAME: ${{ github.workflow }}
