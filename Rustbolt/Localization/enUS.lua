@@ -25,6 +25,13 @@ L["CAMPAIGN_WINDOW_TITLE"] = "Playing: %s";
 
 L["NOTIFICATION_TRAY_TITLE"] = "Notifications";
 
+L["TOOLBAR_TITLE_FILE"] = "File";
+L["TOOLBAR_TITLE_EDIT"] = "Edit";
+L["TOOLBAR_TITLE_WINDOW"] = "Window";
+L["TOOLBAR_TITLE_TOOLS"] = "Tools";
+L["TOOLBAR_TITLE_BUILD"] = "Build";
+L["TOOLBAR_TITLE_HELP"] = "Help";
+
 -- END LOCALIZATION
 
 Rustbolt.Strings = AceLocale:GetLocale("Rustbolt", false);

@@ -14,12 +14,12 @@ end
 
 function RustboltEditorHomeMixin:RegisterToolbarButtons()
     local names = {
-        "File",
-        "Edit",
-        "Window",
-        "Tools",
-        "Build",
-        "Help"
+        L.TOOLBAR_TITLE_FILE,
+        L.TOOLBAR_TITLE_EDIT,
+        L.TOOLBAR_TITLE_WINDOW,
+        L.TOOLBAR_TITLE_TOOLS,
+        L.TOOLBAR_TITLE_BUILD,
+        L.TOOLBAR_TITLE_HELP,
     };
     for _, name in ipairs(names) do
         local buttonConfig = {
