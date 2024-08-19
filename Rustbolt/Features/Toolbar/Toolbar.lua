@@ -17,6 +17,7 @@ RustboltToolbarMixin.Side = {
 local SIDE = RustboltToolbarMixin.Side;
 
 local DEFAULT_BUTTON_TEMPLATE = "RustboltToolbarButtonTemplate";
+local DROPDOWN_BUTTON_TEMPLATE = "RustboltToolbarDropdownButtonTemplate";
 
 function RustboltToolbarMixin:OnLoad()
     self.Buttons = {
@@ -49,9 +50,14 @@ function RustboltToolbarMixin:OnLoad()
     local function InitButton()
     end
 
-    self.Pools = {
+    self.DefaultPools = {
         [SIDE.LEFT] = CreateFramePool("Button", self.ContainerLeft, DEFAULT_BUTTON_TEMPLATE, ResetButton, false, InitButton, MAX_BUTTONS_PER_SIDE),
         [SIDE.RIGHT] = CreateFramePool("Button", self.ContainerRight, DEFAULT_BUTTON_TEMPLATE, ResetButton, false, InitButton, MAX_BUTTONS_PER_SIDE),
+    };
+
+    self.DropdownPools = {
+        [SIDE.LEFT] = CreateFramePool("DropdownButton", self.ContainerLeft, DROPDOWN_BUTTON_TEMPLATE, ResetButton, false, InitButton, MAX_BUTTONS_PER_SIDE),
+        [SIDE.RIGHT] = CreateFramePool("DropdownButton", self.ContainerRight, DROPDOWN_BUTTON_TEMPLATE, ResetButton, false, InitButton, MAX_BUTTONS_PER_SIDE),
     };
 
     self.IDToButton = {};
@@ -66,19 +72,21 @@ end
 ------------
 
 ---@class RustboltToolbarButtonConfig
----@field Side RustboltToolbarSide
----@field IconAtlas string
 ---@field Text string
----@field ID string
+---@field IconAtlas? string
+---@field Side? RustboltToolbarSide
+---@field ID? string
 ---@field OnClick function
 ---@field OnEnter? function
 ---@field OnLeave? function
+---@field IsDropdown? boolean
 
 ---@param buttonConfig RustboltToolbarButtonConfig
 function RustboltToolbarMixin:AddButton(buttonConfig)
-    local side = buttonConfig.Side;
+    local side = buttonConfig.Side or self.Side.LEFT;
+    local pool = buttonConfig.IsDropdown and self.DropdownPools or self.DefaultPools;
 
-    local button = self.Pools[side]:Acquire();
+    local button = pool[side]:Acquire();
     if not button then
         return false;
     end
@@ -90,6 +98,10 @@ function RustboltToolbarMixin:AddButton(buttonConfig)
     end
 
     tinsert(self.Buttons[side], button);
+
+    if buttonConfig.ID then
+        self.IDToButton[buttonConfig.ID] = button;
+    end
 
     self:Layout();
     return button;

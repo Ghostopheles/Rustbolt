@@ -1,0 +1,24 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+
+    <Script file="DropdownButton.lua" />
+
+    <DropdownButton name="RustboltToolbarDropdownButtonTemplate"
+        mixin="RustboltToolbarDropdownButtonMixin"
+        virtual="true">
+        <KeyValues>
+            <KeyValue key="menuMixin" value="MenuStyle1Mixin" type="global" />
+        </KeyValues>
+
+        <Size x="50" y="20" />
+
+        <HighlightTexture>
+            <Color r="0.75" g="0.75" b="0.75" a="0.15" />
+        </HighlightTexture>
+
+        <Scripts>
+            <OnLoad method="OnLoad" />
+        </Scripts>
+    </DropdownButton>
+
+</Ui>

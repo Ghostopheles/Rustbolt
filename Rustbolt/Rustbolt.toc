@@ -34,6 +34,7 @@ Core/Maps.lua
 Core/GameState.lua
 Core/Engine.lua
 
+Features/Toolbar/DropdownButton.xml
 Features/Toolbar/Button.xml
 Features/Toolbar/Toolbar.xml
 
