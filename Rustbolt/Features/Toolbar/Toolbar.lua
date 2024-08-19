@@ -7,18 +7,18 @@ local BUTTON_SCRIPTS = {
     "OnLeave"
 };
 
-RustboltBasementMixin = {};
+RustboltToolbarMixin = {};
 
----@enum RustboltBasementSide
-RustboltBasementMixin.Side = {
+---@enum RustboltToolbarSide
+RustboltToolbarMixin.Side = {
     LEFT = 1,
     RIGHT = 2
 };
-local SIDE = RustboltBasementMixin.Side;
+local SIDE = RustboltToolbarMixin.Side;
 
-local DEFAULT_BUTTON_TEMPLATE = "RustboltBasementButtonTemplate";
+local DEFAULT_BUTTON_TEMPLATE = "RustboltToolbarButtonTemplate";
 
-function RustboltBasementMixin:OnLoad()
+function RustboltToolbarMixin:OnLoad()
     self.Buttons = {
         [SIDE.LEFT] = {},
         [SIDE.RIGHT] = {},
@@ -46,7 +46,7 @@ function RustboltBasementMixin:OnLoad()
         end
     end
 
-    local function InitButton(button)
+    local function InitButton()
     end
 
     self.Pools = {
@@ -57,16 +57,16 @@ function RustboltBasementMixin:OnLoad()
     self.IDToButton = {};
 end
 
-function RustboltBasementMixin:OnShow()
+function RustboltToolbarMixin:OnShow()
 end
 
-function RustboltBasementMixin:OnHide()
+function RustboltToolbarMixin:OnHide()
 end
 
 ------------
 
----@class RustboltBasementButtonConfig
----@field Side RustboltBasementSide
+---@class RustboltToolbarButtonConfig
+---@field Side RustboltToolbarSide
 ---@field IconAtlas string
 ---@field Text string
 ---@field ID string
@@ -74,8 +74,8 @@ end
 ---@field OnEnter? function
 ---@field OnLeave? function
 
----@param buttonConfig RustboltBasementButtonConfig
-function RustboltBasementMixin:AddButton(buttonConfig)
+---@param buttonConfig RustboltToolbarButtonConfig
+function RustboltToolbarMixin:AddButton(buttonConfig)
     local side = buttonConfig.Side;
 
     local button = self.Pools[side]:Acquire();
@@ -95,13 +95,13 @@ function RustboltBasementMixin:AddButton(buttonConfig)
     return button;
 end
 
-function RustboltBasementMixin:Layout()
+function RustboltToolbarMixin:Layout()
     for side, layout in ipairs(self.Layouts) do
         local InitialAnchor = self.InitialAnchors[side];
         AnchorUtil.ChainLayout(self.Buttons[side], InitialAnchor, layout);
     end
 end
 
-function RustboltBasementMixin:GetButtonByID(id)
+function RustboltToolbarMixin:GetButtonByID(id)
     return self.IDToButton[id];
 end

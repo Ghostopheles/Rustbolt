@@ -46,6 +46,9 @@ Objects/Character.lua
 Objects/World.lua
 Objects/Mesh2D.lua
 
+Templates/Editor/Home.xml
+Templates/Editor/Home.lua
+
 Templates/StartScreen.lua
 Templates/StartScreen.xml
 
