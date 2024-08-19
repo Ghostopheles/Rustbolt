@@ -23,6 +23,13 @@ Rustbolt.Enum.ToolbarButtonType = {
 };
 local BUTTON_TYPE = Rustbolt.Enum.ToolbarButtonType;
 
+---@enum RustboltToolbarMenuOpenDirection
+Rustbolt.Enum.ToolbarMenuOpenDirection = {
+    UP = 1,
+    DOWN = 2,
+};
+local MENU_OPEN_DIRECTION = Rustbolt.Enum.ToolbarMenuOpenDirection;
+
 local BUTTON_TYPE_TEMPLATES = {
     [BUTTON_TYPE.BASE] = "RustboltToolbarButtonTemplate",
     [BUTTON_TYPE.DROPDOWN] = "RustboltToolbarDropdownButtonTemplate"
@@ -81,6 +88,11 @@ end
 
 ------------
 
+---@class RustboltToolbarMenuConfig
+---@field Elements table
+---@field OpenDirection? RustboltToolbarMenuOpenDirection
+---@field Title? string
+
 ---@class RustboltToolbarButtonConfig
 ---@field Text string
 ---@field IconAtlas? string
@@ -90,18 +102,22 @@ end
 ---@field OnEnter? function
 ---@field OnLeave? function
 ---@field ButtonType? RustboltToolbarButtonType
+---@field MenuConfig? RustboltToolbarMenuConfig
 
 ---@param buttonConfig RustboltToolbarButtonConfig
 function RustboltToolbarMixin:AddButton(buttonConfig)
     local side = buttonConfig.Side or SIDE.LEFT;
-    local pool = self.Pools[buttonConfig.ButtonType or BUTTON_TYPE.BASE];
+    local type = buttonConfig.ButtonType;
+    local pool = self.Pools[type or BUTTON_TYPE.BASE];
 
     local button = pool[side]:Acquire();
     if not button then
         return false;
     end
 
-    button:SetText(buttonConfig.Text or DEFAULT_TEXT);
+    if button.Init then
+        button:Init(buttonConfig);
+    end
 
     for _, script in ipairs(BUTTON_SCRIPTS) do
         button:SetScript(script, buttonConfig[script]);

@@ -12,6 +12,17 @@
 
         <Size x="50" y="20" />
 
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString parentKey="Text" font="GameFontWhiteSmall"
+                    wordwrap="false" maxLines="1" justifyH="CENTER" justifyV="MIDDLE">
+                    <Anchors>
+                        <Anchor point="CENTER" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
         <HighlightTexture>
             <Color r="0.75" g="0.75" b="0.75" a="0.15" />
         </HighlightTexture>
