@@ -65,8 +65,45 @@ function RustboltResizeBarMixin:OnMouseUp()
     self.Resizing = false;
 end
 
+function RustboltResizeBarMixin:OnDoubleClick()
+    self:Reset();
+end
+
+function RustboltResizeBarMixin:Reset()
+    local defaults = self.Defaults;
+    if defaults.Point then
+        local p = defaults.Point;
+        self.Target:SetPoint(p.Point, p.RelativeTo, p.RelativePoint, p.OffsetX, p.OffsetY);
+        return;
+    end
+
+    if defaults.Width ~= 0 then
+        self.Target:SetWidth(defaults.Width);
+    end
+
+    if defaults.Height ~= 0 then
+        self.Target:SetHeight(defaults.Height);
+    end
+end
+
 function RustboltResizeBarMixin:SetTarget(target, targetPoint, direction)
     self.Target = target;
     self.Direction = direction;
     self.TargetPoint = targetPoint;
+
+    self.Defaults = {
+        Width = self.Target:GetWidth(true),
+        Height = self.Target:GetHeight(true)
+    };
+
+    if self.TargetPoint then
+        local point, relativeTo, relativePoint, offsetX, offsetY = self.Target:GetPointByName(self.TargetPoint);
+        self.Defaults.Point = {
+            Point = point,
+            RelativeTo = relativeTo,
+            RelativePoint = relativePoint,
+            OffsetX = offsetX,
+            OffsetY = offsetY
+        };
+    end
 end

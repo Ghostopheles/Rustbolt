@@ -1,12 +1,14 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
 
-    <Button name="RustboltResizeBarTemplate" mixin="RustboltResizeBarMixin" virtual="true">
+    <Button name="RustboltResizeBarTemplate" mixin="RustboltResizeBarMixin"
+        registerForClicks="LeftButtonUp" virtual="true">
         <Scripts>
             <OnLoad method="OnLoad" />
             <OnUpdate method="OnUpdate" />
             <OnEnter method="OnEnter" />
             <OnLeave method="OnLeave" />
+            <OnDoubleClick method="OnDoubleClick" />
             <OnMouseDown method="OnMouseDown" />
             <OnMouseUp method="OnMouseUp" />
         </Scripts>
