@@ -70,7 +70,7 @@ function Engine:GetWindow()
 end
 
 function Engine:GetCurrentScreenName()
-    return self:GetWindow():GetCurrentScreen().Name;
+    return self:GetWindow():GetScreen().Name;
 end
 
 function Engine:ToggleWindow()
@@ -172,12 +172,6 @@ end
 --[[
     it's toolbar'n time
 ]]--
-
----@enum RustboltToolbarLocation
-Rustbolt.Enum.ToolbarLocation = {
-    TOP = "Attic",
-    BOTTOM = "Basement"
-};
 
 ---@param toolbar RustboltToolbarLocation
 ---@param buttonInfo RustboltToolbarButtonConfig

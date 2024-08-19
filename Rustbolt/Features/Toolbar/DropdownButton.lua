@@ -1,3 +1,4 @@
+local BUTTON_TYPE = Rustbolt.Enum.ToolbarButtonType;
 local MENU_OPEN_DIRECTION = Rustbolt.Enum.ToolbarMenuOpenDirection;
 
 local function CreateAnchorForUpMenu(owner)
@@ -55,11 +56,11 @@ EventUtil.ContinueOnAddOnLoaded("Rustbolt", function()
     for _, name in ipairs(BUTTONS) do
         Rustbolt.Engine:AddAtticButton({
             Text = name,
-            ButtonType = Rustbolt.Enum.ToolbarButtonType.DROPDOWN,
+            ButtonType = BUTTON_TYPE.DROPDOWN,
         });
         Rustbolt.Engine:AddBasementButton({
             Text = name,
-            ButtonType = Rustbolt.Enum.ToolbarButtonType.DROPDOWN,
+            ButtonType = BUTTON_TYPE.DROPDOWN,
             MenuConfig = {
                 Elements = {
                     "uwu"

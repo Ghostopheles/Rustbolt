@@ -2,20 +2,8 @@ local ANIM_TYPE_BASE = "Animation";
 local ANIM_TYPE_TRANSLATE = "Translation";
 local ANIM_TYPE_ALPHA = "Alpha";
 
----@enum RustboltAnimType
-Rustbolt.Enum.AnimationType = {
-    Bounce = 1,
-    SlideIn = 2,
-};
 local ANIM_TYPE = Rustbolt.Enum.AnimationType;
-
----@enum RustboltSlideInSide
-Rustbolt.Enum.SlideInSide = {
-    LEFT = 1,
-    RIGHT = 2,
-    TOP = 3,
-    BOTTOM = 4,
-};
+local ANIM_SLIDE_IN_SIDE = Rustbolt.Enum.SlideInSide;
 
 local ANIM_DEFAULTS = {
     [ANIM_TYPE.Bounce] = {
@@ -24,7 +12,7 @@ local ANIM_DEFAULTS = {
         Smoothing = "OUT",
     },
     [ANIM_TYPE.SlideIn] = {
-        FromSide = Rustbolt.Enum.SlideInSide.BOTTOM,
+        FromSide = ANIM_SLIDE_IN_SIDE.BOTTOM,
         Distance = 100,
         Duration = 0.35,
         Smoothing = "OUT_IN",

@@ -37,7 +37,4 @@ function RustboltStartScreenMixin:OnHide()
 end
 
 function RustboltStartScreenMixin:OnStartButtonClick()
-    local window = self:GetParent();
-    window:SetScreen(Rustbolt.Enum.ScreenName.GAME);
-    window:SetTitle(format(L.CAMPAIGN_WINDOW_TITLE, "TEST MODE"));
 end

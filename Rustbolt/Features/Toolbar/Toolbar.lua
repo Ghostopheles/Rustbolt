@@ -1,5 +1,4 @@
 local MAX_BUTTONS_PER_SIDE = 8;
-local DEFAULT_TEXT = "$uwu$";
 
 local BUTTON_SCRIPTS = {
     "OnClick",
@@ -9,26 +8,8 @@ local BUTTON_SCRIPTS = {
 
 RustboltToolbarMixin = {};
 
----@enum RustboltToolbarSide
-Rustbolt.Enum.ToolbarSide = {
-    LEFT = 1,
-    RIGHT = 2
-};
 local SIDE = Rustbolt.Enum.ToolbarSide;
-
----@enum RustboltToolbarButtonType
-Rustbolt.Enum.ToolbarButtonType = {
-    BASE = 1,
-    DROPDOWN = 2,
-};
 local BUTTON_TYPE = Rustbolt.Enum.ToolbarButtonType;
-
----@enum RustboltToolbarMenuOpenDirection
-Rustbolt.Enum.ToolbarMenuOpenDirection = {
-    UP = 1,
-    DOWN = 2,
-};
-local MENU_OPEN_DIRECTION = Rustbolt.Enum.ToolbarMenuOpenDirection;
 
 local BUTTON_TYPE_TEMPLATES = {
     [BUTTON_TYPE.BASE] = "RustboltToolbarButtonTemplate",

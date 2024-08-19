@@ -5,14 +5,6 @@ local Registry = Rustbolt.EventRegistry;
 
 local L = Rustbolt.Strings;
 
----@enum RustboltNotificationType
-local NOTIF_TYPE = {
-    INFO = 1,
-    WARNING = 2,
-    ERROR = 3,
-};
-Rustbolt.Enum.NotificationType = NOTIF_TYPE;
-
 ---@class RustboltNotificationManager
 local NotificationManager = {};
 

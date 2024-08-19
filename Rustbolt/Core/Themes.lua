@@ -2,13 +2,10 @@
 local Events = Rustbolt.Events;
 local Registry = Rustbolt.EventRegistry;
 
+local THEME_NAMES = Rustbolt.Enum.ThemeName;
+
 ---@class RustboltThemeManager
 local ThemeManager = {};
-
-local THEME_NAMES = {
-    DEFAULT = "DEFAULT",
-};
-Rustbolt.Enum.ThemeName = THEME_NAMES;
 
 ThemeManager.ThemedTextures = {};
 ThemeManager.CurrentTheme = THEME_NAMES.DEFAULT;
