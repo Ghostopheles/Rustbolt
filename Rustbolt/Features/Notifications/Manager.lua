@@ -1,5 +1,3 @@
-local Constants = Rustbolt.Constants;
-
 local Events = Rustbolt.Events;
 local Registry = Rustbolt.EventRegistry;
 
@@ -29,7 +27,7 @@ end
 
 local function RegisterButton()
     local button = {
-        Side = RustboltBasementMixin.Side.RIGHT,
+        Side = RustboltToolbarMixin.Side.RIGHT,
         ID = "NOTIFICATION_TRAY",
         Text = "$NOTIF$",
         OnClick = function() RustboltNotificationTray:Toggle(); end
