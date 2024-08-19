@@ -41,9 +41,4 @@ function RustboltStartScreenMixin:OnStartButtonClick()
     local window = self:GetParent();
     window:SetScreen(Rustbolt.Enum.ScreenName.GAME);
     window:SetTitle(format(L.CAMPAIGN_WINDOW_TITLE, "TEST MODE"));
-
-    local gameState = Engine:GetGameState();
-    gameState:Init(1);
-    gameState:LoadGame();
-    gameState:Start();
 end
