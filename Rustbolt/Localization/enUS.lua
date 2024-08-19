@@ -5,10 +5,10 @@ local L = AceLocale:NewLocale("Rustbolt", "enUS", true);
 
 L["ADDON_TITLE"] = "Rustbolt";
 
-L["GAME_WINDOW_TITLE"] = "$Game Window Title$";
+L["WINDOW_TITLE"] = "Rustbolt Engine (Dev)";
 
-L["GAME_VERSION_FORMAT"] = "Version: v%s";
-L["GAME_AUTHOR"] = "Created by Ghost";
+L["VERSION_FORMAT"] = "Version: v%s";
+L["AUTHOR"] = "Created by Ghost";
 
 L["START_SCREEN_TITLE"] = "$Game Title$";
 L["START_SCREEN_BOUNCING_TEXT"] = "$Bouncing Text$";

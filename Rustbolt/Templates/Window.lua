@@ -16,7 +16,7 @@ RustboltWindowMixin = {};
 
 function RustboltWindowMixin:OnLoad()
     ButtonFrameTemplate_HidePortrait(self);
-    self:SetTitle(L.GAME_WINDOW_TITLE);
+    self:SetTitle(L.WINDOW_TITLE);
 
     RunNextFrame(function() tinsert(UISpecialFrames, self:GetName()); end);
 
