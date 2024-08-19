@@ -44,6 +44,7 @@ local Engine = {
 --[[
 the engine is going to be the CIA of our project, overseeing the interaction of all the different systems
     additionally, it'll connect our (non-game) UI to the game in a (hopefully) sane manner
+    it'll also probably be a common entry point for third-party addons
 ]]
 
 ---Sets the currently active game
@@ -158,6 +159,33 @@ end
 ---@return boolean isValid
 function Engine:IsValidEvent(eventName)
     return self.Events[eventName] or false;
+end
+
+--[[
+    it's toolbar'n time
+]]--
+
+---@enum RustboltToolbarLocation
+Rustbolt.Enum.ToolbarLocation = {
+    TOP = "Attic",
+    BOTTOM = "Basement"
+};
+
+---@param toolbar RustboltToolbarLocation
+---@param buttonInfo RustboltToolbarButtonConfig
+function Engine:AddToolbarButton(toolbar, buttonInfo)
+    local screen = self:GetGameWindow().EditorHome;
+    screen[toolbar]:AddButton(buttonInfo);
+end
+
+---@param buttonInfo RustboltToolbarButtonConfig
+function Engine:AddAtticButton(buttonInfo)
+    self:AddToolbarButton(Rustbolt.Enum.ToolbarLocation.TOP, buttonInfo);
+end
+
+---@param buttonInfo RustboltToolbarButtonConfig
+function Engine:AddBasementButton(buttonInfo)
+    self:AddToolbarButton(Rustbolt.Enum.ToolbarLocation.BOTTOM, buttonInfo);
 end
 
 ------------

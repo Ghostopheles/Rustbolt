@@ -12,23 +12,21 @@
         <Frames>
             <Frame parentKey="Attic" inherits="RustboltToolbarTemplate">
                 <Anchors>
-                    <Anchor point="TOPLEFT" x="6" y="-20" />
+                    <Anchor point="TOPLEFT" y="-15" />
                     <Anchor point="TOPRIGHT" />
                 </Anchors>
             </Frame>
 
             <Frame parentKey="Basement" inherits="RustboltToolbarTemplate">
                 <Anchors>
-                    <Anchor point="BOTTOMLEFT" x="6" />
-                    <Anchor point="BOTTOMRIGHT" />
+                    <Anchor point="BOTTOMLEFT" y="-5" />
+                    <Anchor point="BOTTOMRIGHT" y="-5" />
                 </Anchors>
             </Frame>
         </Frames>
 
         <Scripts>
             <OnLoad method="OnLoad" />
-            <OnKeyDown method="OnKeyDown" />
-            <OnKeyUp method="OnKeyUp" />
         </Scripts>
     </Frame>
 
