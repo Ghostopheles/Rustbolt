@@ -10,11 +10,13 @@ local BUTTON_SCRIPTS = {
 RustboltToolbarMixin = {};
 
 ---@enum RustboltToolbarSide
-RustboltToolbarMixin.Side = {
+Rustbolt.Enum.ToolbarSide = {
     LEFT = 1,
     RIGHT = 2
 };
-local SIDE = RustboltToolbarMixin.Side;
+local SIDE = Rustbolt.Enum.ToolbarSide;
+
+
 
 local DEFAULT_BUTTON_TEMPLATE = "RustboltToolbarButtonTemplate";
 local DROPDOWN_BUTTON_TEMPLATE = "RustboltToolbarDropdownButtonTemplate";
@@ -83,7 +85,7 @@ end
 
 ---@param buttonConfig RustboltToolbarButtonConfig
 function RustboltToolbarMixin:AddButton(buttonConfig)
-    local side = buttonConfig.Side or self.Side.LEFT;
+    local side = buttonConfig.Side or SIDE.LEFT;
     local pool = buttonConfig.IsDropdown and self.DropdownPools or self.DefaultPools;
 
     local button = pool[side]:Acquire();

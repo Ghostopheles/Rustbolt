@@ -29,7 +29,7 @@ end
 
 local function RegisterButton()
     local button = {
-        Side = RustboltToolbarMixin.Side.RIGHT,
+        Side = Rustbolt.Enum.ToolbarSide.RIGHT,
         ID = "NOTIFICATION_TRAY",
         Text = "$NOTIF$",
         OnClick = function() RustboltNotificationTray:Toggle(); end

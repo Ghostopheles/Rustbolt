@@ -17,7 +17,7 @@ end
 
 EventUtil.ContinueOnAddOnLoaded("Rustbolt", function()
     Rustbolt.Engine:AddAtticButton({
-        Side = RustboltToolbarMixin.Side.LEFT,
+        Side = Rustbolt.Enum.ToolbarSide.LEFT,
         IsDropdown = true,
     });
 end);
