@@ -5,22 +5,22 @@
         mixin="RustboltEditorHomeMixin" setAllPoints="true" virtual="true">
 
         <Anchors>
-            <Anchor point="TOPLEFT" x="5" y="-5" />
-            <Anchor point="BOTTOMRIGHT" y="5" />
+            <Anchor point="TOPLEFT" x="5" y="-20" />
+            <Anchor point="BOTTOMRIGHT" />
         </Anchors>
 
         <Frames>
             <Frame parentKey="Attic" inherits="RustboltToolbarTemplate">
                 <Anchors>
-                    <Anchor point="TOPLEFT" y="-15" />
+                    <Anchor point="TOPLEFT" />
                     <Anchor point="TOPRIGHT" />
                 </Anchors>
             </Frame>
 
             <Frame parentKey="Basement" inherits="RustboltToolbarTemplate">
                 <Anchors>
-                    <Anchor point="BOTTOMLEFT" y="-5" />
-                    <Anchor point="BOTTOMRIGHT" y="-5" />
+                    <Anchor point="BOTTOMLEFT" />
+                    <Anchor point="BOTTOMRIGHT" />
                 </Anchors>
             </Frame>
         </Frames>
