@@ -3,14 +3,14 @@ local ANIM_TYPE_TRANSLATE = "Translation";
 local ANIM_TYPE_ALPHA = "Alpha";
 
 ---@enum RustboltAnimType
-Rustbolt.AnimationType = {
+Rustbolt.Enum.AnimationType = {
     Bounce = 1,
     SlideIn = 2,
 };
-local ANIM_TYPE = Rustbolt.AnimationType;
+local ANIM_TYPE = Rustbolt.Enum.AnimationType;
 
 ---@enum RustboltSlideInSide
-Rustbolt.SlideInSide = {
+Rustbolt.Enum.SlideInSide = {
     LEFT = 1,
     RIGHT = 2,
     TOP = 3,
@@ -24,7 +24,7 @@ local ANIM_DEFAULTS = {
         Smoothing = "OUT",
     },
     [ANIM_TYPE.SlideIn] = {
-        FromSide = Rustbolt.SlideInSide.BOTTOM,
+        FromSide = Rustbolt.Enum.SlideInSide.BOTTOM,
         Distance = 100,
         Duration = 0.35,
         Smoothing = "OUT_IN",
@@ -152,7 +152,7 @@ function AnimationManager:ApplySlideIn(object, fromSide, duration, distance, smo
         return;
     end
 
-    StartSlideIn();
+    SlideIn();
 end
 
 ------------

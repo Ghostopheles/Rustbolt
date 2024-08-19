@@ -5,7 +5,7 @@ RustboltNotificationPopupMixin = {};
 
 function RustboltNotificationPopupMixin:OnLoad()
     -- setup slide in anim
-    local fromSide = Rustbolt.SlideInSide.BOTTOM;
+    local fromSide = Rustbolt.Enum.SlideInSide.BOTTOM;
     local duration = 0.25;
     local distance = 175;
     local smoothing = "OUT_IN";
