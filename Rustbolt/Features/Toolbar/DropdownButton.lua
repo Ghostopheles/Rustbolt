@@ -1,4 +1,3 @@
-local BUTTON_TYPE = Rustbolt.Enum.ToolbarButtonType;
 local MENU_OPEN_DIRECTION = Rustbolt.Enum.ToolbarMenuOpenDirection;
 
 local function CreateAnchorForUpMenu(owner)
@@ -18,6 +17,8 @@ function RustboltToolbarDropdownButtonMixin:Init(data)
         return;
     end
 
+    self.MenuConfig = cfg;
+
     local openDirection = cfg.OpenDirection or MENU_OPEN_DIRECTION.DOWN;
     if openDirection == MENU_OPEN_DIRECTION.UP then
         local anchor = CreateAnchorForUpMenu(self);
@@ -30,33 +31,14 @@ function RustboltToolbarDropdownButtonMixin:OnLoad()
 end
 
 function RustboltToolbarDropdownButtonMixin:CreateToolbarMenu(rootDescription)
-    rootDescription:CreateTitle(self.LabelText);
+    if (self.MenuConfig and self.MenuConfig.Title) and string.trim(self.MenuConfig.Title) ~= "" then
+        rootDescription:CreateTitle(self.LabelText);
+    end
     rootDescription:CreateButton("Button", function(_)
         print("uwu");
     end);
 end
 
 function RustboltToolbarDropdownButtonMixin:SetText(text)
-    self.LabelText = text;
     self.Text:SetText(text);
 end
-
-EventUtil.ContinueOnAddOnLoaded("Rustbolt", function()
-    local BUTTONS = {
-        "File",
-        "Edit",
-        "Selection",
-        "View",
-        "Go",
-        "Run",
-        "Terminal",
-        "Help"
-    };
-
-    for _, name in ipairs(BUTTONS) do
-        Rustbolt.Engine:AddAtticButton({
-            Text = name,
-            ButtonType = BUTTON_TYPE.DROPDOWN,
-        });
-    end
-end);
