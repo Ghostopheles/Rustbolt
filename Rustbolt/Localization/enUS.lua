@@ -23,6 +23,8 @@ L["START_SCREEN_CREDITS"] = "$Credits$";
 L["CAMPAIGN_NEW_PH"] = "New Campaign";
 L["CAMPAIGN_WINDOW_TITLE"] = "Playing: %s";
 
+L["NOTIFICATION_TRAY_TITLE"] = "Notifications";
+
 -- END LOCALIZATION
 
 Rustbolt.Strings = AceLocale:GetLocale("Rustbolt", false);

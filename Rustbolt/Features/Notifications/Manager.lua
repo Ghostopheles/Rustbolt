@@ -23,6 +23,26 @@ function NotificationManager.TriggerNotification(notifType, title, text)
     Registry:TriggerEvent(Events.NOTIFICATION_ADDED, notifType, title, text);
 end
 
+function NotificationManager.ClearNotifications()
+    Registry:TriggerEvent(Events.CLEAR_NOTIFICATIONS);
+end
+
+local function RegisterButton()
+    local button = {
+        Side = RustboltBasementMixin.Side.RIGHT,
+        ID = "NOTIFICATION_TRAY",
+        Text = "$NOTIF$",
+        OnClick = function() RustboltNotificationTray:Toggle(); end
+    };
+
+    RustboltGameWindow.Basement:AddButton(button);
+
+    RustboltNotificationTray:SetParent(RustboltGameWindow);
+    RustboltNotificationTray:SetPoint("BOTTOMRIGHT", -45, 45);
+end
+
+Registry:RegisterCallback(Events.ADDON_LOADED, RegisterButton);
+
 ------------
 
 Rustbolt.NotificationManager = NotificationManager;
@@ -65,10 +85,14 @@ function RustboltNotificationTrayMixin:OnLoad()
 
     Registry:RegisterCallback(Events.NOTIFICATION_ADDED, self.AddNotification, self);
     Registry:RegisterCallback(Events.DISMISS_NOTIFICATION, self.DismissNotification, self);
+    Registry:RegisterCallback(Events.CLEAR_NOTIFICATIONS, self.ClearNotifications, self);
 
-    self:SetTitle("Notifications");
+    self:SetTitle(L.NOTIFICATION_TRAY_TITLE);
 
-    self.ClearButton:Raise();
+    self.CloseButton:SetDisabledAtlas("128-redbutton-exit-disabled");
+    self.CloseButton:SetNormalAtlas("128-redbutton-exit");
+    self.CloseButton:SetPushedAtlas("128-redbutton-exit-pressed");
+    self.CloseButton:SetHighlightAtlas("128-redbutton-exit-highlight");
 end
 
 function RustboltNotificationTrayMixin:OnShow()
@@ -77,11 +101,19 @@ end
 function RustboltNotificationTrayMixin:OnHide()
 end
 
+function RustboltNotificationTrayMixin:OnClearButtonClicked()
+    Registry:TriggerEvent(Events.CLEAR_NOTIFICATIONS);
+end
+
 function RustboltNotificationTrayMixin:Reset()
     self.ScrollView:Flush();
 
     self.DataProvider = CreateDataProvider();
     self.ScrollView:SetDataProvider(self.DataProvider);
+end
+
+function RustboltNotificationTrayMixin:Toggle()
+    self:SetShown(not self:IsShown());
 end
 
 function RustboltNotificationTrayMixin:AddNotification(notifType, title, text)
@@ -97,4 +129,8 @@ function RustboltNotificationTrayMixin:DismissNotification(notifType, title, tex
         return elementData.Type == notifType and elementData.Title == title and elementData.Text == text;
     end);
     Registry:TriggerEvent(Events.NOTIFICATION_REMOVED, notifType, title, text);
+end
+
+function RustboltNotificationTrayMixin:ClearNotifications()
+    self:Reset();
 end

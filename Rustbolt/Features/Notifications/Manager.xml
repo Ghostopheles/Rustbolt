@@ -3,20 +3,24 @@
 
     <Script file="Manager.lua" />
 
-    <Frame name="RustboltNotificationTrayTemplate" mixin="RustboltNotificationTrayMixin"
-        inherits="PortraitFrameFlatTemplate"
-        virtual="true">
+    <Frame name="RustboltNotificationTray" mixin="RustboltNotificationTrayMixin"
+        inherits="PortraitFrameFlatTemplate" hidden="true">
+        <Size x="300" y="600" />
 
         <Frames>
             <Button parentKey="ClearButton" inherits="UIButtonTemplate" frameLevel="515">
                 <Size x="24" y="24" />
                 <Anchors>
-                    <Anchor point="RIGHT" relativeKey="$parent.CloseButton" relativePoint="LEFT"
-                        x="-4" y="0" />
+                    <Anchor point="RIGHT" relativeKey="$parent.CloseButton" relativePoint="LEFT" />
                 </Anchors>
                 <KeyValues>
                     <KeyValue key="buttonArtKit" value="128-redbutton-delete" type="string" />
                 </KeyValues>
+                <Scripts>
+                    <OnClick>
+                        CallMethodOnNearestAncestor(self, "OnClearButtonClicked");
+                    </OnClick>
+                </Scripts>
             </Button>
             <Frame parentKey="ScrollBox" inherits="WowScrollBoxList" />
             <EventFrame parentKey="ScrollBar" inherits="MinimalScrollBar">
@@ -34,10 +38,4 @@
         </Scripts>
     </Frame>
 
-    <Frame name="NotifTrayTest" inherits="RustboltNotificationTrayTemplate" parent="UIParent">
-        <Size x="300" y="600" />
-        <Anchors>
-            <Anchor point="CENTER" />
-        </Anchors>
-    </Frame>
 </Ui>
