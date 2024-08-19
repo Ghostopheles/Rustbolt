@@ -88,7 +88,7 @@ end
 ---@param buttonConfig RustboltToolbarButtonConfig
 function RustboltToolbarMixin:AddButton(buttonConfig)
     local side = buttonConfig.Side or SIDE.LEFT;
-    local type = buttonConfig.ButtonType;
+    local type = buttonConfig.ButtonType or BUTTON_TYPE.BASE;
     local pool = self.Pools[type or BUTTON_TYPE.BASE];
 
     local button = pool[side]:Acquire();

@@ -58,15 +58,5 @@ EventUtil.ContinueOnAddOnLoaded("Rustbolt", function()
             Text = name,
             ButtonType = BUTTON_TYPE.DROPDOWN,
         });
-        Rustbolt.Engine:AddBasementButton({
-            Text = name,
-            ButtonType = BUTTON_TYPE.DROPDOWN,
-            MenuConfig = {
-                Elements = {
-                    "uwu"
-                },
-                OpenDirection = "UP"
-            }
-        });
     end
 end);
