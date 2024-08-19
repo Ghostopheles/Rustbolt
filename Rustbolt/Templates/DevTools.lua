@@ -10,7 +10,7 @@ function RustboltDevToolsMixin:OnLoad()
     self:SetTitle("Dev Tools");
 
     self.ScreenName:SetText("GAME");
-    self.SwitchScreen:SetScript("OnClick", function() RustboltGameWindow:SetScreen(self.ScreenName:GetText()); end);
+    self.SwitchScreen:SetScript("OnClick", function() RustboltWindow:SetScreen(self.ScreenName:GetText()); end);
     self.SwitchScreen:SetText("Set Screen");
 
     self.Assets:SetText("Assets");

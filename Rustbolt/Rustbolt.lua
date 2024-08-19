@@ -7,5 +7,5 @@ Rustbolt.Globals = {
 };
 
 function Rustbolt_OnAddonCompartmentClick()
-    RustboltGameWindow:Toggle();
+    Rustbolt.Engine:ToggleWindow();
 end

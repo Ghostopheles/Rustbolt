@@ -65,12 +65,20 @@ function Engine:GetGameState()
     return Rustbolt.GameState;
 end
 
-function Engine:GetGameWindow()
-    return RustboltGameWindow;
+function Engine:GetWindow()
+    return RustboltWindow;
+end
+
+function Engine:GetCurrentScreenName()
+    return self:GetWindow():GetCurrentScreen().Name;
+end
+
+function Engine:ToggleWindow()
+    return self:GetWindow():Toggle();
 end
 
 function Engine:GetGameCanvas()
-    return self:GetGameWindow().GameCanvas;
+    return self:GetWindow().GameCanvas;
 end
 
 function Engine:LoadMap(mapID)
@@ -174,7 +182,7 @@ Rustbolt.Enum.ToolbarLocation = {
 ---@param toolbar RustboltToolbarLocation
 ---@param buttonInfo RustboltToolbarButtonConfig
 function Engine:AddToolbarButton(toolbar, buttonInfo)
-    local screen = self:GetGameWindow().EditorHome;
+    local screen = self:GetWindow().EditorHome;
     screen[toolbar]:AddButton(buttonInfo);
 end
 

@@ -37,7 +37,7 @@ local function RegisterButton()
 
     Engine:AddBasementButton(button);
 
-    RustboltNotificationTray:SetParent(RustboltGameWindow);
+    RustboltNotificationTray:SetParent(RustboltWindow);
     RustboltNotificationTray:SetPoint("BOTTOMRIGHT", -45, 45);
 end
 

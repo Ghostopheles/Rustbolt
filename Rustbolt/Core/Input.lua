@@ -121,7 +121,7 @@ end
 ---@param keyUp? boolean
 ---@return boolean success
 function InputManager:EvaluateContext(context, key, keyUp)
-    local currentScreen = RustboltGameWindow:GetScreen().Name;
+    local currentScreen = Rustbolt.Engine:GetCurrentScreenName();
     if context.Screens ~= SCREENS_ALL and not context.Screens[currentScreen] then
         return false;
     end

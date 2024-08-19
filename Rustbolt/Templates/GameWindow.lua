@@ -12,9 +12,9 @@ local SCREEN_NAMES = {
 };
 Enum.ScreenName = SCREEN_NAMES;
 
-RustboltGameWindowMixin = {};
+RustboltWindowMixin = {};
 
-function RustboltGameWindowMixin:OnLoad()
+function RustboltWindowMixin:OnLoad()
     ButtonFrameTemplate_HidePortrait(self);
     self:SetTitle(L.GAME_WINDOW_TITLE);
 
@@ -35,7 +35,7 @@ function RustboltGameWindowMixin:OnLoad()
     self.DefaultScreen = SCREEN_NAMES.EDITOR_HOME;
 end
 
-function RustboltGameWindowMixin:OnKeyDown(key)
+function RustboltWindowMixin:OnKeyDown(key)
     if Input:ShouldPropagateKey(key) then
         self:SetPropagateKeyboardInput(true);
     else
@@ -44,19 +44,19 @@ function RustboltGameWindowMixin:OnKeyDown(key)
     end
 end
 
-function RustboltGameWindowMixin:OnKeyUp(key)
+function RustboltWindowMixin:OnKeyUp(key)
     Input:OnKeyUp(key);
 end
 
-function RustboltGameWindowMixin:Toggle()
+function RustboltWindowMixin:Toggle()
     self:SetShown(not self:IsShown());
 end
 
-function RustboltGameWindowMixin:RegisterScreen(screen, screenName)
+function RustboltWindowMixin:RegisterScreen(screen, screenName)
     self.Screens[screenName] = screen;
 end
 
-function RustboltGameWindowMixin:SetScreen(screenName)
+function RustboltWindowMixin:SetScreen(screenName)
     local newScreen = self.Screens[screenName];
     if not newScreen then
         return;
@@ -78,6 +78,6 @@ function RustboltGameWindowMixin:SetScreen(screenName)
     Registry:TriggerEvent(Events.SCREEN_CHANGED, screenName);
 end
 
-function RustboltGameWindowMixin:GetScreen()
+function RustboltWindowMixin:GetScreen()
     return self.CurrentScreen;
 end

@@ -22,7 +22,7 @@
     </Button>
 
     <Frame name="RustboltAssetPicker" inherits="PortraitFrameFlatTemplate"
-        mixin="RustboltAssetPickerMixin" parent="RustboltGameWindow" enableMouse="true" movable="true"
+        mixin="RustboltAssetPickerMixin" parent="RustboltWindow" enableMouse="true" movable="true"
         toplevel="true" hidden="true">
         <Size x="300" y="300" />
         <Anchors>
