@@ -4,7 +4,7 @@
     <Frame name="RustboltWindow" inherits="PortraitFrameFlatTemplate"
         mixin="RustboltWindowMixin" parent="UIParent" movable="true" enableMouse="true"
         dontSavePosition="true" hidden="false" frameStrata="FULLSCREEN">
-        <Size x="1600" y="900" />
+        <Size x="1600" y="1000" />
         <Anchors>
             <Anchor point="CENTER" />
         </Anchors>

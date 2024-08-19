@@ -1,6 +1,72 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
 
+    <Frame name="RustboltPHFrame" virtual="true" enableMouse="true">
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString parentKey="PHText" font="ChatFontNormal">
+                    <Anchors>
+                        <Anchor point="CENTER" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+            <Layer level="BACKGROUND">
+                <Texture setAllPoints="true">
+                    <Color r="0.85" g="0.85" b="0.85" a="0.25" />
+                </Texture>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad>
+                self.PHText:SetText(self:GetParentKey());
+            </OnLoad>
+            <OnEnter>
+                GameTooltip:SetOwner(self, "ANCHOR_TOP");
+                GameTooltip:SetText(self:GetParentKey());
+                GameTooltip:Show();
+            </OnEnter>
+            <OnLeave>
+                GameTooltip:Hide();
+            </OnLeave>
+        </Scripts>
+    </Frame>
+
+    <Frame name="RustboltEditorReflectionTemplate" mixin="RustboltReflectionPanelMixin"
+        virtual="true">
+        <Size x="265" />
+        <Frames>
+            <Frame parentKey="World" inherits="RustboltPHFrame">
+                <Anchors>
+                    <Anchor point="TOPLEFT" />
+                    <Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" y="1" />
+                </Anchors>
+            </Frame>
+
+            <Frame parentKey="Inspector" inherits="RustboltPHFrame">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.World" relativePoint="BOTTOMLEFT"
+                        y="-2" />
+                    <Anchor point="BOTTOMRIGHT" />
+                </Anchors>
+            </Frame>
+
+            <Button parentKey="ResizeBar" inherits="RustboltResizeBarTemplate"
+                frameLevel="500">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.World" relativePoint="BOTTOMLEFT"
+                        y="6" />
+                    <Anchor point="BOTTOMRIGHT" relativeKey="$parent.Inspector"
+                        relativePoint="TOPRIGHT" x="6" />
+                </Anchors>
+            </Button>
+        </Frames>
+        <Scripts>
+            <OnLoad method="OnLoad" />
+        </Scripts>
+    </Frame>
+
+    <Frame name="RustboltEditorViewportTemplate" inherits="RustboltPHFrame" virtual="true" />
+
     <Frame name="RustboltEditorHomeTemplate"
         mixin="RustboltEditorHomeMixin" setAllPoints="true" virtual="true">
 
@@ -23,6 +89,53 @@
                     <Anchor point="BOTTOMRIGHT" />
                 </Anchors>
             </Frame>
+
+            <Frame parentKey="ReflectionPanel" inherits="RustboltEditorReflectionTemplate">
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeKey="$parent.Attic" relativePoint="BOTTOMRIGHT" />
+                    <Anchor point="BOTTOMRIGHT" relativeKey="$parent.Basement"
+                        relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Frame>
+
+            <Frame parentKey="Viewport" inherits="RustboltEditorViewportTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Attic" relativePoint="BOTTOMLEFT"
+                        x="2" />
+                    <Anchor point="BOTTOMRIGHT" relativeKey="$parent.ReflectionPanel"
+                        relativePoint="LEFT" x="-2" y="-150" />
+                </Anchors>
+            </Frame>
+
+            <Frame parentKey="ContentBrowser" inherits="RustboltEditorViewportTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Viewport"
+                        relativePoint="BOTTOMLEFT" y="-2" />
+                    <Anchor point="BOTTOMRIGHT" relativeKey="$parent.ReflectionPanel"
+                        relativePoint="BOTTOMLEFT" x="-2" />
+                </Anchors>
+            </Frame>
+
+            <Button parentKey="HorizontalResizeBar" inherits="RustboltResizeBarTemplate"
+                frameLevel="500">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Viewport" relativePoint="TOPRIGHT"
+                        x="-6" />
+                    <Anchor point="BOTTOMRIGHT" relativeKey="$parent.ReflectionPanel"
+                        relativePoint="BOTTOMLEFT" x="6" />
+                </Anchors>
+            </Button>
+
+            <Button parentKey="VerticalResizeBar" inherits="RustboltResizeBarTemplate"
+                frameLevel="500">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Viewport"
+                        relativePoint="BOTTOMLEFT"
+                        y="6" />
+                    <Anchor point="BOTTOMRIGHT" relativeKey="$parent.ContentBrowser"
+                        relativePoint="TOPRIGHT" y="-6" />
+                </Anchors>
+            </Button>
         </Frames>
 
         <Scripts>

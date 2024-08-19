@@ -48,8 +48,13 @@ Objects/Character.lua
 Objects/World.lua
 Objects/Mesh2D.lua
 
-Templates/Editor/Home.xml
+Templates/Editor/ResizeBar.lua
+Templates/Editor/ResizeBar.xml
+
+Templates/Editor/ReflectionPanel.lua
+
 Templates/Editor/Home.lua
+Templates/Editor/Home.xml
 
 Templates/StartScreen.lua
 Templates/StartScreen.xml

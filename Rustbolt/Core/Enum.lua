@@ -14,6 +14,13 @@ Rustbolt.Enum.NotificationType = {
     ERROR = 3,
 };
 
+---@enum RustboltResizeDirection
+Rustbolt.Enum.ResizeDirection = {
+    HORIZONTAL = 1,
+    VERTICAL = 2,
+    BOTH = 3,
+};
+
 --- ANIMATION ENUMS
 
 ---@enum RustboltAnimType
