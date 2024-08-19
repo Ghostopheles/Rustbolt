@@ -16,10 +16,17 @@ Rustbolt.Enum.ToolbarSide = {
 };
 local SIDE = Rustbolt.Enum.ToolbarSide;
 
+---@enum RustboltToolbarButtonType
+Rustbolt.Enum.ToolbarButtonType = {
+    BASE = 1,
+    DROPDOWN = 2,
+};
+local BUTTON_TYPE = Rustbolt.Enum.ToolbarButtonType;
 
-
-local DEFAULT_BUTTON_TEMPLATE = "RustboltToolbarButtonTemplate";
-local DROPDOWN_BUTTON_TEMPLATE = "RustboltToolbarDropdownButtonTemplate";
+local BUTTON_TYPE_TEMPLATES = {
+    [BUTTON_TYPE.BASE] = "RustboltToolbarButtonTemplate",
+    [BUTTON_TYPE.DROPDOWN] = "RustboltToolbarDropdownButtonTemplate"
+};
 
 function RustboltToolbarMixin:OnLoad()
     self.Buttons = {
@@ -52,14 +59,15 @@ function RustboltToolbarMixin:OnLoad()
     local function InitButton()
     end
 
-    self.DefaultPools = {
-        [SIDE.LEFT] = CreateFramePool("Button", self.ContainerLeft, DEFAULT_BUTTON_TEMPLATE, ResetButton, false, InitButton, MAX_BUTTONS_PER_SIDE),
-        [SIDE.RIGHT] = CreateFramePool("Button", self.ContainerRight, DEFAULT_BUTTON_TEMPLATE, ResetButton, false, InitButton, MAX_BUTTONS_PER_SIDE),
-    };
-
-    self.DropdownPools = {
-        [SIDE.LEFT] = CreateFramePool("DropdownButton", self.ContainerLeft, DROPDOWN_BUTTON_TEMPLATE, ResetButton, false, InitButton, MAX_BUTTONS_PER_SIDE),
-        [SIDE.RIGHT] = CreateFramePool("DropdownButton", self.ContainerRight, DROPDOWN_BUTTON_TEMPLATE, ResetButton, false, InitButton, MAX_BUTTONS_PER_SIDE),
+    self.Pools = {
+        [BUTTON_TYPE.BASE] ={
+            [SIDE.LEFT] = CreateFramePool("Button", self.ContainerLeft, BUTTON_TYPE_TEMPLATES[BUTTON_TYPE.BASE], ResetButton, false, InitButton, MAX_BUTTONS_PER_SIDE),
+            [SIDE.RIGHT] = CreateFramePool("Button", self.ContainerRight, BUTTON_TYPE_TEMPLATES[BUTTON_TYPE.BASE], ResetButton, false, InitButton, MAX_BUTTONS_PER_SIDE),
+        },
+        [BUTTON_TYPE.DROPDOWN] = {
+            [SIDE.LEFT] = CreateFramePool("DropdownButton", self.ContainerLeft, BUTTON_TYPE_TEMPLATES[BUTTON_TYPE.DROPDOWN], ResetButton, false, InitButton, MAX_BUTTONS_PER_SIDE),
+            [SIDE.RIGHT] = CreateFramePool("DropdownButton", self.ContainerRight, BUTTON_TYPE_TEMPLATES[BUTTON_TYPE.DROPDOWN], ResetButton, false, InitButton, MAX_BUTTONS_PER_SIDE),
+        };
     };
 
     self.IDToButton = {};
@@ -78,15 +86,15 @@ end
 ---@field IconAtlas? string
 ---@field Side? RustboltToolbarSide
 ---@field ID? string
----@field OnClick function
+---@field OnClick? function
 ---@field OnEnter? function
 ---@field OnLeave? function
----@field IsDropdown? boolean
+---@field ButtonType? RustboltToolbarButtonType
 
 ---@param buttonConfig RustboltToolbarButtonConfig
 function RustboltToolbarMixin:AddButton(buttonConfig)
     local side = buttonConfig.Side or SIDE.LEFT;
-    local pool = buttonConfig.IsDropdown and self.DropdownPools or self.DefaultPools;
+    local pool = self.Pools[buttonConfig.ButtonType or BUTTON_TYPE.BASE];
 
     local button = pool[side]:Acquire();
     if not button then
