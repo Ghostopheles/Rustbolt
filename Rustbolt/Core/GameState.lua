@@ -1,23 +1,5 @@
-local Constants = Rustbolt.Constants;
-
-local InputManager = Rustbolt.InputManager;
-
-local Events = Rustbolt.Events;
-local Registry = Rustbolt.EventRegistry;
-
 local GameEvents = Rustbolt.GameEvents;
 local GameRegistry = Rustbolt.GameRegistry;
-
-local Enum = Rustbolt.Enum;
-local MapManager = Rustbolt.MapManager;
-
-local AssetManager = Rustbolt.AssetManager;
-
-local ObjectManager = Rustbolt.ObjectManager;
-
-local Animations = Rustbolt.AnimationManager;
-local ThemeManager = Rustbolt.ThemeManager;
-local L = Rustbolt.Strings;
 
 ---@enum RustboltGameStatus
 local GameStatus = {

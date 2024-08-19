@@ -5,17 +5,10 @@ local InputManager = Rustbolt.InputManager;
 local Events = Rustbolt.Events;
 local Registry = Rustbolt.EventRegistry;
 
-local GameEvents = Rustbolt.GameEvents;
-local GameRegistry = Rustbolt.GameRegistry;
-
 local Enum = Rustbolt.Enum;
 local MapManager = Rustbolt.MapManager;
 
 local AssetManager = Rustbolt.AssetManager;
-
-local Animations = Rustbolt.AnimationManager;
-local ThemeManager = Rustbolt.ThemeManager;
-local L = Rustbolt.Strings;
 
 local MAX_TILES = Constants.Map.MaxTileCount;
 local MAX_TILES_X = Constants.Map.MaxTilesX;

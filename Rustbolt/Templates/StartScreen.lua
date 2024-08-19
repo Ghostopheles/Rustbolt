@@ -1,4 +1,3 @@
-local Engine = Rustbolt.Engine;
 local Animations = Rustbolt.AnimationManager;
 local ThemeManager = Rustbolt.ThemeManager;
 local L = Rustbolt.Strings;

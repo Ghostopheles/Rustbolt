@@ -11,7 +11,7 @@ function CharacterObject:OnBeginPlay()
     self:SetupControls();
 end
 
-function CharacterObject:OnTick(deltaTime)
+function CharacterObject:OnTick()
 end
 
 function CharacterObject:IsInputEnabled()

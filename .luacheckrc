@@ -2,7 +2,7 @@ max_line_length = false;
 
 exclude_files = {
 	"Rustbolt/Libs",
-	"Rustbolt/Types",
+	"Rustbolt/Types"
 };
 
 ignore = {
@@ -10,7 +10,7 @@ ignore = {
 	"11./^Rustbolt",
 
 	-- ignore unused self
-	"212/self",
+	"212/self"
 };
 
 std = "lua51"

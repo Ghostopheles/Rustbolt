@@ -1,17 +1,4 @@
-local Constants = Rustbolt.Constants;
-
-local InputManager = Rustbolt.InputManager;
-
-local Events = Rustbolt.Events;
-local Registry = Rustbolt.EventRegistry;
-
-local GameEvents = Rustbolt.GameEvents;
-local GameRegistry = Rustbolt.GameRegistry;
-
-local SaveManager = Rustbolt.SaveManager;
-
-local L = Rustbolt.Strings;
-
+-- auto populates entries on index if the index doesn't exist
 local AutoPopMT = {
     __index = function(t, k)
         rawset(t, k, {});

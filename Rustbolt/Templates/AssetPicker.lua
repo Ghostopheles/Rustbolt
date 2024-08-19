@@ -1,11 +1,7 @@
 local Events = Rustbolt.Events;
 local Registry = Rustbolt.EventRegistry;
 
-local MapManager = Rustbolt.MapManager;
 local AssetManager = Rustbolt.AssetManager;
-local Animations = Rustbolt.AnimationManager;
-local ThemeManager = Rustbolt.ThemeManager;
-local L = Rustbolt.Strings;
 
 local ASSET_PICKER_STRIDE = 4;
 local ASSET_PICKER_BUTTON_SIZE = 64; -- 64x64;
