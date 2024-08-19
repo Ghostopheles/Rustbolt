@@ -13,7 +13,7 @@ ignore = {
 	"212/self",
 };
 
-std = "lua51+wow"
+std = "lua51"
 
 globals = {
 	"CreateScrollBoxListLinearView",
