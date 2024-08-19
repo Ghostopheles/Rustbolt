@@ -57,8 +57,8 @@ Templates/StartScreen.xml
 Templates/GameCanvas.lua
 Templates/GameCanvas.xml
 
-Templates/GameWindow.lua
-Templates/GameWindow.xml
+Templates/Window.lua
+Templates/Window.xml
 
 Templates/AssetPicker.lua
 Templates/AssetPicker.xml
