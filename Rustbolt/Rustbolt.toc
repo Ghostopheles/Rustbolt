@@ -51,6 +51,9 @@ Objects/Mesh2D.lua
 Templates/Shared/ResizeBar.lua
 Templates/Shared/ResizeBar.xml
 
+Templates/Editor/ReflectionEntry.lua
+Templates/Editor/ReflectionEntry.xml
+
 Templates/Editor/ReflectionPanel.lua
 
 Templates/Editor/Home.lua

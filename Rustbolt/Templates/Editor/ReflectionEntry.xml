@@ -1,0 +1,61 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+
+    <Frame name="RustboltEditorReflectionEntryTemplate"
+        mixin="RustboltEditorReflectionEntryMixin" virtual="true">
+        <Size y="20" />
+
+        <Frames>
+            <Button parentKey="DefaultsButton">
+                <Size x="21" y="20" />
+                <Anchors>
+                    <Anchor point="LEFT" />
+                </Anchors>
+                <NormalTexture atlas="talents-button-undo" />
+            </Button>
+        </Frames>
+
+        <Layers>
+            <Layer level="ARTWORK">
+                <Texture parentKey="Chevron" atlas="common-dropdown-icon-next"
+                    useAtlasSize="false">
+                    <Size x="21" y="20" />
+                    <TexCoords left="0" right="1" top="0" bottom="1" />
+                    <Anchors>
+                        <Anchor point="RIGHT" />
+                    </Anchors>
+                </Texture>
+
+                <FontString parentKey="Text" font="GameFontWhite"
+                    text="CHINA" maxLines="1" wordwrap="false" justifyH="LEFT">
+                    <Anchors>
+                        <Anchor point="LEFT" relativeKey="$parent.DefaultsButton"
+                            relativePoint="RIGHT" x="2" />
+                        <Anchor point="TOPRIGHT" relativePoint="TOP" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOM" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Frames>
+            <EditBox parentKey="EntryBox" inherits="InputBoxTemplate" autoFocus="false">
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeKey="$parent.Chevron" relativePoint="TOPLEFT"
+                        x="-2" />
+                    <Anchor point="BOTTOMLEFT" relativeKey="$parent.Text"
+                        relativePoint="BOTTOMRIGHT"
+                        x="5" />
+                </Anchors>
+            </EditBox>
+        </Frames>
+
+    </Frame>
+
+    <Frame name="TEST_ENTRY" parent="UIParent" inherits="RustboltEditorReflectionEntryTemplate">
+        <Anchors>
+            <Anchor point="CENTER" />
+        </Anchors>
+        <Size x="200" y="20" />
+    </Frame>
+</Ui>
