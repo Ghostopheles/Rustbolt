@@ -158,7 +158,7 @@ end
 ---@param category RustboltCVarCategory
 ---@param defaultValue any
 ---@param ephemeral? boolean
----@return RustboltCVar?
+---@return RustboltCVar
 function CVarManager:RegisterCVar(name, type, category, defaultValue, ephemeral)
     assert(not self:CVarExists(name), "Attempt to register duplicate CVar");
     assert(self:IsCategoryValid(category), "Invalid CVar category");
