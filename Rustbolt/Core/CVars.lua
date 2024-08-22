@@ -160,10 +160,7 @@ end
 ---@param ephemeral? boolean
 ---@return RustboltCVar?
 function CVarManager:RegisterCVar(name, type, category, defaultValue, ephemeral)
-    if self.CVars[name] then
-        return self.CVars[name];
-    end
-
+    assert(not self:CVarExists(name), "Attempt to register duplicate CVar");
     assert(self:IsCategoryValid(category), "Invalid CVar category");
 
     local cvar = CreateCVar(name, type, category, defaultValue, ephemeral);
@@ -173,6 +170,7 @@ function CVarManager:RegisterCVar(name, type, category, defaultValue, ephemeral)
     return cvar;
 end
 
+---@param name string
 function CVarManager:DeleteCVar(name)
     self.CVars[name] = nil;
     Registry:TriggerEvent(Events.CVAR_DELETED, name);
@@ -182,6 +180,12 @@ end
 ---@return table<RustboltCVar>
 function CVarManager:GetAllCVars()
     return self.CVars;
+end
+
+---@param name string CVar name
+---@return boolean cvarExists
+function CVarManager:CVarExists(name)
+    return self:GetCVarObject(name) ~= nil;
 end
 
 ---Returns a CVar object. To retrieve only the CVar value, use :GetCVar
