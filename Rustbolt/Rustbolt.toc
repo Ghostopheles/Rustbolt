@@ -26,6 +26,7 @@ Core/CVars.lua
 Core/Constants.lua
 Core/MathUtil.lua
 Core/ClassUtil.lua
+Core/FrameUtil.lua
 Core/Input.lua
 Core/Animations.lua
 Core/Themes.lua
