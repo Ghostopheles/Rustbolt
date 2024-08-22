@@ -22,12 +22,12 @@ Localization/enUS.lua
 
 Core/Enum.lua
 Core/Events.lua
-Core/CVars.lua
-Core/Constants.lua
 Core/MathUtil.lua
 Core/ClassUtil.lua
 Core/TableUtil.lua
+Core/CVars.lua
 Core/FrameUtil.lua
+Core/Constants.lua
 Core/Input.lua
 Core/Animations.lua
 Core/Themes.lua

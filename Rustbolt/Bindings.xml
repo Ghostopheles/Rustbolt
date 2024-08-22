@@ -1,0 +1,5 @@
+<Bindings>
+    <Binding name="Toggle Frame Borders" category="Rustbolt">
+        Rustbolt.FrameUtil.ToggleFrameBorders();
+    </Binding>
+</Bindings>

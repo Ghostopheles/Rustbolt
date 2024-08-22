@@ -12,10 +12,12 @@ Rustbolt.Events = {
 	CVAR_CREATED = "CVarCreated",
 	CVAR_DELETED = "CVarDeleted",
 	CVAR_VALUE_CHANGED = "CVarValueChanged",
+	CVARS_LOADED = "CVarsLoaded",
 	NOTIFICATION_ADDED = "NotificationAdded",
 	NOTIFICATION_REMOVED = "NotificationRemoved",
 	DISMISS_NOTIFICATION = "DismissNotification",
 	CLEAR_NOTIFICATIONS = "ClearNotifications",
+	TOGGLE_FRAME_BORDERS = "ToggleFrameBorders"
 };
 
 Rustbolt.GameEvents = {

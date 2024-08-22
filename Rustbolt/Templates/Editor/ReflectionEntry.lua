@@ -9,6 +9,7 @@
 RustboltEditorReflectionEntryMixin = {};
 
 function RustboltEditorReflectionEntryMixin:OnLoad()
+    Rustbolt.FrameUtil.AddFrameBorder(self);
 end
 
 function RustboltEditorReflectionEntryMixin:Init(data)

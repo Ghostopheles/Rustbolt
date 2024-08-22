@@ -50,6 +50,10 @@
             </EditBox>
         </Frames>
 
+        <Scripts>
+            <OnLoad method="OnLoad" />
+        </Scripts>
+
     </Frame>
 
     <Frame name="TEST_ENTRY" parent="UIParent" inherits="RustboltEditorReflectionEntryTemplate">

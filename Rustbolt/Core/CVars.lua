@@ -62,10 +62,35 @@ function CVar:SetValue(value, noEvent)
     if not noEvent then
         Registry:TriggerEvent(Events.CVAR_VALUE_CHANGED, self);
     end
+
+    self:OnValueChanged();
 end
 
 function CVar:GetValue()
     return self.Value;
+end
+
+function CVar:AddValueChangedCallback(cb, runNow)
+    if not self.Callbacks then
+        self.Callbacks = {};
+    end
+
+    tinsert(self.Callbacks, cb);
+
+    if runNow then
+        self:OnValueChanged();
+    end
+end
+
+function CVar:OnValueChanged()
+    if Rustbolt.TableUtil.IsEmpty(self.Callbacks) then
+        return;
+    end
+
+    local value = self:GetValue();
+    for _, cb in ipairs(self.Callbacks) do
+        cb(value) -- TODO: probably pcall this
+    end
 end
 
 ------------
@@ -99,11 +124,12 @@ function CVarManager:OnAddonLoaded()
         else
             -- cvar hasn't been registered, so create it from saved variables
             local cvar = CreateCVar(v.Name, v.Type, v.Category, v.DefaultValue);
-            local noEvent = true;
-            cvar:SetValue(v.Value, noEvent);
+            cvar:SetValue(v.Value);
             CVarManager.CVars[v.Name] = cvar;
         end
     end
+
+    Registry:TriggerEvent(Events.CVARS_LOADED);
 end
 
 function CVarManager:OnAddonUnloading()
@@ -135,7 +161,7 @@ end
 ---@return RustboltCVar?
 function CVarManager:RegisterCVar(name, type, category, defaultValue, ephemeral)
     if self.CVars[name] then
-        return;
+        return self.CVars[name];
     end
 
     assert(self:IsCategoryValid(category), "Invalid CVar category");
