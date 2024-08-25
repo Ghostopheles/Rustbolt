@@ -6,8 +6,8 @@ on:
       - '!**-dev**'
 
 jobs:
-  closeouts:
-    uses: ./.github/workflows/closeouts.yml
+  tests:
+    uses: ./.github/workflows/tests.yml
 
   deploy:
     needs:
