@@ -76,4 +76,7 @@ globals = {
 	"setmetatable",
 	"pairs",
 	"GameTooltip",
+	"SetCursor",
+	"GetScaledCursorDelta",
+	"DevTool"
 };
