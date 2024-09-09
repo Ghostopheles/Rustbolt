@@ -25,7 +25,7 @@ what does the game state need to know in order to begin running the main loop?
 after we've got the startup params, we can create our World instance and store that for anything that might
 need it later
 
-]]--  
+]]--
 
 ---Initializer for our game state
 ---@param mapID number
