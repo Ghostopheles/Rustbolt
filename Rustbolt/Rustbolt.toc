@@ -20,6 +20,7 @@ Rustbolt.lua
 
 Localization/enUS.lua
 
+Core/IO.lua
 Core/Enum.lua
 Core/Events.lua
 Core/MathUtil.lua
