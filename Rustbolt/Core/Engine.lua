@@ -69,6 +69,11 @@ function Engine:GetWindow()
     return RustboltWindow;
 end
 
+function Engine:GetScreenByName(name)
+    local window = self:GetWindow();
+    return window:GetScreenByName(name);
+end
+
 function Engine:GetCurrentScreenName()
     return self:GetWindow():GetScreen().Name;
 end

@@ -1,25 +1,102 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
 
+    <CheckButton name="RustboltEditorReflectionEntryCheckboxTemplate"
+        mixin="RustboltEditorReflectionEntryCheckboxMixin" virtual="true">
+
+        <NormalTexture atlas="checkbox-minimal" useAtlasSize="true" />
+        <PushedTexture atlas="checkbox-minimal" useAtlasSize="true" />
+        <CheckedTexture atlas="checkmark-minimal" useAtlasSize="true" />
+        <DisabledCheckedTexture atlas="checkmark-minimal-disabled" useAtlasSize="true" />
+    </CheckButton>
+
+    <EditBox name="RustboltEditorReflectionEntryEditBoxTemplate"
+        mixin="RustboltEditorReflectionEntryEditBoxMixin" inherits="InputBoxTemplate"
+        autoFocus="false" virtual="true">
+
+        <Frames>
+            <Button parentKey="ResetButton" hidden="true">
+                <Size x="17" y="17" />
+                <Anchors>
+                    <Anchor point="RIGHT" x="-3" y="0" />
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <Texture atlas="common-search-clearbutton" useAtlasSize="false" alpha="0.5"
+                            parentKey="Icon">
+                            <Size x="10" y="10" />
+                            <Anchors>
+                                <Anchor point="TOPLEFT" x="3" y="-3" />
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnEnter>
+						self.Icon:SetAlpha(1.0);
+					</OnEnter>
+                    <OnLeave>
+						self.Icon:SetAlpha(0.5);
+					</OnLeave>
+                    <OnMouseDown>
+						if self:IsEnabled() then
+							self.Icon:SetPoint("TOPLEFT", self, "TOPLEFT", 4, -4);
+						end
+					</OnMouseDown>
+                    <OnMouseUp>
+						self.Icon:SetPoint("TOPLEFT", self, "TOPLEFT", 3, -3);
+					</OnMouseUp>
+                    <OnClick>
+                        CallMethodOnNearestAncestor(self, "OnResetButtonPressed");
+                    </OnClick>
+                </Scripts>
+            </Button>
+        </Frames>
+
+        <Scripts>
+            <OnLoad method="OnLoad" />
+            <OnChar method="OnChar" />
+        </Scripts>
+
+    </EditBox>
+
+    <Button name="RustboltEditorReflectionHeaderTemplate"
+        mixin="RustboltEditorReflectionHeaderMixin" virtual="true">
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString parentKey="Text" font="GameFontWhite"
+                    text="CHINA" maxLines="1" wordwrap="false" justifyH="LEFT">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" />
+                        <Anchor point="BOTTOMRIGHT" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="Background"
+                    setAllPoints="true">
+                    <Color r="0.75" g="0.75" b="0.75" a="0.50" />
+                </Texture>
+            </Layer>
+        </Layers>
+
+        <Scripts>
+            <OnLoad method="OnLoad" />
+            <OnMouseDown method="OnMouseDown" />
+            <OnMouseUp method="OnMouseUp" />
+            <OnClick method="OnClick" />
+        </Scripts>
+    </Button>
+
     <Frame name="RustboltEditorReflectionEntryTemplate"
         mixin="RustboltEditorReflectionEntryMixin" virtual="true">
         <Size y="20" />
-
-        <Frames>
-            <Button parentKey="DefaultsButton">
-                <Size x="21" y="20" />
-                <Anchors>
-                    <Anchor point="LEFT" />
-                </Anchors>
-                <NormalTexture atlas="talents-button-undo" />
-            </Button>
-        </Frames>
 
         <Layers>
             <Layer level="ARTWORK">
                 <Texture parentKey="Chevron" atlas="common-dropdown-icon-next"
                     useAtlasSize="false">
-                    <Size x="21" y="20" />
+                    <Size x="16" y="16" />
                     <TexCoords left="0" right="1" top="0" bottom="1" />
                     <Anchors>
                         <Anchor point="RIGHT" />
@@ -29,25 +106,20 @@
                 <FontString parentKey="Text" font="GameFontWhite"
                     text="CHINA" maxLines="1" wordwrap="false" justifyH="LEFT">
                     <Anchors>
-                        <Anchor point="LEFT" relativeKey="$parent.DefaultsButton"
-                            relativePoint="RIGHT" x="2" />
-                        <Anchor point="TOPRIGHT" relativePoint="TOP" />
-                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOM" />
+                        <Anchor point="TOPLEFT" x="2" />
+                        <Anchor point="BOTTOM" x="-5" />
                     </Anchors>
                 </FontString>
             </Layer>
         </Layers>
 
         <Frames>
-            <EditBox parentKey="EntryBox" inherits="InputBoxTemplate" autoFocus="false">
+            <Frame parentKey="Controls">
                 <Anchors>
-                    <Anchor point="TOPRIGHT" relativeKey="$parent.Chevron" relativePoint="TOPLEFT"
-                        x="-2" />
-                    <Anchor point="BOTTOMLEFT" relativeKey="$parent.Text"
-                        relativePoint="BOTTOMRIGHT"
-                        x="5" />
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Text" x="10" />
+                    <Anchor point="BOTTOMRIGHT" />
                 </Anchors>
-            </EditBox>
+            </Frame>
         </Frames>
 
         <Scripts>

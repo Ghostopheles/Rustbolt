@@ -45,6 +45,8 @@ Features/Toolbar/Toolbar.xml
 Features/Notifications/Notifications.xml
 Features/Notifications/Manager.xml
 
+Features/Reflection/Reflection.lua
+
 Objects/ObjectManager.lua
 Objects/Object.lua
 Objects/Character.lua
@@ -58,6 +60,7 @@ Templates/Editor/ReflectionEntry.lua
 Templates/Editor/ReflectionEntry.xml
 
 Templates/Editor/ReflectionPanel.lua
+Templates/Editor/ReflectionPanel.xml
 
 Templates/Editor/Home.lua
 Templates/Editor/Home.xml

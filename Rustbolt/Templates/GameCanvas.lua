@@ -206,9 +206,9 @@ function RustboltGameCanvasMixin:OnLoad()
     Registry:RegisterCallback(Events.SCREEN_CHANGED, self.OnScreenChanged, self);
     Registry:RegisterCallback(Events.DEV_STATE_CHANGED, self.OnDevStateChanged, self);
 
-    InputManager:RegisterInputListener(KEY_TOGGLE_WALKABLE, self.OnKeyDown, self, Enum.ScreenName.GAME, InDevMode);
-    InputManager:RegisterInputListener(KEY_TOGGLE_BUILDABLE, self.OnKeyDown, self, Enum.ScreenName.GAME, InDevMode);
-    InputManager:RegisterInputListener(KEY_TOGGLE_WATER, self.OnKeyDown, self, Enum.ScreenName.GAME, InDevMode);
+    InputManager:RegisterInputListener(KEY_TOGGLE_WALKABLE, self.OnKeyDown, self, Enum.GameWindowScreen.GAME, InDevMode);
+    InputManager:RegisterInputListener(KEY_TOGGLE_BUILDABLE, self.OnKeyDown, self, Enum.GameWindowScreen.GAME, InDevMode);
+    InputManager:RegisterInputListener(KEY_TOGGLE_WATER, self.OnKeyDown, self, Enum.GameWindowScreen.GAME, InDevMode);
 
     self.TileHighlight:Hide();
 end
@@ -239,7 +239,7 @@ function RustboltGameCanvasMixin:OnKeyUp(...)
 end
 
 function RustboltGameCanvasMixin:OnScreenChanged(screenName)
-    if screenName == Enum.ScreenName.GAME then
+    if screenName == Enum.GameWindowScreen.GAME then
         self:LoadMap(1);
     end
 end

@@ -4,13 +4,7 @@ local Events = Rustbolt.Events;
 local Registry = Rustbolt.EventRegistry;
 local L = Rustbolt.Strings;
 
-local SCREEN_NAMES = {
-    EMPTY = "EMPTY",
-    START = "START",
-    GAME = "GAME",
-    EDITOR_HOME = "EDITOR_HOME"
-};
-Enum.ScreenName = SCREEN_NAMES;
+local SCREEN_NAMES = Enum.GameWindowScreen;
 
 RustboltWindowMixin = {};
 
@@ -80,4 +74,8 @@ end
 
 function RustboltWindowMixin:GetScreen()
     return self.CurrentScreen;
+end
+
+function RustboltWindowMixin:GetScreenByName(name)
+    return self.Screens[name];
 end

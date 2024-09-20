@@ -31,18 +31,18 @@
         </Scripts>
     </Frame>
 
-    <Frame name="RustboltEditorReflectionTemplate" mixin="RustboltReflectionPanelMixin"
+    <Frame name="RustboltEditorReflectionTemplate" mixin="RustboltEditorReflectionMixin"
         virtual="true">
         <Size x="265" />
         <Frames>
-            <Frame parentKey="World" inherits="RustboltPHFrame">
+            <Frame parentKey="World" inherits="RustboltEditorReflectionWorldPanelTemplate">
                 <Anchors>
                     <Anchor point="TOPLEFT" />
                     <Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" y="1" />
                 </Anchors>
             </Frame>
 
-            <Frame parentKey="Inspector" inherits="RustboltPHFrame">
+            <Frame parentKey="Inspector" inherits="RustboltEditorReflectionInspectorPanelTemplate">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeKey="$parent.World" relativePoint="BOTTOMLEFT"
                         y="-2" />

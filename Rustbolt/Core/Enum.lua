@@ -21,6 +21,16 @@ Rustbolt.Enum.ResizeDirection = {
     BOTH = 3,
 };
 
+--- WINDOW ENUMS
+
+---@enum RustboltGameWindowScreenName
+Rustbolt.Enum.GameWindowScreen = {
+    EMPTY = "EMPTY",
+    START = "START",
+    GAME = "GAME",
+    EDITOR_HOME = "EDITOR_HOME"
+};
+
 --- ANIMATION ENUMS
 
 ---@enum RustboltAnimType
@@ -61,4 +71,15 @@ Rustbolt.Enum.ToolbarButtonType = {
 Rustbolt.Enum.ToolbarMenuOpenDirection = {
     UP = 1,
     DOWN = 2,
+};
+
+--- REFLECTION ENUMS
+
+---@enum RustboltReflectionEntryType
+Rustbolt.Enum.ReflectionEntryType = {
+    EntryBoxSingle = 1,
+    EntryBoxDouble = 2,
+    EntryBoxTriple = 3,
+    Checkbox = 4,
+    Asset = 5
 };
