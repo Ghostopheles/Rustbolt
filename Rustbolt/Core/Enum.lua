@@ -35,7 +35,7 @@ Rustbolt.Enum.GameWindowScreen = {
 
 ---@enum RustboltAnimType
 Rustbolt.Enum.AnimationType = {
-    Bounce = 1,
+    Bounce = 1, -- peak consistency
     SlideIn = 2,
 };
 
@@ -77,9 +77,7 @@ Rustbolt.Enum.ToolbarMenuOpenDirection = {
 
 ---@enum RustboltReflectionEntryType
 Rustbolt.Enum.ReflectionEntryType = {
-    EntryBoxSingle = 1,
-    EntryBoxDouble = 2,
-    EntryBoxTriple = 3,
-    Checkbox = 4,
-    Asset = 5
+    ENTRYBOX = 1,
+    CHECKBOX = 2,
+    ASSET = 3
 };

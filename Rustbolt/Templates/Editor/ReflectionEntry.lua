@@ -1,19 +1,29 @@
-RustboltEditorReflectionEntryEditBoxMixin = {};
+local Events = Rustbolt.Events;
+local Registry = Rustbolt.EventRegistry;
+local Enum = Rustbolt.Enum;
 
-function RustboltEditorReflectionEntryEditBoxMixin:OnLoad()
+CONTROL_FRAME_POOL_COLLECTION = CreateFramePoolCollection();
+local CONTROL_TYPE_TO_TEMPLATE = {
+    [Enum.ReflectionEntryType.ENTRYBOX] = "RustboltEditorReflectionEntryEditBoxTemplate",
+    [Enum.ReflectionEntryType.CHECKBOX] = "RustboltEditorReflectionEntryCheckboxTemplate",
+    [Enum.ReflectionEntryType.ASSET] = "RustboltEditorReflectionEntryAssetTemplate"
+};
+
+local function ResetControl(frame)
+    frame:Reset();
 end
 
-function RustboltEditorReflectionEntryEditBoxMixin:OnChar(char)
+local function SetupFramePools()
+    do
+        local frameType = "EditBox";
+        local parent = nil;
+        local template = CONTROL_TYPE_TO_TEMPLATE[Enum.ReflectionEntryType.ENTRYBOX];
+        local resetFunc = ResetControl;
+        CONTROL_FRAME_POOL_COLLECTION:CreatePool(frameType, parent, template, resetFunc);
+    end
 end
 
-function RustboltEditorReflectionEntryEditBoxMixin:OnTabPressed()
-end
-
-function RustboltEditorReflectionEntryEditBoxMixin:OnEntryPressed()
-end
-
-function RustboltEditorReflectionEntryEditBoxMixin:OnResetButtonPressed()
-end
+Registry:RegisterCallback(Events.ADDON_LOADED, SetupFramePools);
 
 ------------
 
@@ -41,10 +51,55 @@ end
 
 ------------
 
+RustboltEditorReflectionEntryEditBoxMixin = {};
+
+function RustboltEditorReflectionEntryEditBoxMixin:OnLoad()
+end
+
+function RustboltEditorReflectionEntryEditBoxMixin:OnChar(char)
+end
+
+function RustboltEditorReflectionEntryEditBoxMixin:OnTabPressed()
+end
+
+function RustboltEditorReflectionEntryEditBoxMixin:OnEnterPressed()
+end
+
+function RustboltEditorReflectionEntryEditBoxMixin:OnResetButtonPressed()
+end
+
+------------
+
+RustboltEditorReflectionEntryCheckboxMixin = {};
+
+function RustboltEditorReflectionEntryCheckboxMixin:OnLoad()
+end
+
+------------
+
+RustboltEditorReflectionEntryAssetMixin = {};
+
+function RustboltEditorReflectionEntryAssetMixin:OnLoad()
+end
+
+------------
+
+---@class RustboltEditorReflectionEntryData
+---@field ControlType RustboltReflectionEntryType
+
 RustboltEditorReflectionEntryMixin = {};
 
 function RustboltEditorReflectionEntryMixin:OnLoad()
 end
 
-function RustboltEditorReflectionEntryMixin:Init()
+---@param data RustboltEditorReflectionEntryData
+function RustboltEditorReflectionEntryMixin:Init(data)
+    if self.ControlFrame then
+        self.ControlFrame:Release();
+    end
+
+    local template = CONTROL_TYPE_TO_TEMPLATE[data.ControlType];
+    local pool = CONTROL_FRAME_POOL_COLLECTION:GetOrCreatePool(template);
+    self.ControlFrame = pool:Acquire();
+
 end
