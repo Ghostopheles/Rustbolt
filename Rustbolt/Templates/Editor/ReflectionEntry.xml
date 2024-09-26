@@ -97,6 +97,15 @@
         <Size y="20" />
 
         <Layers>
+            <Layer level="OVERLAY" textureSubLevel="5">
+                <Texture parentKey="HelpIcon" atlas="QuestTurnIn"
+                    useAtlasSize="false">
+                    <Size x="16" y="16" />
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="TOPRIGHT" />
+                    </Anchors>
+                </Texture>
+            </Layer>
             <Layer level="ARTWORK">
                 <Texture parentKey="Chevron" atlas="common-dropdown-icon-next"
                     useAtlasSize="false">
@@ -121,7 +130,8 @@
             <Frame parentKey="Controls">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeKey="$parent.Text" x="10" />
-                    <Anchor point="BOTTOMRIGHT" />
+                    <Anchor point="BOTTOMRIGHT" relativeKey="$parent.Chevron"
+                        relativePoint="BOTTOMLEFT" />
                 </Anchors>
             </Frame>
         </Frames>
@@ -130,12 +140,5 @@
             <OnLoad method="OnLoad" />
         </Scripts>
 
-    </Frame>
-
-    <Frame name="TEST_ENTRY" parent="UIParent" inherits="RustboltEditorReflectionEntryTemplate">
-        <Anchors>
-            <Anchor point="CENTER" />
-        </Anchors>
-        <Size x="200" y="20" />
     </Frame>
 </Ui>
