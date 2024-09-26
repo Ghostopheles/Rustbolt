@@ -21,6 +21,13 @@ Rustbolt.Enum.ResizeDirection = {
     BOTH = 3,
 };
 
+---@enum RustboltCVarCategory
+Rustbolt.Enum.CVarCategory = {
+    ENGINE = 1,
+    GAME = 2,
+    DEBUG = 3,
+};
+
 --- WINDOW ENUMS
 
 ---@enum RustboltGameWindowScreenName

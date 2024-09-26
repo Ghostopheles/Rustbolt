@@ -88,12 +88,3 @@ end
 
 hooksecurefunc(Rustbolt.EventRegistry, "TriggerEvent", OnCallbackEventFired);
 hooksecurefunc(Rustbolt.GameRegistry, "TriggerEvent", OnCallbackEventFired);
-
-Rustbolt.EventRegistry:RegisterCallback(Rustbolt.Events.CVAR_MANAGER_LOADED, function()
-	local cvarManager = Rustbolt.CVarManager;
-	local name = "bPushEventsToEventTrace";
-	local type = "boolean";
-	local category = Rustbolt.CVarCategory.DEBUG;
-	local defaultValue = false;
-	cvarManager:RegisterCVar(name, type, category, defaultValue);
-end);

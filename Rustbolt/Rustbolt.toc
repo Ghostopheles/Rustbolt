@@ -26,6 +26,7 @@ Core/Events.lua
 Core/MathUtil.lua
 Core/ClassUtil.lua
 Core/TableUtil.lua
+Core/CVarStatic.lua
 Core/CVars.lua
 Core/FrameUtil.lua
 Core/Constants.lua

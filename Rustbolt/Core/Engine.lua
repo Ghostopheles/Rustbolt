@@ -13,19 +13,6 @@ local function GetAutoPopTable()
 end
 
 ------
--- register engine CVars
-
-do
-    local name = "bIgnoreDuplicateEvents";
-    local default = false;
-    local type = type(default);
-    local category = Rustbolt.CVarCategory.ENGINE;
-    local ephemeral = false;
-
-    Rustbolt.CVarManager:RegisterCVar(name, type, category, default, ephemeral);
-end
-
-------
 
 ---@alias RustboltGameID string
 ---@alias RustboltEventName string

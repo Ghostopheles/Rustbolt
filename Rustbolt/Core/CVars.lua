@@ -1,13 +1,7 @@
 local Events = Rustbolt.Events;
 local Registry = Rustbolt.EventRegistry;
 
----@enum RustboltCVarCategory
-local CVarCategory = {
-    ENGINE = 1,
-    GAME = 2,
-    DEBUG = 3,
-};
-
+local CVarCategory = Rustbolt.Enum.CVarCategory;
 local I_CVarCategory = tInvert(CVarCategory);
 
 ------------
@@ -220,7 +214,6 @@ Registry:RegisterCallback(Events.ADDON_UNLOADING, CVarManager.OnAddonUnloading, 
 
 ------------
 
-Rustbolt.CVarCategory = CVarCategory;
 Rustbolt.CVarManager = CVarManager;
 
 Registry:TriggerEvent(Events.CVAR_MANAGER_LOADED);

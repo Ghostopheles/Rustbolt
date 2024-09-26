@@ -16,28 +16,6 @@ end
 
 ------------
 
---- registering relevant CVars
-local function RegisterCVars()
-    --- frame borders
-    do
-        local name = "bShowFrameBorders";
-        local category = Rustbolt.CVarCategory.DEBUG;
-        local defaultValue = false;
-        local type = type(defaultValue);
-        local ephemeral = false;
-        local cvar = Rustbolt.CVarManager:RegisterCVar(name, type, category, defaultValue, ephemeral);
-
-        if cvar then
-            local runNow = true;
-            cvar:AddValueChangedCallback(SetFrameBordersShown, runNow);
-        end
-    end
-end
-
-Registry:RegisterCallback(Events.CVARS_LOADED, RegisterCVars);
-
-------------
-
 ---@class RustboltFrameUtil
 local FrameUtil = {};
 
