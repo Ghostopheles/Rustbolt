@@ -44,6 +44,7 @@ Rustbolt.Enum.GameWindowScreen = {
 Rustbolt.Enum.AnimationType = {
     Bounce = 1, -- peak consistency
     SlideIn = 2,
+    ScaleOnMouseover = 3,
 };
 
 ---@enum RustboltSlideInSide

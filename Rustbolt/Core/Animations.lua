@@ -1,6 +1,7 @@
 local ANIM_TYPE_BASE = "Animation";
 local ANIM_TYPE_TRANSLATE = "Translation";
 local ANIM_TYPE_ALPHA = "Alpha";
+local ANIM_TYPE_SCALE = "Scale";
 
 local ANIM_TYPE = Rustbolt.Enum.AnimationType;
 local ANIM_SLIDE_IN_SIDE = Rustbolt.Enum.SlideInSide;
@@ -17,6 +18,11 @@ local ANIM_DEFAULTS = {
         Duration = 0.35,
         Smoothing = "OUT_IN",
     },
+    [ANIM_TYPE.ScaleOnMouseover] = {
+        UpperScale = 1.5,
+        Duration = 0.35,
+        Smoothing = "IN_OUT"
+    }
 };
 
 ---@class RustboltAnimationManager
@@ -141,6 +147,56 @@ function AnimationManager:ApplySlideIn(object, fromSide, duration, distance, smo
     end
 
     SlideIn();
+end
+
+---@param object any
+---@param upperScale? number
+---@param duration? number
+---@param smoothing? string
+function AnimationManager:AddScaleOnMouseover(object, upperScale, duration, smoothing)
+    local defaults = ANIM_DEFAULTS[ANIM_TYPE.ScaleOnMouseover];
+
+    local animGroup = object.ScaleOnMouseoverAnimGroup or object:CreateAnimationGroup();
+    animGroup:SetLooping("NONE");
+    animGroup.Anim = animGroup.Anim or animGroup:CreateAnimation(ANIM_TYPE_SCALE);
+
+    local anim = animGroup.Anim;
+    duration = duration or defaults.Duration;
+    anim:SetDuration(duration or defaults.Duration);
+    anim:SetSmoothing(smoothing or defaults.Smoothing);
+
+    local startScale = object:GetScale();
+    local targetScale = upperScale or defaults.UpperScale;
+    local scaleRange = targetScale - startScale;
+
+    local elapsed = 0;
+    local function OnTick()
+        elapsed = elapsed + GetTickTime();
+
+        local scale = startScale + (anim:GetSmoothProgress() * scaleRange);
+        object:SetScale(scale);
+
+        if elapsed < duration then
+            RunNextFrame(OnTick);
+        end
+    end
+
+    local function ScaleOnEnter()
+        elapsed = 0;
+        animGroup:Play();
+        OnTick();
+    end
+
+    local function ScaleOnLeave()
+        elapsed = 0;
+        local reverse = true;
+        animGroup:Play(reverse);
+        OnTick();
+    end
+
+    object:HookScript("OnEnter", ScaleOnEnter);
+    object:HookScript("OnLeave", ScaleOnLeave);
+
 end
 
 ------------

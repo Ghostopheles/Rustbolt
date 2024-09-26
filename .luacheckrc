@@ -78,5 +78,12 @@ globals = {
 	"GameTooltip",
 	"SetCursor",
 	"GetScaledCursorDelta",
-	"DevTool"
+	"DevTool",
+	"UIParent",
+	"CreateFrame",
+	"UpdateAddOnCPUUsage",
+	"UpdateAddOnMemoryUsage",
+	"GetAddOnCPUUsage",
+	"GetAddOnMemoryUsage",
+	"ResetCPUUsage",
 };

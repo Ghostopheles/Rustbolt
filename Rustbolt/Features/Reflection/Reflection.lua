@@ -24,6 +24,10 @@ end
 ---@class RustboltReflectionSystem
 local Reflection = {};
 
+function Reflection.GetWorldPanel()
+    return GetWorldPanel();
+end
+
 ---@param obj RustboltObject
 ---@param name string
 function Reflection.AddToInspector(obj, name)

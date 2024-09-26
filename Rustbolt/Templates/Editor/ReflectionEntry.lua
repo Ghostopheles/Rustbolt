@@ -106,6 +106,10 @@ end
 
 ------------
 
+---@class RustboltEditorReflectionEntryBoxData
+---@field Amount number
+---@field DefaultText string | number
+
 ---@class RustboltEditorReflectionEntryData
 ---@field ControlTitle string
 ---@field ControlType RustboltReflectionEntryType
@@ -114,24 +118,22 @@ end
 RustboltEditorReflectionEntryMixin = {};
 
 function RustboltEditorReflectionEntryMixin:OnLoad()
-    Rustbolt.FrameUtil.AddFrameBorder(self);
-
     self.ControlAnchors = {
-        CreateAnchor("TOPLEFT", self.Text, "TOPRIGHT", 10, 0),
-        CreateAnchor("BOTTOMRIGHT", self.Chevron, "BOTTOMLEFT", 0, 0)
+        CreateAnchor("TOPLEFT", self.Text, "TOPRIGHT", 10, -2),
+        CreateAnchor("BOTTOMRIGHT", self.Chevron, "BOTTOMLEFT", 0, -2)
     };
 
-    -- help icon scripts
-    self.HelpIcon:SetScript("OnEnter", function()
-        self:OnHelpEnter();
+    -- text tooltip scripts
+    self.Text:SetScript("OnEnter", function()
+        self:OnTitleEnter();
     end);
 
-    self.HelpIcon:SetScript("OnLeave", function()
-        self:OnHelpLeave();
+    self.Text:SetScript("OnLeave", function()
+        self:OnTitleLeave();
     end);
 end
 
-function RustboltEditorReflectionEntryMixin:OnHelpEnter()
+function RustboltEditorReflectionEntryMixin:OnTitleEnter()
     if self:HasTooltipText() then
         GameTooltip:SetOwner(self, "ANCHOR_CURSOR_RIGHT");
         GameTooltip:SetText(self:GetTooltipText(), 1, 1, 1);
@@ -139,7 +141,7 @@ function RustboltEditorReflectionEntryMixin:OnHelpEnter()
     end
 end
 
-function RustboltEditorReflectionEntryMixin:OnHelpLeave()
+function RustboltEditorReflectionEntryMixin:OnTitleLeave()
     if GameTooltip:IsOwned(self) then
         GameTooltip:Hide();
     end
@@ -190,17 +192,15 @@ end
 
 --TODO: REMOVE AFTER TESTING
 
-local function SetupTestFrame()
-    local f = CreateFrame("Frame", "TEST_ENTRY", UIParent, "RustboltEditorReflectionEntryTemplate");
-    f:SetPoint("CENTER");
-    f:SetSize(200, 20);
-
+local function InsertTestData()
+    local panel = Rustbolt.Reflection.GetWorldPanel();
     local data = {
-        ControlTitle = "UwU",
+        Template = "RustboltEditorReflectionEntryTemplate",
+        ControlTitle = "Test",
         ControlType = Enum.ReflectionEntryType.ENTRYBOX,
-        TooltipText = "OwO Tooltip"
+        TooltipText = "Tooltip Text"
     };
-    f:Init(data);
+    panel:AddEntry(data);
 end
 
-Rustbolt.EventRegistry:RegisterCallback(Rustbolt.Events.ADDON_LOADED, SetupTestFrame);
+Rustbolt.EventRegistry:RegisterCallback(Rustbolt.Events.ADDON_LOADED, InsertTestData);

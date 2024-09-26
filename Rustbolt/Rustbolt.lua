@@ -13,5 +13,6 @@ end
 EventUtil.ContinueOnAddOnLoaded("Rustbolt", function()
     if DevTool then
         DevTool:AddData(Rustbolt, "Rustbolt");
+        DevTool:AddData(RustboltWindow, "RustboltWindow");
     end
 end);

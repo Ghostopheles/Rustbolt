@@ -97,15 +97,6 @@
         <Size y="20" />
 
         <Layers>
-            <Layer level="OVERLAY" textureSubLevel="5">
-                <Texture parentKey="HelpIcon" atlas="QuestTurnIn"
-                    useAtlasSize="false">
-                    <Size x="16" y="16" />
-                    <Anchors>
-                        <Anchor point="CENTER" relativePoint="TOPRIGHT" />
-                    </Anchors>
-                </Texture>
-            </Layer>
             <Layer level="ARTWORK">
                 <Texture parentKey="Chevron" atlas="common-dropdown-icon-next"
                     useAtlasSize="false">
@@ -117,7 +108,7 @@
                 </Texture>
 
                 <FontString parentKey="Text" font="GameFontWhite"
-                    text="CHINA" maxLines="1" wordwrap="false" justifyH="LEFT">
+                    maxLines="1" wordwrap="false" justifyH="LEFT">
                     <Anchors>
                         <Anchor point="TOPLEFT" x="2" />
                         <Anchor point="BOTTOM" x="-5" />
@@ -125,16 +116,6 @@
                 </FontString>
             </Layer>
         </Layers>
-
-        <Frames>
-            <Frame parentKey="Controls">
-                <Anchors>
-                    <Anchor point="TOPLEFT" relativeKey="$parent.Text" x="10" />
-                    <Anchor point="BOTTOMRIGHT" relativeKey="$parent.Chevron"
-                        relativePoint="BOTTOMLEFT" />
-                </Anchors>
-            </Frame>
-        </Frames>
 
         <Scripts>
             <OnLoad method="OnLoad" />

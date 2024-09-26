@@ -35,12 +35,12 @@ function RustboltEditorReflectionPanelMixin:OnLoad()
     end);
 
     local function Initializer(frame, node)
-        frame:Init(node);
+        frame:Init(node:GetData());
     end
 
     self.ScrollView:SetElementFactory(function(factory, node)
 		local data = node:GetData();
-		local template = data.Template;
+		local template = data.Template or "RustboltEditorReflectionEntryTemplate";
 		factory(template, Initializer);
 	end);
 
@@ -75,7 +75,11 @@ function RustboltEditorReflectionPanelMixin:AddHeader(text)
         Template = "RustboltEditorReflectionHeaderTemplate",
         Text = text
     };
-    self.DataProvider:Insert(data);
+    return self.DataProvider:Insert(data);
+end
+
+function RustboltEditorReflectionPanelMixin:AddEntry(data)
+    return self.DataProvider:Insert(data);
 end
 
 ------------

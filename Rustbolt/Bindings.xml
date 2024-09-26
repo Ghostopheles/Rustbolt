@@ -2,4 +2,7 @@
     <Binding name="Toggle Frame Borders" category="Rustbolt">
         Rustbolt.FrameUtil.ToggleFrameBorders();
     </Binding>
+    <Binding name="Toggle Addon Usage Display" category="Rustbolt">
+        Rustbolt.DebugUtil.ToggleAddonUsageDisplay();
+    </Binding>
 </Bindings>
