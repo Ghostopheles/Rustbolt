@@ -1,29 +1,43 @@
-local Events = Rustbolt.Events;
-local Registry = Rustbolt.EventRegistry;
 local Enum = Rustbolt.Enum;
 
-CONTROL_FRAME_POOL_COLLECTION = CreateFramePoolCollection();
 local CONTROL_TYPE_TO_TEMPLATE = {
     [Enum.ReflectionEntryType.ENTRYBOX] = "RustboltEditorReflectionEntryEditBoxTemplate",
     [Enum.ReflectionEntryType.CHECKBOX] = "RustboltEditorReflectionEntryCheckboxTemplate",
     [Enum.ReflectionEntryType.ASSET] = "RustboltEditorReflectionEntryAssetTemplate"
 };
 
+local FRAME_POOLS = {};
+
 local function ResetControl(frame)
     frame:Reset();
 end
 
-local function SetupFramePools()
-    do
-        local frameType = "EditBox";
-        local parent = nil;
-        local template = CONTROL_TYPE_TO_TEMPLATE[Enum.ReflectionEntryType.ENTRYBOX];
-        local resetFunc = ResetControl;
-        CONTROL_FRAME_POOL_COLLECTION:CreatePool(frameType, parent, template, resetFunc);
-    end
+do
+    local frameType = "EditBox";
+    local parent = nil;
+    local template = CONTROL_TYPE_TO_TEMPLATE[Enum.ReflectionEntryType.ENTRYBOX];
+    FRAME_POOLS[Enum.ReflectionEntryType.ENTRYBOX] = CreateFramePool(frameType, parent, template, ResetControl);
 end
 
-Registry:RegisterCallback(Events.ADDON_LOADED, SetupFramePools);
+do
+    local frameType = "CheckButton";
+    local parent = nil;
+    local template = CONTROL_TYPE_TO_TEMPLATE[Enum.ReflectionEntryType.CHECKBOX];
+    FRAME_POOLS[Enum.ReflectionEntryType.CHECKBOX] = CreateFramePool(frameType, parent, template, ResetControl);
+end
+
+do
+    local frameType = "Frame";
+    local parent = nil;
+    local template = CONTROL_TYPE_TO_TEMPLATE[Enum.ReflectionEntryType.ASSET];
+    FRAME_POOLS[Enum.ReflectionEntryType.ASSET] = CreateFramePool(frameType, parent, template, ResetControl);
+end
+
+local function AcquireControl(parent, controlType)
+    local f = FRAME_POOLS[controlType]:Acquire();
+    f:SetParent(parent);
+    return f;
+end
 
 ------------
 
@@ -98,8 +112,5 @@ function RustboltEditorReflectionEntryMixin:Init(data)
         self.ControlFrame:Release();
     end
 
-    local template = CONTROL_TYPE_TO_TEMPLATE[data.ControlType];
-    local pool = CONTROL_FRAME_POOL_COLLECTION:GetOrCreatePool(template);
-    self.ControlFrame = pool:Acquire();
-
+    self.ControlFrame = AcquireControl(self, data.ControlType);
 end
