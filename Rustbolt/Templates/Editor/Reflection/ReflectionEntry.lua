@@ -189,11 +189,10 @@ function RustboltEditorReflectionEntryMixin:HasTooltipText()
 end
 
 ------------
-
 --TODO: REMOVE AFTER TESTING
 
 local function InsertTestData()
-    local panel = Rustbolt.Reflection.GetWorldPanel();
+    local panel = Rustbolt.Reflection.GetInspectorPanel();
     local data = {
         Template = "RustboltEditorReflectionEntryTemplate",
         ControlTitle = "Test",

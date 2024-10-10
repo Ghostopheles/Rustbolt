@@ -17,15 +17,15 @@
             </Layer>
         </Layers>
         <Scripts>
-            <OnLoad>
+            <OnLoad inherit="prepend">
                 self.PHText:SetText(self:GetParentKey());
             </OnLoad>
-            <OnEnter>
+            <OnEnter inherit="prepend">
                 GameTooltip:SetOwner(self, "ANCHOR_TOP");
                 GameTooltip:SetText(self:GetParentKey());
                 GameTooltip:Show();
             </OnEnter>
-            <OnLeave>
+            <OnLeave inherit="prepend">
                 GameTooltip:Hide();
             </OnLeave>
         </Scripts>
@@ -35,16 +35,19 @@
         virtual="true">
         <Size x="265" />
         <Frames>
-            <Frame parentKey="World" inherits="RustboltEditorReflectionWorldPanelTemplate">
+            <Frame parentKey="Outliner"
+                inherits="RustboltEditorOutlinerPanelTemplate,RustboltPHFrame">
                 <Anchors>
                     <Anchor point="TOPLEFT" />
-                    <Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" y="1" />
+                    <Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" />
                 </Anchors>
             </Frame>
 
-            <Frame parentKey="Inspector" inherits="RustboltEditorReflectionInspectorPanelTemplate">
+            <Frame parentKey="Inspector"
+                inherits="RustboltEditorReflectionInspectorPanelTemplate,RustboltPHFrame">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeKey="$parent.World" relativePoint="BOTTOMLEFT"
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Outliner"
+                        relativePoint="BOTTOMLEFT"
                         y="-2" />
                     <Anchor point="BOTTOMRIGHT" />
                 </Anchors>
@@ -53,7 +56,8 @@
             <Button parentKey="ResizeBar" inherits="RustboltResizeBarTemplate"
                 frameLevel="500">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeKey="$parent.World" relativePoint="BOTTOMLEFT"
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Outliner"
+                        relativePoint="BOTTOMLEFT"
                         y="6" />
                     <Anchor point="BOTTOMRIGHT" relativeKey="$parent.Inspector"
                         relativePoint="TOPRIGHT" x="6" />
@@ -92,7 +96,8 @@
 
             <Frame parentKey="ReflectionPanel" inherits="RustboltEditorReflectionTemplate">
                 <Anchors>
-                    <Anchor point="TOPRIGHT" relativeKey="$parent.Attic" relativePoint="BOTTOMRIGHT" />
+                    <Anchor point="TOPRIGHT" relativeKey="$parent.Attic"
+                        relativePoint="BOTTOMRIGHT" />
                     <Anchor point="BOTTOMRIGHT" relativeKey="$parent.Basement"
                         relativePoint="TOPRIGHT" />
                 </Anchors>

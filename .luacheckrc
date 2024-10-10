@@ -86,4 +86,5 @@ globals = {
 	"GetAddOnCPUUsage",
 	"GetAddOnMemoryUsage",
 	"ResetCPUUsage",
+	"GetFramerate"
 };

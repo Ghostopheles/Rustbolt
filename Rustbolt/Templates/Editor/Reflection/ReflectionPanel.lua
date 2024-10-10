@@ -1,9 +1,9 @@
 -- I know this naming is confusing - this is for the frame containing both reflection panels
--- the mixin below this one (RustboltEditorReflectionPanelMixin) is the base mixin for both the world and inspector panels
+-- the mixin below this one (RustboltEditorReflectionPanelMixin) is the base mixin for both the outliner and inspector panels
 RustboltEditorReflectionMixin = {};
 
 function RustboltEditorReflectionMixin:OnLoad()
-    self.ResizeBar:SetTarget(self.World, "BOTTOMRIGHT", Rustbolt.Enum.ResizeDirection.VERTICAL);
+    self.ResizeBar:SetTarget(self.Outliner, "BOTTOMRIGHT", Rustbolt.Enum.ResizeDirection.VERTICAL);
 end
 
 ------------
