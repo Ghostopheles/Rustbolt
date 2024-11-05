@@ -1,0 +1,63 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+    <Font name="RustboltCleanFont" virtual="true"
+        font="Interface/AddOns/Rustbolt/Assets/Fonts/Inter_Tight/InterTight-Regular.ttf" height="12">
+        <Color r="1" g="1" b="1" />
+        <Shadow x="1.5" y="-1.5" />
+    </Font>
+
+    <Font name="RustboltCleanFontNoShadow" virtual="true"
+        font="Interface/AddOns/Rustbolt/Assets/Fonts/Inter_Tight/InterTight-Regular.ttf" height="12">
+        <Color r="1" g="1" b="1" />
+    </Font>
+
+    <Font name="RustboltCleanFontBold" virtual="true"
+        font="Interface/AddOns/Rustbolt/Assets/Fonts/Inter_Tight/InterTight-Bold.ttf" height="12">
+        <Color r="1" g="1" b="1" />
+        <Shadow x="1.5" y="-1.5" />
+    </Font>
+
+    <Font name="RustboltCleanFontSmall" virtual="true"
+        font="Interface/AddOns/Rustbolt/Assets/Fonts/Inter_Tight/InterTight-Regular.ttf" height="10">
+        <Color r="1" g="1" b="1" />
+        <Shadow x="1.5" y="-1.5" />
+    </Font>
+
+    <Font name="RustboltCleanFontSmallNoShadow" virtual="true"
+        font="Interface/AddOns/Rustbolt/Assets/Fonts/Inter_Tight/InterTight-Regular.ttf" height="10">
+        <Color r="1" g="1" b="1" />
+    </Font>
+
+    <Font name="RustboltCleanFontLabelSmall" virtual="true"
+        font="Interface/AddOns/Rustbolt/Assets/Fonts/Inter_Tight/InterTight-Regular.ttf" height="5">
+        <Color r="1" g="1" b="1" />
+    </Font>
+
+    <Font name="RustboltCleanFontSmallish" virtual="true"
+        font="Interface/AddOns/Rustbolt/Assets/Fonts/Inter_Tight/InterTight-Regular.ttf" height="11">
+        <Color r="1" g="1" b="1" />
+        <Shadow x="1.5" y="-1.5" />
+    </Font>
+
+    <Font name="RustboltCleanFontMedium" virtual="true"
+        font="Interface/AddOns/Rustbolt/Assets/Fonts/Inter_Tight/InterTight-Regular.ttf" height="14">
+        <Color r="1" g="1" b="1" />
+        <Shadow x="1.5" y="-1.5" />
+    </Font>
+
+    <Font name="RustboltCleanFontMediumNoShadow" virtual="true"
+        font="Interface/AddOns/Rustbolt/Assets/Fonts/Inter_Tight/InterTight-Regular.ttf" height="14">
+        <Color r="1" g="1" b="1" />
+    </Font>
+
+    <Font name="RustboltCleanFontBig" virtual="true"
+        font="Interface/AddOns/Rustbolt/Assets/Fonts/Inter_Tight/InterTight-Regular.ttf" height="16">
+        <Color r="1" g="1" b="1" />
+        <Shadow x="1.5" y="-1.5" />
+    </Font>
+
+    <Font name="RustboltCleanFontBigNoShadow" virtual="true"
+        font="Interface/AddOns/Rustbolt/Assets/Fonts/Inter_Tight/InterTight-Regular.ttf" height="16">
+        <Color r="1" g="1" b="1" />
+    </Font>
+</Ui>
