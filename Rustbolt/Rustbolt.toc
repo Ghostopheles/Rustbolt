@@ -72,6 +72,9 @@ Templates/Editor/Outliner/OutlinerTableBuilder.lua
 Templates/Editor/Outliner/OutlinerCell.xml
 Templates/Editor/Outliner/OutlinerPanel.xml
 
+Templates/Editor/Blueprints/BlueprintNode.lua
+Templates/Editor/Blueprints/BlueprintNode.xml
+
 Templates/Editor/Blueprints/BlueprintEditor.lua
 Templates/Editor/Blueprints/BlueprintEditor.xml
 
