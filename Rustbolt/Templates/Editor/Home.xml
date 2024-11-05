@@ -103,7 +103,7 @@
                 </Anchors>
             </Frame>
 
-            <Frame parentKey="Viewport" inherits="RustboltEditorViewportTemplate">
+            <Frame parentKey="BlueprintEditor" inherits="RustboltBlueprintEditorTemplate">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeKey="$parent.Attic" relativePoint="BOTTOMLEFT"
                         x="2" />
@@ -112,9 +112,19 @@
                 </Anchors>
             </Frame>
 
+            <!--<Frame
+            parentKey="Viewport" inherits="RustboltEditorViewportTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Attic" relativePoint="BOTTOMLEFT"
+                        x="2" />
+                    <Anchor point="BOTTOMRIGHT" relativeKey="$parent.ReflectionPanel"
+                        relativePoint="LEFT" x="-2" y="-150" />
+                </Anchors>
+            </Frame>-->
+
             <Frame parentKey="ContentBrowser" inherits="RustboltEditorViewportTemplate">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeKey="$parent.Viewport"
+                    <Anchor point="TOPLEFT" relativeKey="$parent.BlueprintEditor"
                         relativePoint="BOTTOMLEFT" y="-2" />
                     <Anchor point="BOTTOMRIGHT" relativeKey="$parent.ReflectionPanel"
                         relativePoint="BOTTOMLEFT" x="-2" />
@@ -124,7 +134,8 @@
             <Button parentKey="HorizontalResizeBar" inherits="RustboltResizeBarTemplate"
                 frameLevel="500">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeKey="$parent.Viewport" relativePoint="TOPRIGHT"
+                    <Anchor point="TOPLEFT" relativeKey="$parent.BlueprintEditor"
+                        relativePoint="TOPRIGHT"
                         x="-6" />
                     <Anchor point="BOTTOMRIGHT" relativeKey="$parent.ReflectionPanel"
                         relativePoint="BOTTOMLEFT" x="6" />
@@ -134,7 +145,7 @@
             <Button parentKey="VerticalResizeBar" inherits="RustboltResizeBarTemplate"
                 frameLevel="500">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeKey="$parent.Viewport"
+                    <Anchor point="TOPLEFT" relativeKey="$parent.BlueprintEditor"
                         relativePoint="BOTTOMLEFT"
                         y="6" />
                     <Anchor point="BOTTOMRIGHT" relativeKey="$parent.ContentBrowser"

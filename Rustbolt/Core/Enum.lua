@@ -26,6 +26,7 @@ Rustbolt.Enum.CVarCategory = {
     ENGINE = 1,
     GAME = 2,
     DEBUG = 3,
+    EDITOR = 4,
 };
 
 --- WINDOW ENUMS

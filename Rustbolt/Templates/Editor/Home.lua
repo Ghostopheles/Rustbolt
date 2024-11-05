@@ -12,7 +12,7 @@ function RustboltEditorHomeMixin:OnLoad()
     Registry:RegisterCallback(Events.ADDON_LOADED, self.RegisterToolbarButtons, self);
 
     self.HorizontalResizeBar:SetTarget(self.ReflectionPanel, nil, Rustbolt.Enum.ResizeDirection.HORIZONTAL);
-    self.VerticalResizeBar:SetTarget(self.Viewport, "BOTTOMRIGHT", Rustbolt.Enum.ResizeDirection.VERTICAL);
+    self.VerticalResizeBar:SetTarget(self.BlueprintEditor, "BOTTOMRIGHT", Rustbolt.Enum.ResizeDirection.VERTICAL);
 end
 
 function RustboltEditorHomeMixin:RegisterToolbarButtons()

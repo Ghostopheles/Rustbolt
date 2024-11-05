@@ -86,5 +86,9 @@ globals = {
 	"GetAddOnCPUUsage",
 	"GetAddOnMemoryUsage",
 	"ResetCPUUsage",
-	"GetFramerate"
+	"GetFramerate",
+	"min",
+	"max",
+	"GetScaledCursorPosition",
+	"Saturate"
 };

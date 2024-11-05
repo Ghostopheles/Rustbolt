@@ -18,6 +18,26 @@ local EngineCVars = {
         DefaultValue = false,
         Category = Rustbolt.Enum.CVarCategory.DEBUG
     },
+    { -- blueprint cvars
+        Name = "bBlueprintGraphRequireShiftForCenter",
+        DefaultValue = true,
+        Category = Rustbolt.Enum.CVarCategory.EDITOR
+    },
+    {
+        Name = "fBlueprintGraphMaxScale",
+        DefaultValue = 3.0,
+        Category = Rustbolt.Enum.CVarCategory.EDITOR
+    },
+    {
+        Name = "fBlueprintGraphMinScale",
+        DefaultValue = 0.1,
+        Category = Rustbolt.Enum.CVarCategory.EDITOR
+    },
+    {
+        Name = "fBlueprintGraphScaleStep",
+        DefaultValue = 0.1,
+        Category = Rustbolt.Enum.CVarCategory.EDITOR
+    }
 };
 
 local function ValidateCVars()
