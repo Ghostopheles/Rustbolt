@@ -1,4 +1,18 @@
+local mt = {
+    __index = function(self, key)
+        if key == "Strings" then
+            local AceLocale = LibStub("AceLocale-3.0");
+            local L = AceLocale:GetLocale("Rustbolt", false);
+            rawset(self, key, L);
+        end
+
+        return rawget(self, key);
+    end
+};
+
 Rustbolt = {};
+setmetatable(Rustbolt, mt);
+
 Rustbolt.Maps = {};
 
 Rustbolt.Globals = {

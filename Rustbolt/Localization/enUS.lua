@@ -32,6 +32,8 @@ L["TOOLBAR_TITLE_TOOLS"] = "Tools";
 L["TOOLBAR_TITLE_BUILD"] = "Build";
 L["TOOLBAR_TITLE_HELP"] = "Help";
 
--- END LOCALIZATION
+L["BLUEPRINT_GRAPH_TITLE"] = "Blueprint Graph";
+L["BLUEPRINT_GRAPH_PH_FILENAME"] = "$FILENAME$";
+L["BLUEPRINT_GRAPH_ZOOM_FORMAT"] = "Zoom: %d%%";
 
-Rustbolt.Strings = AceLocale:GetLocale("Rustbolt", false);
+-- END LOCALIZATION

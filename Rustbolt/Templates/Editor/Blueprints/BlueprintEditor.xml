@@ -9,12 +9,12 @@
         mixin="RustboltBlueprintEditorMixin" setAllPoints="true" clipChildren="true" virtual="true">
 
         <Frames>
-            <Frame parentKey="Canvas" movable="true">
+            <Frame parentKey="Canvas" movable="true" useParentLevel="true">
                 <Anchors>
                     <Anchor point="CENTER" />
                 </Anchors>
                 <Layers>
-                    <Layer level="BACKGROUND">
+                    <Layer level="BACKGROUND" textureSubLevel="1">
                         <Texture parentKey="Background" setAllPoints="true"
                             file="Interface/Addons/Rustbolt/Assets/GRID.png" horizTile="true"
                             vertTile="true" />
@@ -24,6 +24,27 @@
         </Frames>
 
         <Layers>
+            <Layer level="OVERLAY">
+                <FontString parentKey="TitleText" inherits="RustboltCleanFontBig" justifyH="LEFT">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="5" y="-5" />
+                    </Anchors>
+                    <Color r="1" g="1" b="1" a="0.75" />
+                </FontString>
+                <FontString parentKey="FileNameText" inherits="RustboltCleanFont" justifyH="LEFT">
+                    <Anchors>
+                        <Anchor point="LEFT" relativeKey="$parent.Title" relativePoint="RIGHT"
+                            x="10" />
+                    </Anchors>
+                    <Color r="1" g="1" b="1" a="0.75" />
+                </FontString>
+                <FontString parentKey="ZoomText" inherits="RustboltCleanFontMedium" justifyH="RIGHT">
+                    <Anchors>
+                        <Anchor point="TOPRIGHT" x="-5" y="-5" />
+                    </Anchors>
+                    <Color r="1" g="1" b="1" a="0.75" />
+                </FontString>
+            </Layer>
             <Layer level="BACKGROUND">
                 <Texture parentKey="Background" setAllPoints="true">
                     <Color r="0.15" g="0.15" b="0.15" a="1" />

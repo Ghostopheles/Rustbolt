@@ -1,6 +1,7 @@
 local CVarManager = Rustbolt.CVarManager;
 local Registry = Rustbolt.EventRegistry;
 local Events = Rustbolt.Events;
+local L = Rustbolt.Strings;
 
 ------------
 
@@ -25,12 +26,12 @@ function RustboltBlueprintEditorMixin:OnLoad()
         self.ScaleStep = newValue;
     end, true);
 
-    self.VirtualWidth = 1280;
-    self.VirtualHeight = 1280;
+    self.VirtualWidth = 2560;
+    self.VirtualHeight = 2560;
 
     local width, height = self:GetSize();
-    self.AutoScaleWidth = width - 40;
-    self.AutoScaleHeight = height - 40;
+    self.AutoScaleWidth = width + 120;
+    self.AutoScaleHeight = height + 120;
 
     self:RegisterForDrag("LeftButton");
     self:EnableMouseWheel(true);
@@ -38,6 +39,9 @@ function RustboltBlueprintEditorMixin:OnLoad()
     self.IsPanning = false;
     self:ResetCanvas();
     self:CreateCanvasBorder();
+
+    self.TitleText:SetText(L.BLUEPRINT_GRAPH_TITLE);
+    self:SetFilename(L.BLUEPRINT_GRAPH_PH_FILENAME);
 end
 
 function RustboltBlueprintEditorMixin:OnUpdate()
@@ -61,7 +65,6 @@ function RustboltBlueprintEditorMixin:OnMouseWheel(delta)
 end
 
 function RustboltBlueprintEditorMixin:OnMouseDown(button)
-    
 end
 
 function RustboltBlueprintEditorMixin:OnMouseUp(button, isInside)
@@ -98,12 +101,21 @@ function RustboltBlueprintEditorMixin:SetDisplayScale(scale)
     scale = min(self.MaxScale, max(self.MinScale, scale));
     self.CurrentScale = scale;
     self:UpdateCanvasSize();
+    self:UpdateZoomText();
 end
 
 function RustboltBlueprintEditorMixin:UpdateCanvasSize()
     local width = self.VirtualWidth * self.CurrentScale;
     local height = self.VirtualHeight * self.CurrentScale;
     self.Canvas:SetSize(width, height);
+end
+
+function RustboltBlueprintEditorMixin:UpdateZoomText()
+    self.ZoomText:SetFormattedText(L.BLUEPRINT_GRAPH_ZOOM_FORMAT, self.CurrentScale * 100);
+end
+
+function RustboltBlueprintEditorMixin:SetFilename(filename)
+    self.FileNameText:SetText(filename);
 end
 
 function RustboltBlueprintEditorMixin:ResetCanvas()
@@ -114,8 +126,8 @@ function RustboltBlueprintEditorMixin:ResetCanvas()
 		scale = max(self.MinScale, min(widthScale, heightScale));
     end
 
-    self:SetDisplayScale(scale);
     self:SetCanvasOffsets(0, 0);
+    self:SetDisplayScale(scale);
 end
 
 function RustboltBlueprintEditorMixin:GetMouseCoordinatesOnCanvas()

@@ -57,6 +57,8 @@ Objects/Character.lua
 Objects/World.lua
 Objects/Mesh2D.lua
 
+Templates/Shared/Fonts.xml
+
 Templates/Shared/ResizeBar.lua
 Templates/Shared/ResizeBar.xml
 
