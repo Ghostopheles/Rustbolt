@@ -184,7 +184,7 @@ end
 
 ---Returns a CVar object. To retrieve only the CVar value, use :GetCVar
 ---@param name string
----@return RustboltCVar? cvar
+---@return RustboltCVar cvar
 function CVarManager:GetCVarObject(name)
     return self.CVars[name];
 end
