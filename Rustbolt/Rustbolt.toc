@@ -51,11 +51,11 @@ Features/Reflection/Reflection.lua
 
 Features/Outliner/Outliner.lua
 
-Objects/ObjectManager.lua
-Objects/Object.lua
-Objects/Character.lua
-Objects/World.lua
-Objects/Mesh2D.lua
+Objects/Gameplay/ObjectManager.lua
+Objects/Gameplay/Object.lua
+Objects/Gameplay/Character.lua
+Objects/Gameplay/World.lua
+Objects/Gameplay/Mesh2D.lua
 
 Templates/Shared/Fonts.xml
 
