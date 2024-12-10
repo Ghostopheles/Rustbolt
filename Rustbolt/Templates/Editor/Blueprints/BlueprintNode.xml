@@ -36,7 +36,8 @@
         </Frames>
     </Frame>
 
-    <Frame name="BlueprintTestNode" inherits="RustboltBlueprintNodeTemplate" parent="UIParent">
+    <Frame name="BlueprintTestNode" inherits="RustboltBlueprintNodeTemplate" parent="UIParent"
+        hidden="true">
         <Anchors>
             <Anchor point="CENTER" />
         </Anchors>
