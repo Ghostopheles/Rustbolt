@@ -34,24 +34,6 @@ the engine is going to be the CIA of our project, overseeing the interaction of 
     it'll also probably be a common entry point for third-party addons
 ]]
 
----Sets the currently active game
----@param gameID RustboltGameID
----@return RustboltGame?
-function Engine:SetActiveGame(gameID)
-    local game; -- TODO: create GameManager
-    self:SetActiveGame(game);
-    return game;
-end
-
----@return RustboltGame?
-function Engine:GetActiveGame()
-    return self.ActiveGame;
-end
-
-function Engine:GetGameState()
-    return Rustbolt.GameState;
-end
-
 function Engine:GetWindow()
     return RustboltWindow;
 end

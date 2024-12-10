@@ -17,7 +17,8 @@ Rustbolt.Events = {
 	NOTIFICATION_REMOVED = "NotificationRemoved",
 	DISMISS_NOTIFICATION = "DismissNotification",
 	CLEAR_NOTIFICATIONS = "ClearNotifications",
-	TOGGLE_FRAME_BORDERS = "ToggleFrameBorders"
+	TOGGLE_FRAME_BORDERS = "ToggleFrameBorders",
+	ACTIVE_GAME_CHANGED = "ActiveGameChanged",
 };
 
 Rustbolt.GameEvents = {

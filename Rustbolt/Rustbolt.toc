@@ -3,7 +3,7 @@
 ## Notes: An open-source game engine designed for World of Warcraft
 ## Author: Ghostopheles
 ## Version: @project-version@
-## SavedVariables: RustboltDevMap, RustboltSaveData, RustboltState, RustboltConfig
+## SavedVariables: RustboltDevMap, RustboltSaveData, RustboltState, RustboltConfig, RustboltGames
 
 ## AddonCompartmentFunc: Rustbolt_OnAddonCompartmentClick
 
@@ -36,7 +36,7 @@ Core/Animations.lua
 Core/Themes.lua
 Core/Assets.lua
 Core/Maps.lua
-
+Core/GameManager.lua
 Core/GameState.lua
 Core/Engine.lua
 
@@ -50,6 +50,9 @@ Features/Notifications/Manager.xml
 Features/Reflection/Reflection.lua
 
 Features/Outliner/Outliner.lua
+
+Objects/Editor/EditorObjects.lua
+Objects/Editor/Game.lua
 
 Objects/Gameplay/ObjectManager.lua
 Objects/Gameplay/Object.lua

@@ -1,0 +1,2 @@
+---@class RustboltEditorObjects
+Rustbolt.EditorObjects = {};
