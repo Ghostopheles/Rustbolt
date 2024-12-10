@@ -19,6 +19,8 @@ Rustbolt.Events = {
 	CLEAR_NOTIFICATIONS = "ClearNotifications",
 	TOGGLE_FRAME_BORDERS = "ToggleFrameBorders",
 	ACTIVE_GAME_CHANGED = "ActiveGameChanged",
+	DIALOG_SHOWN = "DialogShown",
+	DIALOG_HIDDEN = "DialogHidden",
 };
 
 Rustbolt.GameEvents = {

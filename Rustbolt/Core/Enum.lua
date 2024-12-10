@@ -90,3 +90,11 @@ Rustbolt.Enum.ReflectionEntryType = {
     CHECKBOX = 2,
     ASSET = 3
 };
+
+--- DIALOG ENUMS
+
+---@enum RustboltDialogRowType
+Rustbolt.Enum.DialogRowType = {
+    Editbox = 1,
+    Checkbox = 2,
+};

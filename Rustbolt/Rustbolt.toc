@@ -65,6 +65,9 @@ Templates/Shared/Fonts.xml
 Templates/Shared/ResizeBar.lua
 Templates/Shared/ResizeBar.xml
 
+Templates/Editor/Dialog/Dialog.lua
+Templates/Editor/Dialog/Dialog.xml
+
 Templates/Editor/Reflection/ReflectionEntry.lua
 Templates/Editor/Reflection/ReflectionEntry.xml
 

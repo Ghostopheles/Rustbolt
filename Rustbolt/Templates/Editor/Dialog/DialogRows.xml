@@ -1,0 +1,44 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+
+    <Script file="DialogRows.lua" />
+
+    <Frame name="RustboltDialogRowTemplate_Base" mixin="RustboltDialogRowBaseMixin" virtual="true">
+        <Size x="175" y="30" />
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString parentKey="Title" inherits="RustboltCleanFont" justifyH="LEFT">
+                    <Anchors>
+                        <Anchor point="LEFT" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="RustboltDialogRowTemplate_Editbox" inherits="RustboltDialogRowTemplate_Base"
+        mixin="RustboltDialogRowEditboxMixin"
+        virtual="true">
+        <Frames>
+            <EditBox parentKey="Editbox" inherits="InputBoxTemplate" autoFocus="false">
+                <Size x="100" y="30" />
+                <Anchors>
+                    <Anchor point="RIGHT" />
+                </Anchors>
+            </EditBox>
+        </Frames>
+    </Frame>
+
+    <Frame name="RustboltDialogRowTemplate_Checkbox" inherits="RustboltDialogRowTemplate_Base"
+        mixin="RustboltDialogRowCheckboxMixin"
+        virtual="true">
+        <Frames>
+            <CheckButton parentKey="Checkbox" inherits="UICheckButtonTemplate">
+                <Anchors>
+                    <Anchor point="RIGHT" />
+                </Anchors>
+            </CheckButton>
+        </Frames>
+    </Frame>
+
+</Ui>
