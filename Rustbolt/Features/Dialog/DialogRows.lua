@@ -26,19 +26,24 @@ function RustboltDialogRowBaseMixin:Reset()
     end
 end
 
+function RustboltDialogRowBaseMixin:HasBeenModified()
+    return self:GetData() ~= self.DefaultValue;
+end
+
 ------------
 
 RustboltDialogRowEditboxMixin = CreateFromMixins(RustboltDialogRowBaseMixin);
 
 function RustboltDialogRowEditboxMixin:Init(title, required)
     self.RowType = RowType.Editbox;
+    self.DefaultValue = "";
 
     self:SetTitle(title);
     self:SetRequired(required);
 end
 
 function RustboltDialogRowEditboxMixin:OnReset()
-    self.Editbox:SetText("");
+    self.Editbox:SetText(self.DefaultValue);
 end
 
 function RustboltDialogRowEditboxMixin:GetData()
@@ -51,13 +56,14 @@ RustboltDialogRowCheckboxMixin = CreateFromMixins(RustboltDialogRowBaseMixin);
 
 function RustboltDialogRowCheckboxMixin:Init(title, required)
     self.RowType = RowType.Checkbox;
+    self.DefaultValue = false;
 
     self:SetTitle(title);
     self:SetRequired(required);
 end
 
 function RustboltDialogRowCheckboxMixin:OnReset()
-    self.Checkbox:SetChecked(false);
+    self.Checkbox:SetChecked(self.DefaultValue);
 end
 
 function RustboltDialogRowCheckboxMixin:GetData()
