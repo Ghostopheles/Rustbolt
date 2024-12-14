@@ -90,5 +90,6 @@ globals = {
 	"min",
 	"max",
 	"GetScaledCursorPosition",
-	"Saturate"
+	"Saturate",
+	"wipe"
 };

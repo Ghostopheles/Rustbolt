@@ -66,7 +66,7 @@ local function OnCallbackEventFired(registry, event, ...)
 		return;
 	end
 
-	if not Rustbolt.CVarManager or not Rustbolt.CVarManager:GetCVar("bPushEventsToRegistry") then
+	if not Rustbolt.CVarManager or not Rustbolt.CVarManager:GetCVar("bPushEngineEventsToEventTrace") then
 		return;
 	end
 

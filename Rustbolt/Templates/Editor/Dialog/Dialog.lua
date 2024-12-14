@@ -59,12 +59,14 @@ end
 ---@field Title string
 ---@field Fields RustboltDialogField[]
 ---@field SubmitText string?
+---@field Tag string?
 
 RustboltDialogMixin = {};
 
 function RustboltDialogMixin:OnLoad()
     ButtonFrameTemplate_HidePortrait(self);
     self.SubmitButton:SetText("$Submit$");
+    self.SubmitButton:SetScript("OnClick", function() self:OnSubmit() end);
 
     self.InitialAnchor = CreateAnchor("TOP", self, "TOP", 0, -20);
 
@@ -77,21 +79,46 @@ function RustboltDialogMixin:OnLoad()
 end
 
 function RustboltDialogMixin:OnShow()
-    Registry:TriggerEvent(Events.DIALOG_SHOWN);
+    Registry:TriggerEvent(Events.DIALOG_SHOWN, self:GetTag());
 end
 
 function RustboltDialogMixin:OnHide()
-    Registry:TriggerEvent(Events.DIALOG_HIDDEN);
+    Registry:TriggerEvent(Events.DIALOG_HIDDEN, self:GetTag());
+end
+
+function RustboltDialogMixin:OnSubmit()
+    local data = {};
+    for i, row in ipairs(self.Rows) do
+        local rowData = row:GetData();
+        tinsert(data, i, rowData);
+    end
+
+    self.Callback(data);
 end
 
 function RustboltDialogMixin:Layout()
     AnchorUtil.GridLayout(self.Rows, self.InitialAnchor, self.GridLayout);
 end
 
+function RustboltDialogMixin:Reset()
+    for _, row in pairs(self.Rows) do
+        row:Release();
+    end
+    wipe(self.Rows);
+end
+
+function RustboltDialogMixin:SetTag(tag)
+    self.Tag = tag;
+end
+
+function RustboltDialogMixin:GetTag()
+    return self.Tag;
+end
+
 ---@param dialogStructure RustboltDialogStructure
 ---@param callback function
 function RustboltDialogMixin:CreateAndShow(dialogStructure, callback)
-    wipe(self.Rows);
+    self:Reset();
 
     self:SetTitle(dialogStructure.Title);
     for _, rowInfo in ipairs(dialogStructure.Fields) do
@@ -102,6 +129,7 @@ function RustboltDialogMixin:CreateAndShow(dialogStructure, callback)
 
     self.SubmitButton:SetText(dialogStructure.SubmitText or "Submit");
     self.Callback = callback;
+    self:SetTag(dialogStructure.Tag);
 
     self:Layout();
     self:Show();
@@ -112,6 +140,7 @@ end
 function DialogTest()
     local dialog = {
         Title = "uwu",
+        Tag = "TEST_DIALOG",
         Fields = {
             {
                 RowType = Enum.DialogRowType.Editbox,

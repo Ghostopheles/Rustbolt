@@ -5,7 +5,7 @@
 
     <Frame name="RustboltDialog" inherits="PortraitFrameFlatTemplate"
         mixin="RustboltDialogMixin" toplevel="true" frameStrata="FULLSCREEN_DIALOG"
-        parent="UIParent">
+        parent="UIParent" hidden="true">
         <Size x="300" y="300" />
         <Anchors>
             <Anchor point="CENTER" />
