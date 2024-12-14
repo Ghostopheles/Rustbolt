@@ -93,7 +93,11 @@ function RustboltDialogMixin:OnSubmit()
         tinsert(data, i, rowData);
     end
 
-    self.Callback(data);
+    if self.Callback then
+        self.Callback(data);
+    end
+
+    self:Hide();
 end
 
 function RustboltDialogMixin:Layout()
