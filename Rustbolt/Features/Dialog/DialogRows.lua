@@ -1,9 +1,15 @@
 local Enum = Rustbolt.Enum;
 local RowType = Enum.DialogRowType;
+local L = Rustbolt.Strings;
 
 ------------
 
 RustboltDialogRowBaseMixin = {};
+
+function RustboltDialogRowBaseMixin:OnLoad()
+    self.RequiredIcon:SetScript("OnEnter", function() self:OnRequiredButtonEnter() end);
+    self.RequiredIcon:SetScript("OnLeave", function() self:OnRequiredButtonLeave() end);
+end
 
 function RustboltDialogRowBaseMixin:SetTitle(text)
     self.Title:SetText(text);
@@ -11,6 +17,7 @@ end
 
 function RustboltDialogRowBaseMixin:SetRequired(isRequired)
     self.Required = isRequired;
+    self.RequiredIcon:SetShown(self.Required);
 end
 
 function RustboltDialogRowBaseMixin:IsRequired()
@@ -28,6 +35,16 @@ end
 
 function RustboltDialogRowBaseMixin:HasBeenModified()
     return self:GetData() ~= self.DefaultValue;
+end
+
+function RustboltDialogRowBaseMixin:OnRequiredButtonEnter()
+    GameTooltip:SetOwner(self.RequiredIcon, "ANCHOR_TOPLEFT");
+    GameTooltip:SetText(L.DIALOG_FIELD_REQUIRED_TOOLTIP, 1, 1, 1);
+    GameTooltip:Show();
+end
+
+function RustboltDialogRowBaseMixin:OnRequiredButtonLeave()
+    GameTooltip:Hide();
 end
 
 ------------

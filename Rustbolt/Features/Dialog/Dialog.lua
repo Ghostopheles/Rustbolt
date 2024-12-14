@@ -10,7 +10,9 @@ local DEFAULT_ROW_TEMPLATE = "RustboltDialogRowTemplate_"; -- specialization is 
 local RowTypeToName = tInvert(Enum.DialogRowType);
 
 local function ResetRow(_, row)
-    row:Reset();
+    if row.DefaultValue then
+        row:Reset();
+    end
 end
 
 local FramePools = {};
@@ -153,7 +155,6 @@ Rustbolt.Dialog = Dialog;
 
 ------------
 
---[[
 function ExampleDialog()
     local dialog = {
         Title = "uwu",
@@ -168,9 +169,10 @@ function ExampleDialog()
                 RowType = Enum.DialogRowType.Checkbox,
                 Title = "check deez",
             }
-        },
-        SubmitText = "bark"
+        }
     };
-    RustboltDialog:CreateAndShow(dialog);
+    local callback = function(data)
+        DevTools_Dump(data);
+    end
+    Dialog.CreateAndShowDialog(dialog, callback);
 end
-]]--

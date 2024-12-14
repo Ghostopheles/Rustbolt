@@ -7,6 +7,12 @@
         <Size x="175" y="30" />
         <Layers>
             <Layer level="ARTWORK">
+                <Texture parentKey="RequiredIcon" atlas="quest-legendary-available"
+                    useAtlasSize="true" hidden="true" scale="0.75">
+                    <Anchors>
+                        <Anchor point="LEFT" relativePoint="RIGHT" />
+                    </Anchors>
+                </Texture>
                 <FontString parentKey="Title" inherits="RustboltCleanFont" justifyH="LEFT">
                     <Anchors>
                         <Anchor point="LEFT" />
@@ -14,6 +20,9 @@
                 </FontString>
             </Layer>
         </Layers>
+        <Scripts>
+            <OnLoad method="OnLoad" />
+        </Scripts>
     </Frame>
 
     <Frame name="RustboltDialogRowTemplate_Editbox" inherits="RustboltDialogRowTemplate_Base"
