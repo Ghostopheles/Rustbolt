@@ -65,7 +65,7 @@ RustboltDialogMixin = {};
 
 function RustboltDialogMixin:OnLoad()
     ButtonFrameTemplate_HidePortrait(self);
-    self.SubmitButton:SetText("$Submit$");
+    self.SubmitButton:SetText(L.DIALOG_SUBMIT_TEXT);
     self.SubmitButton:SetScript("OnClick", function() self:OnSubmit() end);
 
     self.InitialAnchor = CreateAnchor("TOP", self, "TOP", 0, -20);
@@ -137,7 +137,20 @@ end
 
 ------------
 
-function DialogTest()
+---@class RustboltDialog
+local Dialog = {};
+
+function Dialog.CreateAndShowDialog(dialogStructure, callback)
+    local dialog = RustboltDialog;
+    dialog:CreateAndShow(dialogStructure, callback);
+end
+
+Rustbolt.Dialog = Dialog;
+
+------------
+
+--[[
+function ExampleDialog()
     local dialog = {
         Title = "uwu",
         Tag = "TEST_DIALOG",
@@ -156,3 +169,4 @@ function DialogTest()
     };
     RustboltDialog:CreateAndShow(dialog);
 end
+]]--

@@ -47,6 +47,9 @@ Features/Toolbar/Toolbar.xml
 Features/Notifications/Notifications.xml
 Features/Notifications/Manager.xml
 
+Features/Dialog/Dialog.lua
+Features/Dialog/Dialog.xml
+
 Features/Reflection/Reflection.lua
 
 Features/Outliner/Outliner.lua
@@ -64,9 +67,6 @@ Templates/Shared/Fonts.xml
 
 Templates/Shared/ResizeBar.lua
 Templates/Shared/ResizeBar.xml
-
-Templates/Editor/Dialog/Dialog.lua
-Templates/Editor/Dialog/Dialog.xml
 
 Templates/Editor/Reflection/ReflectionEntry.lua
 Templates/Editor/Reflection/ReflectionEntry.xml
