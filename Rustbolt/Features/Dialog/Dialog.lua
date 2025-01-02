@@ -55,6 +55,7 @@ end
 ---@class RustboltDialogField
 ---@field RowType RustboltDialogRowType
 ---@field Title string
+---@field Tag string
 ---@field Required boolean?
 
 ---@class RustboltDialogStructure
@@ -78,6 +79,7 @@ function RustboltDialogMixin:OnLoad()
     self.GridLayout = AnchorUtil.CreateGridLayout(direction, stride, paddingX, paddingY);
 
     self.Rows = {};
+    self.TagToRow = {};
 end
 
 function RustboltDialogMixin:OnShow()
@@ -89,17 +91,21 @@ function RustboltDialogMixin:OnHide()
 end
 
 function RustboltDialogMixin:OnSubmit()
-    local data = {};
-    for i, row in ipairs(self.Rows) do
-        local rowData = row:GetData();
-        tinsert(data, i, rowData);
-    end
-
     if self.Callback then
+        local data = self:CollectData();
         self.Callback(data);
     end
 
     self:Hide();
+end
+
+function RustboltDialogMixin:CollectData()
+    local data = {};
+    for tag, row in pairs(self.TagToRow) do
+        data[tag] = row:GetData();
+    end
+
+    return data;
 end
 
 function RustboltDialogMixin:Layout()
@@ -111,6 +117,7 @@ function RustboltDialogMixin:Reset()
         row:Release();
     end
     wipe(self.Rows);
+    wipe(self.TagToRow);
 end
 
 function RustboltDialogMixin:SetTag(tag)
@@ -130,6 +137,7 @@ function RustboltDialogMixin:CreateAndShow(dialogStructure, callback)
     for _, rowInfo in ipairs(dialogStructure.Fields) do
         local row = ElementFactory:CreateRow(rowInfo.RowType);
         row:Init(rowInfo.Title, rowInfo.Required);
+        self.TagToRow[rowInfo.Tag] = row;
         tinsert(self.Rows, row);
     end
 
@@ -164,10 +172,12 @@ function ExampleDialog()
                 RowType = Enum.DialogRowType.Editbox,
                 Title = "owo",
                 Required = true,
+                Tag = "Name"
             },
             {
                 RowType = Enum.DialogRowType.Checkbox,
                 Title = "check deez",
+                Tag = "Toggle"
             }
         }
     };
