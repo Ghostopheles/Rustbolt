@@ -39,4 +39,9 @@ L["BLUEPRINT_GRAPH_ZOOM_FORMAT"] = "Zoom: %d%%";
 L["DIALOG_SUBMIT_TEXT"] = "Submit";
 L["DIALOG_FIELD_REQUIRED_TOOLTIP"] = "This field is required.";
 
+L["DIALOG_NEW_PROJECT_TITLE"] = "New Project";
+L["DIALOG_NEW_PROJECT_NAME"] = "Project Name";
+L["DIALOG_NEW_PROJECT_AUTHOR"] = "Author";
+L["DIALOG_NEW_PROJECT_OPEN"] = "Open project";
+
 -- END LOCALIZATION

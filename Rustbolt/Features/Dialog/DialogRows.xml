@@ -4,7 +4,7 @@
     <Script file="DialogRows.lua" />
 
     <Frame name="RustboltDialogRowTemplate_Base" mixin="RustboltDialogRowBaseMixin" virtual="true">
-        <Size x="175" y="30" />
+        <Size x="225" y="30" />
         <Layers>
             <Layer level="ARTWORK">
                 <Texture parentKey="RequiredIcon" atlas="quest-legendary-available"

@@ -91,5 +91,6 @@ globals = {
 	"max",
 	"GetScaledCursorPosition",
 	"Saturate",
-	"wipe"
+	"wipe",
+	"strtrim"
 };

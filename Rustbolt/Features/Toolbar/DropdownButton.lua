@@ -8,6 +8,8 @@ end
 
 RustboltToolbarDropdownButtonMixin = {};
 
+--- see Toolbar.lua for typedefs
+
 ---@param data RustboltToolbarButtonConfig
 function RustboltToolbarDropdownButtonMixin:Init(data)
     self:SetText(data.Text);
@@ -31,12 +33,18 @@ function RustboltToolbarDropdownButtonMixin:OnLoad()
 end
 
 function RustboltToolbarDropdownButtonMixin:CreateToolbarMenu(rootDescription)
-    if (self.MenuConfig and self.MenuConfig.Title) and string.trim(self.MenuConfig.Title) ~= "" then
-        rootDescription:CreateTitle(self.LabelText);
+    if not self.MenuConfig then
+        return;
     end
-    rootDescription:CreateButton("Button", function(_)
-        print("uwu");
-    end);
+
+    local title = self.MenuConfig.Title;
+    if title and strtrim(title) ~= "" then
+        rootDescription:CreateTitle(title);
+    end
+
+    if self.MenuConfig.Generator then
+        self.MenuConfig.Generator(rootDescription);
+    end
 end
 
 function RustboltToolbarDropdownButtonMixin:SetText(text)

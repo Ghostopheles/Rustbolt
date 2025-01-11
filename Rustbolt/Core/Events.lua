@@ -21,6 +21,8 @@ Rustbolt.Events = {
 	ACTIVE_GAME_CHANGED = "ActiveGameChanged",
 	DIALOG_SHOWN = "DialogShown",
 	DIALOG_HIDDEN = "DialogHidden",
+	GAME_CREATED = "GameCreated",
+	GAME_DELETED = "GameDeleted"
 };
 
 Rustbolt.GameEvents = {

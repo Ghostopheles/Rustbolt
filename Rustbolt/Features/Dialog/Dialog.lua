@@ -114,7 +114,7 @@ end
 
 function RustboltDialogMixin:Reset()
     for _, row in pairs(self.Rows) do
-        row:Release();
+        ElementFactory:Release(row);
     end
     wipe(self.Rows);
     wipe(self.TagToRow);

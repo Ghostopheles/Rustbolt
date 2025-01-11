@@ -70,7 +70,7 @@ end
 ------------
 
 ---@class RustboltToolbarMenuConfig
----@field Elements table
+---@field Generator function
 ---@field OpenDirection? RustboltToolbarMenuOpenDirection
 ---@field Title? string
 
