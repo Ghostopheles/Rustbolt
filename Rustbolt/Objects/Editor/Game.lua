@@ -1,14 +1,4 @@
----@class RustboltGameAuthor
----@field Name string
----@field SocialHandle string?
----@field Role string?
-
----@alias RustboltGameVersion string | number
-
----@class RustboltGameSaved
----@field Name string
----@field Authors RustboltGameAuthor[]
----@field Version RustboltGameVersion
+--- See Types/Game.d.lua
 
 ---@class RustboltGame
 local Game = {};
@@ -71,7 +61,7 @@ end
 ---@class RustboltEditorObjects
 local EditorObjects = Rustbolt.EditorObjects;
 
----@param gameInfo RustboltGameSaved
+---@param gameInfo RustboltGame
 function EditorObjects.CreateGame(gameInfo)
     assert(gameInfo.Name and gameInfo.Name ~= "", "A name is required when creating games.");
     return CreateAndInitFromMixin(Game, gameInfo.Name, gameInfo.Authors, gameInfo.Version);

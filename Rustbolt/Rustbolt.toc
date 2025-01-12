@@ -85,6 +85,8 @@ Templates/Editor/Blueprints/BlueprintNode.xml
 Templates/Editor/Blueprints/BlueprintEditor.lua
 Templates/Editor/Blueprints/BlueprintEditor.xml
 
+Templates/Editor/Viewport/Viewport.xml
+
 Templates/Editor/Home.lua
 Templates/Editor/Home.xml
 
