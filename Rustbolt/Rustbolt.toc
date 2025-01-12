@@ -38,6 +38,7 @@ Core/Assets.lua
 Core/Maps.lua
 Core/GameManager.lua
 Core/GameState.lua
+Core/Editor.lua
 Core/Engine.lua
 
 Features/Toolbar/DropdownButton.xml

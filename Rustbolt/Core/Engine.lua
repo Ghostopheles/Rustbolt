@@ -164,6 +164,22 @@ function Engine:AddBasementButton(buttonInfo)
     self:AddToolbarButton(Rustbolt.Enum.ToolbarLocation.BOTTOM, buttonInfo);
 end
 
+--[[
+    it's gamin' time
+]]--
+
+---@param game RustboltGame Game to load
+---@param inEditor boolean? Load in editor
+function Engine:LoadGame(game, inEditor)
+    if inEditor then
+        local editor = Rustbolt.Editor;
+        editor:LoadGame(game);
+    else
+        local manager = Rustbolt.GameManager;
+        manager:LoadGame(game);
+    end
+end
+
 ------------
 
 Rustbolt.Engine = Engine;

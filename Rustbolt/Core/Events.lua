@@ -18,11 +18,12 @@ Rustbolt.Events = {
 	DISMISS_NOTIFICATION = "DismissNotification",
 	CLEAR_NOTIFICATIONS = "ClearNotifications",
 	TOGGLE_FRAME_BORDERS = "ToggleFrameBorders",
-	ACTIVE_GAME_CHANGED = "ActiveGameChanged",
 	DIALOG_SHOWN = "DialogShown",
 	DIALOG_HIDDEN = "DialogHidden",
 	GAME_CREATED = "GameCreated",
-	GAME_DELETED = "GameDeleted"
+	GAME_DELETED = "GameDeleted",
+	ACTIVE_GAME_CHANGED = "ActiveGameChanged",
+	EDITOR_GAME_LOADED = "EditorGameLoaded"
 };
 
 Rustbolt.GameEvents = {

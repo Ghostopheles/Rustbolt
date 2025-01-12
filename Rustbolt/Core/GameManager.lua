@@ -54,12 +54,19 @@ end
 
 ---@param gameName string
 ---@return boolean success
-function GameManager:LoadGame(gameName)
+function GameManager:LoadGameByName(gameName)
     local game = self:GetGameByName(gameName);
     if not game then
         return false;
     end
 
+    self:SetActiveGame(game);
+    return true;
+end
+
+---@param game RustboltGame
+---@return boolean success
+function GameManager:LoadGame(game)
     self:SetActiveGame(game);
     return true;
 end
