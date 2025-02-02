@@ -34,8 +34,6 @@ Core/Constants.lua
 Core/Input.lua
 Core/Animations.lua
 Core/Themes.lua
-Core/Assets.lua
-Core/Maps.lua
 Core/GameManager.lua
 Core/GameState.lua
 Core/Editor.lua

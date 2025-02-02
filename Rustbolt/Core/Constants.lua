@@ -1,14 +1,16 @@
 ---@class RustboltConstants
 local Constants = {};
 
----@class RustboltMapConstants
-local Map = {};
-Map.MaxTileCount = 1400;
-Map.MaxTilesX = 50;
-Map.MaxTilesY = Map.MaxTileCount / Map.MaxTilesX;
-Map.TileSize = 32; -- 32x32
+------------
 
-Constants.Map = Map;
+---@class RustboltEditorCanvasConstants
+local EditorCanvas = {};
+EditorCanvas.TileWidth = 32;
+EditorCanvas.TileHeight = 32;
+
+Constants.EditorCanvas = EditorCanvas;
+
+------------
 
 Constants.SpritesheetSize = 512;
 
