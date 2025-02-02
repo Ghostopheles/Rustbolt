@@ -61,7 +61,12 @@ end
 ---@class RustboltEditorObjects
 local EditorObjects = Rustbolt.EditorObjects;
 
----@param gameInfo RustboltGame
+---@class RustboltGameInfo
+---@field Name string
+---@field Authors string[]
+---@field Version string
+
+---@param gameInfo RustboltGameInfo
 function EditorObjects.CreateGame(gameInfo)
     assert(gameInfo.Name and gameInfo.Name ~= "", "A name is required when creating games.");
     return CreateAndInitFromMixin(Game, gameInfo.Name, gameInfo.Authors, gameInfo.Version);

@@ -6,6 +6,7 @@ local L = AceLocale:NewLocale("Rustbolt", "enUS", true);
 L["ADDON_TITLE"] = "Rustbolt";
 
 L["WINDOW_TITLE"] = "Rustbolt Engine (Dev)";
+L["WINDOW_TITLE_PROJECT"] = "Rustbolt Engine: %s";
 
 L["VERSION_FORMAT"] = "Version: v%s";
 L["AUTHOR"] = "Created by Ghost";
@@ -41,5 +42,8 @@ L["DIALOG_NEW_PROJECT_TITLE"] = "New Project";
 L["DIALOG_NEW_PROJECT_NAME"] = "Project Name";
 L["DIALOG_NEW_PROJECT_AUTHOR"] = "Author";
 L["DIALOG_NEW_PROJECT_OPEN"] = "Open project";
+
+L["TOOLBAR_FILE_NEW_PROJECT"] = "New Project...";
+L["TOOLBAR_FILE_LOAD_PROJECT"] = "Load Project...";
 
 -- END LOCALIZATION

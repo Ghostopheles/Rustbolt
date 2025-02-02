@@ -27,6 +27,8 @@ function RustboltWindowMixin:OnLoad()
     self:SetScreen(SCREEN_NAMES.START);
 
     self.DefaultScreen = SCREEN_NAMES.START;
+
+    Registry:RegisterCallback(Events.PROJECT_CREATED, self.OnProjectCreated, self);
 end
 
 function RustboltWindowMixin:OnKeyDown(key)
@@ -40,6 +42,11 @@ end
 
 function RustboltWindowMixin:OnKeyUp(key)
     Input:OnKeyUp(key);
+end
+
+function RustboltWindowMixin:OnProjectCreated(game)
+    local title = L.WINDOW_TITLE_PROJECT:format(game:GetName());
+    self:SetTitle(title);
 end
 
 function RustboltWindowMixin:Toggle()

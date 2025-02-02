@@ -92,5 +92,6 @@ globals = {
 	"GetScaledCursorPosition",
 	"Saturate",
 	"wipe",
-	"strtrim"
+	"strtrim",
+	"GetKeysArray"
 };

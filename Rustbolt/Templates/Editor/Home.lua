@@ -33,11 +33,6 @@ function RustboltEditorHomeMixin:RegisterToolbarButtons()
                     Required = true,
                     Tag = "AuthorName"
                 },
-                {
-                    RowType = Enum.DialogRowType.Checkbox,
-                    Title = L.DIALOG_NEW_PROJECT_OPEN,
-                    Tag = "OpenProject"
-                },
             }
         };
 
@@ -47,13 +42,15 @@ function RustboltEditorHomeMixin:RegisterToolbarButtons()
                 Authors = {results.AuthorName},
                 Version = "0.0.1"
             });
-            local open = results.OpenProject;
-            Registry:TriggerEvent(Events.GAME_CREATED, game, open);
+            Registry:TriggerEvent(Events.PROJECT_CREATED, game);
         end
 
         local function GenerateMenu(rootDescription)
-            rootDescription:CreateButton("New project...", function()
+            rootDescription:CreateButton(L.TOOLBAR_FILE_NEW_PROJECT, function()
                 Rustbolt.Dialog.CreateAndShowDialog(dialogConfig, DialogCallback);
+            end);
+            rootDescription:CreateButton(L.TOOLBAR_FILE_LOAD_PROJECT, function()
+                print("uwu");
             end);
         end
 

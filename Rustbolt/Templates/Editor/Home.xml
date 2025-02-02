@@ -121,7 +121,7 @@
                 </Anchors>
             </Frame>
 
-            <Frame parentKey="ContentBrowser" inherits="RustboltEditorViewportTemplate">
+            <Frame parentKey="ContentBrowser">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeKey="$parent.Viewport"
                         relativePoint="BOTTOMLEFT" y="-2" />

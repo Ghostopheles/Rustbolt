@@ -4,5 +4,10 @@
     <Script file="Viewport.lua" />
 
     <Frame name="RustboltEditorViewportTemplate" mixin="RustboltEditorViewportMixin" virtual="true">
+        <Frames>
+            <Frame parentKey="Canvas" inherits="RustboltEditorViewportCanvasTemplate"
+                setAllPoints="true">
+            </Frame>
+        </Frames>
     </Frame>
 </Ui>
