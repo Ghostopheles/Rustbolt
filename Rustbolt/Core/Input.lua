@@ -25,12 +25,17 @@ local InputListenerBase = {
     Context = InputContextBase,
     Callback = function() end,
     Owner = nil,
+    OnUp = nil,
 };
 
 function InputListenerBase:Init(context, callback, owner)
     self.Context = context;
     self.Callback = callback;
     self.Owner = owner;
+end
+
+function InputListenerBase:SetOnUp(callback)
+    self.OnUp = callback;
 end
 
 ------------
@@ -169,6 +174,19 @@ end
 
 function InputManager:OnKeyUp(key)
     self.HandlingKeyUp = true;
+
+    local listeners = self.Keys[key];
+    if not listeners then
+        return false;
+    end
+
+    for _, listener in pairs(listeners) do
+        local context = listener.Context;
+        if listener.OnUp and self:EvaluateContext(context, key, true) then
+            local success, result = pcall(listener.OnUp, listener.Owner, key);
+            if not success then self:HandleInputError(key, result); end;
+        end
+    end
 
     self.HandlingKeyUp = false;
 end

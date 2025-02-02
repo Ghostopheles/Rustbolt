@@ -6,8 +6,20 @@ local E = Rustbolt.Enum;
 local L = Rustbolt.Strings;
 
 local TILE_TEMPLATE_NAME = "RustboltEditorViewportTileTemplate";
-local TILE_WIDTH = 32;
-local TILE_HEIGHT = 32;
+local TILE_WIDTH = Constants.EditorCanvas.TileWidth;
+local TILE_HEIGHT = Constants.EditorCanvas.TileHeight;
+
+------------
+
+-- Camera object that will represent our view
+-- the X and Y coords are the world coords of the top-left point of our camera
+local Camera = {
+    X = 0,
+    Y = 0,
+    Zoom = 0
+};
+
+------------
 
 RustboltEditorViewportCanvasMixin = {};
 
@@ -22,6 +34,15 @@ function RustboltEditorViewportCanvasMixin:OnShow()
     self:CreatePlaceholderTiles();
 end
 
+function RustboltEditorViewportCanvasMixin:OnUpdate(deltaTime)
+    if self.IsMouseDown then
+        local deltaX, deltaY = GetScaledCursorDelta();
+        Camera.X = Camera.X + -deltaX;
+        Camera.Y = Camera.Y + deltaY;
+        self:CreatePlaceholderTiles();
+    end
+end
+
 function RustboltEditorViewportCanvasMixin:OnTileEnter(tile)
     self.HighlightFrame:SetAllPoints(tile);
     self.HighlightFrame:Show();
@@ -30,6 +51,14 @@ end
 function RustboltEditorViewportCanvasMixin:OnTileLeave(tile)
     self.HighlightFrame:ClearAllPoints();
     self.HighlightFrame:Hide();
+end
+
+function RustboltEditorViewportCanvasMixin:OnMouseDown(button)
+    self.IsMouseDown = true;
+end
+
+function RustboltEditorViewportCanvasMixin:OnMouseUp(button)
+    self.IsMouseDown = false;
 end
 
 function RustboltEditorViewportCanvasMixin:OnKeyDown(key)
@@ -53,40 +82,27 @@ function RustboltEditorViewportCanvasMixin:CreateHighlightFrame()
 end
 
 function RustboltEditorViewportCanvasMixin:CreatePlaceholderTiles()
-    local maxTilesX = Round(self:GetWidth() / TILE_WIDTH);
-    local maxTilesY = Round(self:GetHeight() / TILE_HEIGHT);
+    local startTileX = floor(Camera.X / TILE_WIDTH);
+    local startTileY = floor(Camera.Y / TILE_HEIGHT);
+    local numTilesX = Round(self:GetWidth() / TILE_WIDTH) + 1;
+    local numTilesY = Round(self:GetHeight() / TILE_HEIGHT) + 1;
+    local offsetX = Camera.X % TILE_WIDTH;
+    local offsetY = Camera.Y % TILE_HEIGHT;
+
+    self.TilePool:ReleaseAll();
 
     local tiles = {};
-    for i=1, maxTilesX * maxTilesY do
-        local tile = self.TilePool:Acquire();
-        tile:SetSize(TILE_WIDTH, TILE_HEIGHT);
-        tile.Texture:SetColorTexture(0.25, 0.25, 0.25, 1);
-        tile:Show();
-        tinsert(tiles, tile);
-    end
+    for iy=startTileY, startTileY + numTilesY do
+        for ix=startTileX, startTileX + numTilesX do
+            local tile = self.TilePool:Acquire();
+            tile:SetSize(TILE_WIDTH, TILE_HEIGHT);
+            tile.Texture:SetColorTexture(0.25, 0.25, 0.25, 1);
+            tile:Show();
+            tinsert(tiles, tile);
 
-    self:LayoutTiles(tiles);
-
-    --local direction = GridLayoutMixin.Direction.TopLeftToBottomRight;
-    --local stride = maxTilesX;
-    --local layout = AnchorUtil.CreateGridLayout(direction, stride);
-
-    --local initialAnchor = AnchorUtil.CreateAnchor("TOPLEFT", self, "TOPLEFT", 0, 0);
-    --AnchorUtil.GridLayout(tiles, initialAnchor, layout);
-end
-
-function RustboltEditorViewportCanvasMixin:LayoutTiles(tiles)
-    local width = TILE_WIDTH;
-    local height = TILE_HEIGHT;
-    local stride = Round(self:GetWidth() / width);
-    local directionX = 1;
-    local directionY = -1;
-
-    for i, frame in ipairs(tiles) do
-        local row = floor((i - 1) / stride) + 1;
-        local col = (i - 1) % stride + 1;
-        local offsetX = (col - 1) * width * directionX;
-        local offsetY = (row - 1) * height * directionY;
-        PixelUtil.SetPoint(frame, "TOPLEFT", self, "TOPLEFT", offsetX, offsetY, 1, 1);
+            local screenX = (ix - startTileX) * TILE_WIDTH - offsetX;
+            local screenY = (iy - startTileY) * TILE_HEIGHT - offsetY;
+            tile:SetPoint("TOPLEFT", self, "TOPLEFT", screenX, -screenY);
+        end
     end
 end

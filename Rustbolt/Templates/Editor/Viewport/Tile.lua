@@ -1,6 +1,7 @@
 RustboltEditorViewportTileMixin = {};
 
 function RustboltEditorViewportTileMixin:OnLoad()
+    self:SetMouseClickEnabled(false); -- because OnEnter enables mouse clicks for some reason
 end
 
 function RustboltEditorViewportTileMixin:OnEnter()

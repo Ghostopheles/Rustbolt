@@ -4,10 +4,13 @@
     <Script file="Canvas.lua" />
 
     <Frame name="RustboltEditorViewportCanvasTemplate" mixin="RustboltEditorViewportCanvasMixin"
-        virtual="true">
+        clipChildren="true" enableMouseClicks="true" virtual="true">
         <Scripts>
             <OnLoad method="OnLoad" />
             <OnShow method="OnShow" />
+            <OnUpdate method="OnUpdate" />
+            <OnMouseDown method="OnMouseDown" />
+            <OnMouseUp method="OnMouseUp" />
         </Scripts>
     </Frame>
 </Ui>
