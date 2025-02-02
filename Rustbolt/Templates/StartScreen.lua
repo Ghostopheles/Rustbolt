@@ -1,5 +1,6 @@
 local Animations = Rustbolt.AnimationManager;
 local ThemeManager = Rustbolt.ThemeManager;
+local E = Rustbolt.Enum;
 local L = Rustbolt.Strings;
 
 RustboltStartScreenMixin = {};
@@ -9,21 +10,19 @@ function RustboltStartScreenMixin:OnLoad()
     self.BouncingText:SetText(L.START_SCREEN_BOUNCING_TEXT);
 
     local stack = self.ButtonStack;
-    stack.StartButton:SetText(L.START_SCREEN_NEW_GAME);
-    stack.LoadButton:SetText(L.START_SCREEN_LOAD_GAME);
+    stack.PlayButton:SetText(L.START_SCREEN_PLAY);
+    stack.PlayButton:Disable();
+    stack.EditorButton:SetText(L.START_SCREEN_EDITOR);
     stack.SettingsButton:SetText(L.START_SCREEN_SETTINGS);
-    stack.HelpButton:SetText(L.START_SCREEN_HELP);
-    stack.CreditsButton:SetText(L.START_SCREEN_CREDITS);
 
     stack.Version:SetText(format(L.VERSION_FORMAT, Rustbolt.Globals.Version));
     stack.Author:SetText(L.AUTHOR);
 
-    stack.LoadButton:Disable();
-
     ThemeManager:RegisterThemedTexture(self.Background, "START_SCREEN_BG");
     ThemeManager:RegisterThemedTexture(self.ButtonStack.Background, "START_SCREEN_BUTTON_STACK_BG");
 
-    stack.StartButton:SetScript("OnClick", function() self:OnStartButtonClick(); end);
+    stack.PlayButton:SetScript("OnClick", function() self:OnPlayButtonClick(); end);
+    stack.EditorButton:SetScript("OnClick", function() self:OnEditorButtonClick(); end);
 end
 
 function RustboltStartScreenMixin:OnShow()
@@ -36,5 +35,10 @@ function RustboltStartScreenMixin:OnHide()
     self.BouncingText:StopBounce();
 end
 
-function RustboltStartScreenMixin:OnStartButtonClick()
+function RustboltStartScreenMixin:OnPlayButtonClick()
+end
+
+function RustboltStartScreenMixin:OnEditorButtonClick()
+    local window = Rustbolt.Engine:GetWindow();
+    window:SetScreen(E.GameWindowScreen.EDITOR_HOME);
 end

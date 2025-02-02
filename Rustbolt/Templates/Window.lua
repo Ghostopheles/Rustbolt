@@ -24,9 +24,9 @@ function RustboltWindowMixin:OnLoad()
     self:RegisterScreen(self.EditorHome, SCREEN_NAMES.EDITOR_HOME);
     self:RegisterScreen(self.GameCanvas, SCREEN_NAMES.GAME);
     self:RegisterScreen(self.StartScreen, SCREEN_NAMES.START);
-    self:SetScreen(SCREEN_NAMES.EDITOR_HOME);
+    self:SetScreen(SCREEN_NAMES.START);
 
-    self.DefaultScreen = SCREEN_NAMES.EDITOR_HOME;
+    self.DefaultScreen = SCREEN_NAMES.START;
 end
 
 function RustboltWindowMixin:OnKeyDown(key)

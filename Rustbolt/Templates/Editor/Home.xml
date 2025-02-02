@@ -69,8 +69,6 @@
         </Scripts>
     </Frame>
 
-    <Frame name="RustboltEditorViewportTemplate" inherits="RustboltPHFrame" virtual="true" />
-
     <Frame name="RustboltEditorHomeTemplate"
         mixin="RustboltEditorHomeMixin" setAllPoints="true" virtual="true">
 

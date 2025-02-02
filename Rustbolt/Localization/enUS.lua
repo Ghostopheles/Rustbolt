@@ -12,11 +12,9 @@ L["AUTHOR"] = "Created by Ghost";
 
 L["START_SCREEN_TITLE"] = "$Game Title$";
 L["START_SCREEN_BOUNCING_TEXT"] = "$Bouncing Text$";
-L["START_SCREEN_NEW_GAME"] = "$New Game$";
-L["START_SCREEN_START_GAME"] = "$Start Game$";
-L["START_SCREEN_RESUME_GAME"] = "$Resume Game$";
-L["START_SCREEN_LOAD_GAME"] = "$Load Game$";
-L["START_SCREEN_SETTINGS"] = "$Settings$";
+L["START_SCREEN_PLAY"] = "Play";
+L["START_SCREEN_EDITOR"] = "Editor";
+L["START_SCREEN_SETTINGS"] = "Settings";
 L["START_SCREEN_HELP"] = "$Help$";
 L["START_SCREEN_CREDITS"] = "$Credits$";
 

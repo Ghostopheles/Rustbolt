@@ -52,16 +52,16 @@
                     </Layer>
                 </Layers>
                 <Frames>
-                    <Button parentKey="StartButton" inherits="SharedGoldRedButtonLargeTemplate">
+                    <Button parentKey="PlayButton" inherits="SharedGoldRedButtonLargeTemplate">
                         <Size x="200" y="40" />
                         <Anchors>
                             <Anchor point="TOP" y="-25" />
                         </Anchors>
                     </Button>
-                    <Button parentKey="LoadButton" inherits="SharedButtonTemplate">
+                    <Button parentKey="EditorButton" inherits="SharedButtonTemplate">
                         <Size x="165" y="30" />
                         <Anchors>
-                            <Anchor point="TOP" relativeKey="$parent.StartButton"
+                            <Anchor point="TOP" relativeKey="$parent.PlayButton"
                                 relativePoint="BOTTOM"
                                 y="-10" />
                         </Anchors>
@@ -69,23 +69,7 @@
                     <Button parentKey="SettingsButton" inherits="SharedButtonTemplate">
                         <Size x="165" y="30" />
                         <Anchors>
-                            <Anchor point="TOP" relativeKey="$parent.LoadButton"
-                                relativePoint="BOTTOM"
-                                y="-10" />
-                        </Anchors>
-                    </Button>
-                    <Button parentKey="HelpButton" inherits="SharedButtonTemplate">
-                        <Size x="165" y="30" />
-                        <Anchors>
-                            <Anchor point="TOP" relativeKey="$parent.SettingsButton"
-                                relativePoint="BOTTOM"
-                                y="-10" />
-                        </Anchors>
-                    </Button>
-                    <Button parentKey="CreditsButton" inherits="SharedButtonTemplate">
-                        <Size x="165" y="30" />
-                        <Anchors>
-                            <Anchor point="TOP" relativeKey="$parent.HelpButton"
+                            <Anchor point="TOP" relativeKey="$parent.EditorButton"
                                 relativePoint="BOTTOM"
                                 y="-10" />
                         </Anchors>
