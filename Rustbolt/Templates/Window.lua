@@ -22,7 +22,6 @@ function RustboltWindowMixin:OnLoad()
 
     self:RegisterScreen(self.Empty, SCREEN_NAMES.EMPTY);
     self:RegisterScreen(self.EditorHome, SCREEN_NAMES.EDITOR_HOME);
-    self:RegisterScreen(self.GameCanvas, SCREEN_NAMES.GAME);
     self:RegisterScreen(self.StartScreen, SCREEN_NAMES.START);
     self:SetScreen(SCREEN_NAMES.START);
 

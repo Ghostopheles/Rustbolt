@@ -95,14 +95,5 @@ Templates/Editor/Home.xml
 Templates/StartScreen.lua
 Templates/StartScreen.xml
 
-Templates/GameCanvas.lua
-Templates/GameCanvas.xml
-
 Templates/Window.lua
 Templates/Window.xml
-
-Templates/AssetPicker.lua
-Templates/AssetPicker.xml
-
-Templates/DevTools.lua
-Templates/DevTools.xml
