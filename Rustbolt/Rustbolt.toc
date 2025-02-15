@@ -1,4 +1,4 @@
-## Interface: 110002
+## Interface: 110100
 ## Title: Rustbolt
 ## Notes: An open-source game engine designed for World of Warcraft
 ## Author: Ghostopheles
