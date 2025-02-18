@@ -93,5 +93,6 @@ globals = {
 	"Saturate",
 	"wipe",
 	"strtrim",
-	"GetKeysArray"
+	"GetKeysArray",
+	"Round"
 };
