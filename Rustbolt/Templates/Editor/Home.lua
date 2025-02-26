@@ -50,6 +50,7 @@ function RustboltEditorHomeMixin:RegisterToolbarButtons()
                 Rustbolt.Dialog.CreateAndShowDialog(dialogConfig, DialogCallback);
             end);
             rootDescription:CreateButton(L.TOOLBAR_FILE_LOAD_PROJECT, function()
+                --TODO: implement
                 print("uwu");
             end);
         end
