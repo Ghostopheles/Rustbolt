@@ -34,7 +34,7 @@ function RustboltEditorViewportCanvasMixin:OnShow()
     self:CreatePlaceholderTiles();
 end
 
-function RustboltEditorViewportCanvasMixin:OnUpdate(deltaTime)
+function RustboltEditorViewportCanvasMixin:OnUpdate()
     if self.IsMouseDown then
         local deltaX, deltaY = GetScaledCursorDelta();
         Camera.X = Camera.X + -deltaX;
@@ -48,23 +48,17 @@ function RustboltEditorViewportCanvasMixin:OnTileEnter(tile)
     self.HighlightFrame:Show();
 end
 
-function RustboltEditorViewportCanvasMixin:OnTileLeave(tile)
+function RustboltEditorViewportCanvasMixin:OnTileLeave()
     self.HighlightFrame:ClearAllPoints();
     self.HighlightFrame:Hide();
 end
 
-function RustboltEditorViewportCanvasMixin:OnMouseDown(button)
+function RustboltEditorViewportCanvasMixin:OnMouseDown()
     self.IsMouseDown = true;
 end
 
-function RustboltEditorViewportCanvasMixin:OnMouseUp(button)
+function RustboltEditorViewportCanvasMixin:OnMouseUp()
     self.IsMouseDown = false;
-end
-
-function RustboltEditorViewportCanvasMixin:OnKeyDown(key)
-end
-
-function RustboltEditorViewportCanvasMixin:OnKeyUp(key)
 end
 
 function RustboltEditorViewportCanvasMixin:CreateHighlightFrame()
