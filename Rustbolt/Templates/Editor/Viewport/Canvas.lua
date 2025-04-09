@@ -12,6 +12,8 @@ local TILE_WIDTH = Constants.EditorCanvas.TileWidth;
 local TILE_HEIGHT = Constants.EditorCanvas.TileHeight;
 local TILE_COLOR = CreateColor(0.25, 0.25, 0.25, 1);
 
+local CANVAS_DRAG_BUTTON = "LeftButton";
+
 ------------
 
 -- Camera object that will represent our view
@@ -64,8 +66,13 @@ function RustboltEditorViewportCanvasMixin:OnTileLeave()
     self.HighlightFrame:Hide();
 end
 
-function RustboltEditorViewportCanvasMixin:OnMouseDown()
-    self.IsMouseDown = true;
+function RustboltEditorViewportCanvasMixin:OnMouseDown(button)
+    if button ~= CANVAS_DRAG_BUTTON then
+        self:SetPropagateMouseClicks(true);
+    else
+        self:SetPropagateMouseClicks(false);
+        self.IsMouseDown = true;
+    end
 end
 
 function RustboltEditorViewportCanvasMixin:OnMouseUp()
@@ -111,6 +118,7 @@ function RustboltEditorViewportCanvasMixin:CreateHighlightFrame()
     return f;
 end
 
+--TODO: make this faster
 function RustboltEditorViewportCanvasMixin:Render()
     -- if the viewport is valid, it means we don't need to re-render anything
     if self:IsViewportValid() then

@@ -24,6 +24,7 @@ Rustbolt.Events = {
 	GAME_DELETED = "GameDeleted",
 	PROJECT_CREATED = "ProjectCreated",
 	PROJECT_LOADED = "ProjectLoaded",
+	EDITOR_TILE_CLICK = "EditorTileClick"
 };
 
 Rustbolt.GameEvents = {

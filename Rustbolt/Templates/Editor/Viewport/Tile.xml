@@ -4,7 +4,7 @@
     <Script file="Tile.lua" />
 
     <Frame name="RustboltEditorViewportTileTemplate" mixin="RustboltEditorViewportTileMixin"
-        enableMouseMotion="true"
+        enableMouseMotion="true" enableMouseClicks="true"
         virtual="true">
         <Layers>
             <Layer level="ARTWORK">
@@ -20,6 +20,8 @@
             <OnLoad method="OnLoad" />
             <OnEnter method="OnEnter" />
             <OnLeave method="OnLeave" />
+            <OnMouseDown method="OnMouseDown" />
+            <OnMouseUp method="OnMouseUp" />
         </Scripts>
     </Frame>
 </Ui>

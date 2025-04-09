@@ -1,3 +1,8 @@
+local Events = Rustbolt.Events;
+local Registry = Rustbolt.EventRegistry;
+
+------------
+
 RustboltEditorViewportTileMixin = {};
 
 ---@class RustboltEditorViewportTileData
@@ -26,6 +31,14 @@ end
 function RustboltEditorViewportTileMixin:OnLeave()
     local canvas = self:GetParent();
     canvas:OnTileLeave(self);
+end
+
+function RustboltEditorViewportTileMixin:OnMouseDown(button)
+    Registry:TriggerEvent(Events.EDITOR_TILE_CLICKED, self, button);
+end
+
+function RustboltEditorViewportTileMixin:OnMouseUp(button)
+    Registry:TriggerEvent(Events.EDITOR_TILE_CLICKED, self, button);
 end
 
 function RustboltEditorViewportTileMixin:SetCoordinates(x, y)
