@@ -11,6 +11,7 @@
             <OnUpdate method="OnUpdate" />
             <OnMouseDown method="OnMouseDown" />
             <OnMouseUp method="OnMouseUp" />
+            <OnSizeChanged method="OnSizeChanged" />
         </Scripts>
     </Frame>
 </Ui>
