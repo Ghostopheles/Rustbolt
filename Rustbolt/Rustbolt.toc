@@ -23,6 +23,7 @@ Localization/enUS.lua
 Core/IO.lua
 Core/Enum.lua
 Core/Events.lua
+Core/FunctionUtil.lua
 Core/MathUtil.lua
 Core/ClassUtil.lua
 Core/TableUtil.lua
