@@ -8,6 +8,7 @@ RustboltEditorViewportMixin = {};
 function RustboltEditorViewportMixin:OnLoad()
     Registry:RegisterCallback(Events.EDITOR_TILE_CLICK, self.OnTileClick, self);
     Registry:RegisterCallback(Events.EDITOR_GAME_PRELOAD, self.OnGamePreload, self);
+    Registry:RegisterCallback(Events.EDITOR_LOAD_WORLD, self.OnEditorLoadWorld, self);
 end
 
 ---@param game RustboltGame
@@ -16,7 +17,7 @@ function RustboltEditorViewportMixin:OnGamePreload(game)
     if startupWorldID then
         local world = game:GetWorldByID(startupWorldID);
         if world then
-            self:LoadWorld(world);
+            self:OnEditorLoadWorld(world);
         end
     end
 end
@@ -28,7 +29,7 @@ function RustboltEditorViewportMixin:OnTileClick(button)
 end
 
 ---@param world RustboltWorld
-function RustboltEditorViewportMixin:LoadWorld(world)
+function RustboltEditorViewportMixin:OnEditorLoadWorld(world)
     local canvas = self.Canvas;
     canvas:SetWorld(world);
 end

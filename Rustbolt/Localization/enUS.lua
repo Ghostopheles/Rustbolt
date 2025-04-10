@@ -46,4 +46,12 @@ L["DIALOG_NEW_PROJECT_OPEN"] = "Open project";
 L["TOOLBAR_FILE_NEW_PROJECT"] = "New Project...";
 L["TOOLBAR_FILE_LOAD_PROJECT"] = "Load Project...";
 
+L["TOOLBAR_EDIT_NEW"] = "New...";
+L["TOOLBAR_EDIT_NEW_WORLD"] = "World";
+
+L["DIALOG_NEW_WORLD_TITLE"] = "World Configuration";
+L["DIALOG_NEW_WORLD_NAME"] = "World Name";
+L["DIALOG_NEW_WORLD_ID"] = "Unique ID";
+
+
 -- END LOCALIZATION

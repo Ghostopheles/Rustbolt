@@ -1,5 +1,7 @@
 --- See Types/Game.d.lua
 
+local Events = Rustbolt.Events;
+local Registry = Rustbolt.EventRegistry;
 local ObjectManager = Rustbolt.ObjectManager;
 
 ------------
@@ -14,6 +16,8 @@ function Game:Init(name, authors, version)
     self:SetName(name);
     self:SetAuthors(authors);
     self:SetVersion(version);
+
+    self.NumWorlds = 0;
 end
 
 ---@param name string
@@ -62,13 +66,20 @@ end
 
 ---@param world RustboltWorld
 function Game:AddWorld(world)
+    local isFirstWorld = false;
     if not self.Worlds then
         self.Worlds = {};
+        isFirstWorld = true;
     end
 
     local worldID = world:GetID();
     if not self.Worlds[worldID] then
         self.Worlds[worldID] = world;
+    end
+
+    if isFirstWorld then
+        self:SetStartupWorldID(worldID);
+        Registry:TriggerEvent(Events.EDITOR_LOAD_WORLD, world);
     end
 end
 

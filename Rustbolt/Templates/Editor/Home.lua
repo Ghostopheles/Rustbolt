@@ -17,7 +17,7 @@ function RustboltEditorHomeMixin:OnLoad()
 end
 
 function RustboltEditorHomeMixin:RegisterToolbarButtons()
-    do
+    do -- FILE BUTTON
         local dialogConfig = {
             Title = L.DIALOG_NEW_PROJECT_TITLE,
             Tag = "NEW_PROJECT_DIALOG",
@@ -52,6 +52,58 @@ function RustboltEditorHomeMixin:RegisterToolbarButtons()
         end
 
         local name = L.TOOLBAR_TITLE_FILE;
+        local buttonConfig = {
+            Text = name,
+            ID = "Toolbar_" .. name,
+            ButtonType = Rustbolt.Enum.ToolbarButtonType.DROPDOWN,
+            MenuConfig = {
+                Generator = GenerateMenu
+            }
+        };
+        Editor:AddAtticButton(buttonConfig);
+    end
+
+    do -- EDIT BUTTON
+        local function GenerateMenu(rootDescription)
+            local newObjectSubmenu = rootDescription:CreateButton(L.TOOLBAR_EDIT_NEW);
+            --TODO: generate this list of buttons dynamically based on the available objects to create
+            newObjectSubmenu:CreateButton(L.TOOLBAR_EDIT_NEW_WORLD, function()
+                local dialogConfig = {
+                    Title = L.DIALOG_NEW_WORLD_TITLE,
+                    Tag = "NEW_WORLD_DIALOG",
+                    Fields = {
+                        {
+                            RowType = Enum.DialogRowType.Editbox,
+                            Title = L.DIALOG_NEW_WORLD_NAME,
+                            Required = true,
+                            Tag = "Name"
+                        },
+                        {
+                            RowType = Enum.DialogRowType.Editbox,
+                            Title = L.DIALOG_NEW_WORLD_ID,
+                            Required = true,
+                            Tag = "ID"
+                        },
+                    }
+                };
+
+                local function DialogCallback(results)
+                    local game = Editor:GetActiveGame();
+                    DevTool:AddData(game, results.Name);
+                    if not game then
+                        print("no active game")
+                        return;
+                    end
+
+                    local world = Rustbolt.ObjectManager:CreateObject("World", results.Name, results.ID);
+                    game:AddWorld(world);  -- triggers the event to load the world if it's the first one
+                end
+
+                Rustbolt.Dialog.CreateAndShowDialog(dialogConfig, DialogCallback);
+            end);
+        end
+
+        local name = L.TOOLBAR_TITLE_EDIT;
         local buttonConfig = {
             Text = name,
             ID = "Toolbar_" .. name,

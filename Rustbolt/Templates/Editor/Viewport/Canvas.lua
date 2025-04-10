@@ -139,7 +139,6 @@ function RustboltEditorViewportCanvasMixin:Render()
     end
 
     if not self.World then
-        self:SetViewportValid(true);
         return;
     end
 

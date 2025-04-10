@@ -33,8 +33,8 @@ Constants.Editor = Editor;
 
 ---@class RustboltWorldConstants
 local World = {
-    MaxWidth = 2048,
-    MaxHeight = 2048,
+    MaxWidth = 64,
+    MaxHeight = 64,
 };
 
 Constants.World = World;
