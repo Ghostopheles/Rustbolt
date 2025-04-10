@@ -1,19 +1,46 @@
 local Engine = Rustbolt.Engine;
+local WorldConstants = Rustbolt.Constants.World;
 local ObjectManager = Rustbolt.ObjectManager;
 
 ------------
 
+local function GenerateTilesForEmptyWorld()
+    local w, h = WorldConstants.MaxWidth, WorldConstants.MaxHeight;
+    local tiles = {};
+    for x=1, w do
+        for y=1, h do
+            local tile = {
+                PositionX = x,
+                PositionY = y,
+                TileAtlas = "uitools-window-background"
+            };
+            tinsert(tiles, tile);
+        end
+    end
+
+    return tiles;
+end
+
+------------
+
+---@alias RustboltWorldID string
+
 ---@class RustboltWorldTile
+---@field PositionX number
+---@field PositionY number
+---@field TileTexture string
+---@field TileAtlas string
 
 ---@class RustboltWorldSettings
 
 ---@class RustboltWorld
----@field protected ID string Unique world identifier
+---@field protected ID RustboltWorldID Unique world identifier
 ---@field protected Name string Human-readable world name
 ---@field protected Objects RustboltObject[]
 ---@field protected NameToObject table<string, RustboltObject>
 ---@field protected Settings RustboltWorldSettings
 ---@field protected Tiles RustboltWorldTile[]
+---@field private CoordinatesToTile table<number, table<number, RustboltWorldTile>>
 local World = {};
 
 function World:Init(name, id)
@@ -22,6 +49,7 @@ function World:Init(name, id)
 
     self:SetName(name);
     self:SetID(id);
+    self:GenerateEmptyWorld();
 end
 
 function World:ApplyWorldSettings(worldSettings)
@@ -38,24 +66,54 @@ function World:GetName()
     return self.Name;
 end
 
----@param id string
+---@param id RustboltWorldID
 function World:SetID(id)
     self.ID = id;
 end
 
----@return string
+---@return RustboltWorldID
 function World:GetID()
     return self.ID;
 end
 
+function World:GenerateEmptyWorld()
+    assert(not self.Tiles, "World is already populated with tiles.");
+    self:SetWorldTiles(GenerateTilesForEmptyWorld());
+end
+
 ---@param tiles RustboltWorldTile[]
 function World:SetWorldTiles(tiles)
+    assert(not self.Tiles, "World tiles have already been set.");
+
     self.Tiles = tiles;
+    self.CoordinatesToTile = {};
+
+    for _, tile in ipairs(tiles) do
+        local x = tile.PositionX;
+        local y = tile.PositionY;
+
+        if not self.CoordinatesToTile[x] then
+            self.CoordinatesToTile[x] = {};
+        end
+
+        self.CoordinatesToTile[x][y] = tile;
+    end
 end
 
 ---@return RustboltWorldTile[]? tiles
 function World:GetWorldTiles()
     return self.Tiles;
+end
+
+---@param x number
+---@param y number
+---@return RustboltWorldTile? tile
+function World:GetWorldTileAtCoodinates(x, y)
+    if not self.CoordinatesToTile[x] then
+        return nil;
+    end
+
+    return self.CoordinatesToTile[x][y];
 end
 
 ---Creates and initializes an object in the world
@@ -87,11 +145,4 @@ end
 
 ------------
 
----@param name string
----@param id string
-local function CreateWorld(name, id)
-    local world = CreateAndInitFromMixin(World, name, id);
-    return world;
-end
-
-ObjectManager:RegisterObjectType("World", Rustbolt.ObjectType.WORLD, CreateWorld);
+ObjectManager:RegisterObjectType("World", Rustbolt.ObjectType.WORLD, World);

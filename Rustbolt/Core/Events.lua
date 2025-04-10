@@ -20,10 +20,10 @@ Rustbolt.Events = {
 	TOGGLE_FRAME_BORDERS = "ToggleFrameBorders",
 	DIALOG_SHOWN = "DialogShown",
 	DIALOG_HIDDEN = "DialogHidden",
-	GAME_CREATED = "GameCreated",
-	GAME_DELETED = "GameDeleted",
-	PROJECT_CREATED = "ProjectCreated",
-	PROJECT_LOADED = "ProjectLoaded",
+	EDITOR_GAME_CREATED = "EditorGameCreated",
+	EDITOR_GAME_PRELOAD = "EditorGamePreload",
+	EDITOR_GAME_LOADED = "EditorGameLoaded",
+	EDITOR_GAME_DELETED = "EditorGameDeleted",
 	EDITOR_TILE_CLICK = "EditorTileClick"
 };
 

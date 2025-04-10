@@ -1,8 +1,9 @@
 local Registry = Rustbolt.EventRegistry;
 local Events = Rustbolt.Events;
 local Enum = Rustbolt.Enum;
-local Engine = Rustbolt.Engine;
+local Editor = Rustbolt.Editor;
 local L = Rustbolt.Strings;
+local EditorConstants = Rustbolt.Constants.Editor;
 
 ------------
 
@@ -37,12 +38,7 @@ function RustboltEditorHomeMixin:RegisterToolbarButtons()
         };
 
         local function DialogCallback(results)
-            local game = Rustbolt.EditorObjects.CreateGame({
-                Name = results.Name,
-                Authors = {results.AuthorName},
-                Version = "0.0.1"
-            });
-            Registry:TriggerEvent(Events.PROJECT_CREATED, game);
+            Editor:NewGame(results.Name, {results.AuthorName}, EditorConstants.DefaultGameVersion);
         end
 
         local function GenerateMenu(rootDescription)
@@ -64,6 +60,6 @@ function RustboltEditorHomeMixin:RegisterToolbarButtons()
                 Generator = GenerateMenu
             }
         };
-        Engine:AddAtticButton(buttonConfig);
+        Editor:AddAtticButton(buttonConfig);
     end
 end

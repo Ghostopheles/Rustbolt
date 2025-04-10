@@ -72,7 +72,7 @@ function Game:AddWorld(world)
     end
 end
 
----@param worldID string
+---@param worldID RustboltWorldID
 ---@return RustboltWorld?
 function Game:GetWorldByID(worldID)
     if not self.Worlds then
@@ -82,9 +82,18 @@ function Game:GetWorldByID(worldID)
     return self.Worlds[worldID];
 end
 
----@return RustboltWorld[]?
+---@return table<RustboltWorldID, RustboltWorld> worlds?
 function Game:GetWorlds()
     return self.Worlds;
+end
+
+function Game:SetStartupWorldID(worldID)
+    assert(self.Worlds[worldID], "Specified startup world does not exist within the current game.");
+    self.StartupWorldID = worldID;
+end
+
+function Game:GetStartupWorldID()
+    return self.StartupWorldID;
 end
 
 ------------

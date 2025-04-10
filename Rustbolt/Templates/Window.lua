@@ -27,7 +27,7 @@ function RustboltWindowMixin:OnLoad()
 
     self.DefaultScreen = SCREEN_NAMES.START;
 
-    Registry:RegisterCallback(Events.PROJECT_CREATED, self.OnProjectCreated, self);
+    Registry:RegisterCallback(Events.EDITOR_GAME_CREATED, self.OnProjectCreated, self);
 
     --TODO: remove me
     EventUtil.RegisterOnceFrameEventAndCallback("LOADING_SCREEN_DISABLED", function()

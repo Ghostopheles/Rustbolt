@@ -27,8 +27,6 @@ RustboltEditorViewportCanvasMixin = {};
 function RustboltEditorViewportCanvasMixin:OnLoad()
     self.HighlightFrame = self:CreateHighlightFrame();
     self.TilePool = CreateFramePool("FRAME", self, TILE_TEMPLATE_NAME);
-
-    self.Zoom = 0;
 end
 
 function RustboltEditorViewportCanvasMixin:OnShow()
@@ -79,6 +77,15 @@ function RustboltEditorViewportCanvasMixin:OnMouseUp()
     self.IsMouseDown = false;
 end
 
+function RustboltEditorViewportCanvasMixin:Reset()
+    Camera.X = 0;
+    Camera.Y = 0;
+    Camera.Zoom = 0;
+
+    self.TilePool:ReleaseAll();
+    self:InvalidateViewport();
+end
+
 function RustboltEditorViewportCanvasMixin:RecalculateTileLimits()
     self:OnSizeChanged(self:GetWidth(), self:GetHeight());
 end
@@ -93,6 +100,12 @@ end
 
 function RustboltEditorViewportCanvasMixin:IsViewportValid()
     return self.ViewportValid;
+end
+
+---@param world RustboltWorld
+function RustboltEditorViewportCanvasMixin:SetWorld(world)
+    self.World = world;
+    self:Reset();
 end
 
 function RustboltEditorViewportCanvasMixin:SetWorldBounds(bounds)
@@ -122,6 +135,11 @@ end
 function RustboltEditorViewportCanvasMixin:Render()
     -- if the viewport is valid, it means we don't need to re-render anything
     if self:IsViewportValid() then
+        return;
+    end
+
+    if not self.World then
+        self:SetViewportValid(true);
         return;
     end
 
@@ -163,8 +181,15 @@ function RustboltEditorViewportCanvasMixin:Render()
                 Y = iy,
                 Width = TILE_WIDTH,
                 Height = TILE_HEIGHT,
-                Color = TILE_COLOR
             };
+
+            local worldTile = self.World:GetWorldTileAtCoodinates(ix, iy);
+            if worldTile then
+                tileData.TileTexture = worldTile.TileTexture;
+                tileData.TileAtlas = worldTile.TileAtlas;
+            else
+                tileData.Color = TILE_COLOR;
+            end
 
             if not self.Tiles[ix] then
                 self.Tiles[ix] = {};

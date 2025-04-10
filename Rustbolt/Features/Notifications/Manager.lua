@@ -1,4 +1,4 @@
-local Engine = Rustbolt.Engine;
+local Editor = Rustbolt.Editor;
 
 local Events = Rustbolt.Events;
 local Registry = Rustbolt.EventRegistry;
@@ -27,7 +27,7 @@ local function RegisterButton()
         OnClick = function() RustboltNotificationTray:Toggle(); end
     };
 
-    Engine:AddBasementButton(button);
+    Editor:AddBasementButton(button);
 
     RustboltNotificationTray:SetParent(RustboltWindow);
     RustboltNotificationTray:SetPoint("BOTTOMRIGHT", -45, 45);

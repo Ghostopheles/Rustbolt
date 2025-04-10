@@ -11,12 +11,25 @@ RustboltEditorViewportTileMixin = {};
 ---@field Width number
 ---@field Height number
 ---@field Color ColorMixin
+---@field TileTexture string
+---@field TileAtlas string
 
 ---@param data RustboltEditorViewportTileData
 function RustboltEditorViewportTileMixin:Init(data)
     self:SetSize(data.Width, data.Height);
     self:SetCoordinates(data.X, data.Y);
-    self:SetColor(data.Color);
+
+    if data.Color then
+        self:SetColor(data.Color);
+    end
+
+    if data.TileTexture then
+        self:SetTexture(data.TileTexture);
+    end
+
+    if data.TileAtlas then
+        self:SetAtlas(data.TileAtlas);
+    end
 end
 
 function RustboltEditorViewportTileMixin:OnLoad()
@@ -52,4 +65,12 @@ end
 
 function RustboltEditorViewportTileMixin:SetColor(color)
     self.Texture:SetColorTexture(color:GetRGBA());
+end
+
+function RustboltEditorViewportTileMixin:SetTexture(texture)
+    self.Texture:SetTexture(texture);
+end
+
+function RustboltEditorViewportTileMixin:SetAtlas(atlas)
+    self.Texture:SetAtlas(atlas, false);
 end

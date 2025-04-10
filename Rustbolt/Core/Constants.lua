@@ -22,4 +22,23 @@ Constants.Input = Input;
 
 ------------
 
+---@class RustboltEditorConstants
+local Editor = {
+    DefaultGameVersion = "0.0.1"
+};
+
+Constants.Editor = Editor;
+
+------------
+
+---@class RustboltWorldConstants
+local World = {
+    MaxWidth = 2048,
+    MaxHeight = 2048,
+};
+
+Constants.World = World;
+
+------------
+
 Rustbolt.Constants = Constants;

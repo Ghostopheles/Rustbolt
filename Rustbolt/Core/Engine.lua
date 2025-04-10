@@ -144,27 +144,6 @@ function Engine:IsValidEvent(eventName)
 end
 
 --[[
-    it's toolbar'n time
-]]--
-
----@param toolbar RustboltToolbarLocation
----@param buttonInfo RustboltToolbarButtonConfig
-function Engine:AddToolbarButton(toolbar, buttonInfo)
-    local screen = self:GetWindow().EditorHome;
-    screen[toolbar]:AddButton(buttonInfo);
-end
-
----@param buttonInfo RustboltToolbarButtonConfig
-function Engine:AddAtticButton(buttonInfo)
-    self:AddToolbarButton(Rustbolt.Enum.ToolbarLocation.TOP, buttonInfo);
-end
-
----@param buttonInfo RustboltToolbarButtonConfig
-function Engine:AddBasementButton(buttonInfo)
-    self:AddToolbarButton(Rustbolt.Enum.ToolbarLocation.BOTTOM, buttonInfo);
-end
-
---[[
     it's gamin' time
 ]]--
 

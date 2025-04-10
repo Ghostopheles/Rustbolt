@@ -36,9 +36,10 @@ function ObjectManager:RegisterObjectType(name, objectType, objectOrConstructor)
     self.ObjectTypes[name] = objectType;
 end
 
+---@generic T
 ---@param objectName string Object type name
 ---@param ... any Arguments passed to object constructor
----@return RustboltObject object
+---@return T object
 function ObjectManager:CreateObject(objectName, ...)
     local parent = self.Constructors[objectName];
     assert(parent, "Cannot create invalid object type");
@@ -57,11 +58,13 @@ function ObjectManager:CreateObject(objectName, ...)
         setmetatable(obj, self.ObjectTypeMetatables[objType]);
     end
 
-    -- generate a guid for the object
-    local guid = self:GenerateGUID();
-    assert(not self.ObjectRegistry[guid], "Duplicate object GUID found.");
-    obj:SetGUID(guid);
-    self.ObjectRegistry[guid] = obj;
+    -- generate and set a guid for the object, if supported
+    if type(obj.SetGUID) == "function" then
+        local guid = self:GenerateGUID();
+        assert(not self.ObjectRegistry[guid], "Duplicate object GUID found.");
+        obj:SetGUID(guid);
+        self.ObjectRegistry[guid] = obj;
+    end
 
     return obj;
 end

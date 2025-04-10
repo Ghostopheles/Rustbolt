@@ -10,6 +10,13 @@
         </Anchors>
 
         <Frames>
+            <Frame parentKey="DragBar" inherits="PanelDragBarTemplate">
+                <Size y="32" />
+                <Anchors>
+                    <Anchor point="TOPLEFT" />
+                    <Anchor point="TOPRIGHT" />
+                </Anchors>
+            </Frame>
             <Frame parentKey="Empty" hidden="true" />
             <Frame parentKey="EditorHome" inherits="RustboltEditorHomeTemplate" hidden="true" />
             <Frame parentKey="StartScreen" inherits="RustboltStartScreenTemplate" hidden="true" />
