@@ -95,5 +95,6 @@ globals = {
 	"strtrim",
 	"GetKeysArray",
 	"Round",
-	"random"
+	"random",
+	"Clamp"
 };

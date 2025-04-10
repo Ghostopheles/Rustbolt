@@ -20,6 +20,14 @@ local CANVAS_DRAG_BUTTON = "LeftButton";
 -- the X and Y coords are the world coords of the top-left point of our camera
 local Camera = {X = 0, Y = 0, Zoom = 0};
 
+local function ClampCameraPosition(x, y)
+    local minX = 0;
+    local maxX = 785;
+    local minY = 0;
+    local maxY = 1495;
+    return Clamp(x, minX, maxX), Clamp(y, minY, maxY);
+end
+
 ------------
 
 RustboltEditorViewportCanvasMixin = {};
@@ -40,8 +48,9 @@ function RustboltEditorViewportCanvasMixin:OnUpdate()
 
     if self.IsMouseDown then
         local deltaX, deltaY = GetScaledCursorDelta();
-        Camera.X = Camera.X + -deltaX;
-        Camera.Y = Camera.Y + deltaY;
+        local newX = Camera.X + -deltaX;
+        local newY = Camera.Y + deltaY;
+        Camera.X, Camera.Y = ClampCameraPosition(newX, newY);
         self:InvalidateViewport();
     end
     self:Render();
