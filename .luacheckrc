@@ -94,5 +94,6 @@ globals = {
 	"wipe",
 	"strtrim",
 	"GetKeysArray",
-	"Round"
+	"Round",
+	"random"
 };

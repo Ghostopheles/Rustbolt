@@ -56,6 +56,18 @@ function Game:Save()
     return true;
 end
 
+---@param world RustboltWorld
+function Game:AddWorld(world)
+    if not self.Worlds then
+        self.Worlds = {};
+    end
+
+    if not self.Worlds[world.MapID] then
+        self.Worlds[world.MapID] = world;
+    end
+
+end
+
 ------------
 
 ---@class RustboltEditorObjects

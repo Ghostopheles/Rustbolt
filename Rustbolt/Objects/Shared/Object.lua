@@ -1,3 +1,6 @@
+local Engine = Rustbolt.Engine;
+local ObjectManager = Rustbolt.ObjectManager;
+
 ---@class RustboltObject
 local Object = {
     Children = {},
@@ -40,8 +43,20 @@ function Object:SetName(name)
     self.Name = name;
 end
 
+---@return string
 function Object:GetName()
     return self.Name;
+end
+
+---@param guid RustboltGUID
+function Object:SetGUID(guid)
+    assert(not self.GUID, "Object already has an assigned GUID.");
+    self.GUID = guid;
+end
+
+---@return RustboltGUID
+function Object:GetGUID()
+    return self.GUID;
 end
 
 ---@return Vector3DMixin position
@@ -66,10 +81,10 @@ end
 ---@param ... any
 ---@return RustboltObject
 function Object:CreateSubObject(componentName, ...)
-    local component = Rustbolt.ObjectManager:CreateObject(componentName, ...);
+    local component = ObjectManager:CreateObject(componentName, ...);
     component:SetOwner(self);
 
-    Rustbolt.Engine:DispatchEventForObject(component, "Adopt");
+    Engine:DispatchEventForObject(component, "Adopt");
     tinsert(self.Children, component);
     return component;
 end
@@ -86,7 +101,7 @@ local ObjectMeta = {};
 function ObjectMeta:__newindex(key, value)
     if string.sub(key, 1, 2) == "On" then
         local eventName = string.sub(key, 3);
-        Rustbolt.Engine:RegisterForEvent(self, eventName);
+        Engine:RegisterForEvent(self, eventName);
     end
 
     rawset(self, key, value);
@@ -94,5 +109,5 @@ end
 
 ------------
 
-Rustbolt.ObjectManager:SetObjectTypeMetatable(Rustbolt.ObjectType.OBJECT, ObjectMeta);
-Rustbolt.ObjectManager:RegisterObjectType("Object", Rustbolt.ObjectType.OBJECT, Object);
+ObjectManager:SetObjectTypeMetatable(Rustbolt.ObjectType.OBJECT, ObjectMeta);
+ObjectManager:RegisterObjectType("Object", Rustbolt.ObjectType.OBJECT, Object);

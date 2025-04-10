@@ -8,6 +8,9 @@ Rustbolt.ObjectType = {
 ---@class RustboltObjectManager
 local ObjectManager = {};
 
+---@type table<RustboltGUID, RustboltObject>
+ObjectManager.ObjectRegistry = {};
+
 ---@type table<RustboltObjectType, table | function>
 ObjectManager.Constructors = {};
 
@@ -50,6 +53,12 @@ function ObjectManager:CreateObject(objectName, ...)
         setmetatable(obj, self.ObjectTypeMetatables[objType]);
     end
 
+    -- generate a guid for the object
+    local guid = self:GenerateGUID();
+    assert(not self.ObjectRegistry[guid], "Duplicate object GUID found.");
+    obj:SetGUID(guid);
+    self.ObjectRegistry[guid] = obj;
+
     return obj;
 end
 
@@ -68,6 +77,17 @@ function ObjectManager:GetObjectBase(objectName)
     if type(base) == "table" then
         return base;
     end
+end
+
+---@return RustboltGUID
+function ObjectManager:GenerateGUID()
+    local template ='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
+    local guid = string.gsub(template, '[xy]', function (c)
+        local v = (c == 'x') and random(0, 0xf) or random(8, 0xb)
+        return string.format('%x', v)
+    end);
+
+    return guid;
 end
 
 ------------

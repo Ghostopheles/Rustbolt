@@ -54,13 +54,15 @@ Features/Reflection/Reflection.lua
 
 Features/Outliner/Outliner.lua
 
+Objects/Shared/ObjectManager.lua
+Objects/Shared/Object.lua
+Objects/Shared/Game.lua
+Objects/Shared/World.lua
+
 Objects/Editor/EditorObjects.lua
 Objects/Editor/Game.lua
 
-Objects/Gameplay/ObjectManager.lua
-Objects/Gameplay/Object.lua
 Objects/Gameplay/Character.lua
-Objects/Gameplay/World.lua
 Objects/Gameplay/Mesh2D.lua
 
 Templates/Shared/Fonts.xml

@@ -5,6 +5,7 @@
 ---@field protected Children table<RustboltObject>
 ---@field protected World? RustboltWorld
 ---@field protected Name? string
+---@field protected GUID RustboltGUID
 ---@field DoTick boolean
 ---@field Position Vector3DMixin
 ---@field Replicated boolean

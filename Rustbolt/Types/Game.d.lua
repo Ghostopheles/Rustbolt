@@ -24,3 +24,4 @@
 ---@field Version RustboltGameVersion
 ---@field Levels RustboltGameLevel[]
 ---@field DefaultLevel RustboltGameLevel
+---@field Worlds table<string, RustboltWorld>
