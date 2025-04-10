@@ -59,9 +59,6 @@ Objects/Shared/Object.lua
 Objects/Shared/Game.lua
 Objects/Shared/World.lua
 
-Objects/Editor/EditorObjects.lua
-Objects/Editor/Game.lua
-
 Objects/Gameplay/Character.lua
 Objects/Gameplay/Mesh2D.lua
 
