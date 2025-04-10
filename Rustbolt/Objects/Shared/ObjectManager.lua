@@ -107,6 +107,12 @@ function ObjectManager:GenerateGUID()
     return guid;
 end
 
+---@param guid RustboltGUID
+---@return RustboltObject?
+function ObjectManager:GetObjectByGUID(guid)
+    return self.ObjectRegistry[guid];
+end
+
 ------------
 
 Rustbolt.ObjectManager = ObjectManager;

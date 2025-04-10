@@ -1,11 +1,23 @@
+local Engine = Rustbolt.Engine;
 local ObjectManager = Rustbolt.ObjectManager;
 
+------------
+
+---@class RustboltWorldTile
+
+---@class RustboltWorldSettings
+
 ---@class RustboltWorld
+---@field protected ID string Unique world identifier
+---@field protected Name string Human-readable world name
+---@field protected Objects RustboltObject[]
+---@field protected NameToObject table<string, RustboltObject>
+---@field protected Settings RustboltWorldSettings
+---@field protected Tiles RustboltWorldTile[]
 local World = {};
 
 function World:Init(name, id)
     self.Objects = {};
-    self.GUIDToObject = {};
     self.NameToObject = {};
 
     self:SetName(name);
@@ -36,6 +48,16 @@ function World:GetID()
     return self.ID;
 end
 
+---@param tiles RustboltWorldTile[]
+function World:SetWorldTiles(tiles)
+    self.Tiles = tiles;
+end
+
+---@return RustboltWorldTile[]? tiles
+function World:GetWorldTiles()
+    return self.Tiles;
+end
+
 ---Creates and initializes an object in the world
 ---@param name string
 ---@param objectTypeName string
@@ -44,10 +66,9 @@ end
 function World:CreateObject(name, objectTypeName, ...)
     local object = ObjectManager:CreateObject(objectTypeName, ...);
     object:SetWorld(self);
-    Rustbolt.Engine:DispatchEventForObject(object, "Create");
+    Engine:DispatchEventForObject(object, "Create");
 
     tinsert(self.Objects, object);
-    self.GUIDToObject[object:GetGUID()] = object;
     self.NameToObject[name] = object;
     return object;
 end
@@ -56,6 +77,12 @@ end
 ---@return RustboltObject? object
 function World:GetObjectByName(name)
     return self.Objects[name];
+end
+
+---@param guid RustboltGUID
+---@return RustboltObject? object
+function World:GetObjectByGUID(guid)
+    return ObjectManager:GetObjectByGUID(guid);
 end
 
 ------------
