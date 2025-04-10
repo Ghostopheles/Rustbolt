@@ -26,12 +26,12 @@ function World:GetName()
     return self.Name;
 end
 
----@param id RustboltGUID
+---@param id string
 function World:SetID(id)
     self.ID = id;
 end
 
----@return RustboltGUID
+---@return string
 function World:GetID()
     return self.ID;
 end
@@ -60,8 +60,11 @@ end
 
 ------------
 
-local function CreateWorld(...)
-    local world = CreateAndInitFromMixin(World, ...);
+---@param name string
+---@param id string
+local function CreateWorld(name, id)
+    local world = CreateAndInitFromMixin(World, name, id);
+    return world;
 end
 
-ObjectManager:RegisterObjectType("World", Rustbolt.ObjectType.WORLD, World);
+ObjectManager:RegisterObjectType("World", Rustbolt.ObjectType.WORLD, CreateWorld);

@@ -1,12 +1,16 @@
 
 ---@enum RustboltObjectType
 Rustbolt.ObjectType = {
-    WORLD = 1,
-    OBJECT = 2,
+    GAME = 1,
+    WORLD = 2,
+    OBJECT = 3,
 };
 
 ---@class RustboltObjectManager
 local ObjectManager = {};
+
+---@type table<RustboltObjectType, function>
+ObjectManager.ObjectSerializers = {};
 
 ---@type table<RustboltGUID, RustboltObject>
 ObjectManager.ObjectRegistry = {};
@@ -68,6 +72,19 @@ function ObjectManager:SetObjectTypeMetatable(objectType, metatable)
     if not self.ObjectTypeMetatables[objectType] then
         self.ObjectTypeMetatables[objectType] = metatable;
     end
+end
+
+---@param objectType RustboltObjectType
+---@param serializer function
+function ObjectManager:SetObjectTypeSerializer(objectType, serializer)
+    if not self.ObjectSerializers[objectType] then
+        self.ObjectSerializers[objectType] = serializer;
+    end
+end
+
+---@return function? serializer
+function ObjectManager:GetSerializerForObject(objectType)
+    return self.ObjectSerializers[objectType];
 end
 
 ---@param objectName string Object name

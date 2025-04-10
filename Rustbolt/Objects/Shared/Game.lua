@@ -1,5 +1,9 @@
 --- See Types/Game.d.lua
 
+local ObjectManager = Rustbolt.ObjectManager;
+
+------------
+
 ---@class RustboltGame
 local Game = {};
 
@@ -62,24 +66,29 @@ function Game:AddWorld(world)
         self.Worlds = {};
     end
 
-    if not self.Worlds[world.MapID] then
-        self.Worlds[world.MapID] = world;
+    local worldID = world:GetID();
+    if not self.Worlds[worldID] then
+        self.Worlds[worldID] = world;
+    end
+end
+
+---@param worldID string
+---@return RustboltWorld?
+function Game:GetWorldByID(worldID)
+    if not self.Worlds then
+        return;
     end
 
+    return self.Worlds[worldID];
+end
+
+---@return RustboltWorld[]?
+function Game:GetWorlds()
+    return self.Worlds;
 end
 
 ------------
 
----@class RustboltEditorObjects
-local EditorObjects = Rustbolt.EditorObjects;
+-- TODO: Add a serializer for the game object
 
----@class RustboltGameInfo
----@field Name string
----@field Authors string[]
----@field Version string
-
----@param gameInfo RustboltGameInfo
-function EditorObjects.CreateGame(gameInfo)
-    assert(gameInfo.Name and gameInfo.Name ~= "", "A name is required when creating games.");
-    return CreateAndInitFromMixin(Game, gameInfo.Name, gameInfo.Authors, gameInfo.Version);
-end
+ObjectManager:RegisterObjectType("Game", Rustbolt.ObjectType.GAME, Game);
