@@ -45,6 +45,7 @@ L["DIALOG_NEW_PROJECT_OPEN"] = "Open project";
 
 L["TOOLBAR_FILE_NEW_PROJECT"] = "New Project...";
 L["TOOLBAR_FILE_LOAD_PROJECT"] = "Load Project...";
+L["TOOLBAR_FILE_SAVE_PROJECT"] = "Save Project...";
 
 L["TOOLBAR_EDIT_NEW"] = "New...";
 L["TOOLBAR_EDIT_NEW_WORLD"] = "World";

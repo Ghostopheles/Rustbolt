@@ -24,6 +24,7 @@ Rustbolt.Events = {
 	EDITOR_GAME_PRELOAD = "EditorGamePreload",
 	EDITOR_GAME_LOADED = "EditorGameLoaded",
 	EDITOR_GAME_DELETED = "EditorGameDeleted",
+	EDITOR_GAME_SAVED = "EditorGameSaved",
 	EDITOR_LOAD_WORLD = "EditorLoadWorld",
 	EDITOR_TILE_CLICK = "EditorTileClick"
 };

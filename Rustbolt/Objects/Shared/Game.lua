@@ -109,6 +109,24 @@ end
 
 ------------
 
--- TODO: Add a serializer for the game object
+local function SerializeGame(game)
+    local serializedGame = {
+        Name = game:GetName(),
+        Authors = game:GetAuthors(),
+        Version = game:GetVersion(),
+        Worlds = {},
+        StartupWorldID = game:GetStartupWorldID(),
+    };
+
+    local worldSerializer = ObjectManager:GetSerializerForObject(Rustbolt.ObjectType.WORLD);
+    if worldSerializer then
+        for _, world in pairs(game:GetWorlds()) do
+            table.insert(serializedGame.Worlds, worldSerializer(world));
+        end
+    end
+
+    return serializedGame;
+end
 
 ObjectManager:RegisterObjectType("Game", Rustbolt.ObjectType.GAME, Game);
+ObjectManager:SetObjectTypeSerializer(Rustbolt.ObjectType.GAME, SerializeGame);

@@ -131,6 +131,11 @@ function World:CreateObject(name, objectTypeName, ...)
     return object;
 end
 
+---@return RustboltObject[] objects
+function World:GetAllObjects()
+    return self.Objects;
+end
+
 ---@param name string
 ---@return RustboltObject? object
 function World:GetObjectByName(name)
@@ -145,4 +150,24 @@ end
 
 ------------
 
+local function SerializeWorld(world)
+    local serializedWorld = {
+        ID = world:GetID(),
+        Name = world:GetName(),
+        Tiles = world:GetWorldTiles(),
+        Objects = {},
+        Settings = world.Settings,
+    };
+
+    local objectSerializer = ObjectManager:GetSerializerForObject(Rustbolt.ObjectType.OBJECT);
+    if objectSerializer then
+        for _, object in pairs(world:GetAllObjects()) do
+            table.insert(serializedWorld.Objects, objectSerializer(object));
+        end
+    end
+
+    return serializedWorld;
+end
+
 ObjectManager:RegisterObjectType("World", Rustbolt.ObjectType.WORLD, World);
+ObjectManager:SetObjectTypeSerializer(Rustbolt.ObjectType.WORLD, SerializeWorld);

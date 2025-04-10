@@ -49,6 +49,9 @@ function RustboltEditorHomeMixin:RegisterToolbarButtons()
                 --TODO: implement
                 print("uwu");
             end);
+            rootDescription:CreateButton(L.TOOLBAR_FILE_SAVE_PROJECT, function()
+                Editor:SaveProject();
+            end);
         end
 
         local name = L.TOOLBAR_TITLE_FILE;
@@ -89,7 +92,6 @@ function RustboltEditorHomeMixin:RegisterToolbarButtons()
 
                 local function DialogCallback(results)
                     local game = Editor:GetActiveGame();
-                    DevTool:AddData(game, results.Name);
                     if not game then
                         print("no active game")
                         return;

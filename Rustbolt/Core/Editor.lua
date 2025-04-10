@@ -58,6 +58,26 @@ function Editor:AddBasementButton(buttonInfo)
     self:AddToolbarButton(Enum.ToolbarLocation.BOTTOM, buttonInfo);
 end
 
+--[[
+    it's savin' time
+]]--
+
+function Editor:SaveProject()
+    local game = self:GetActiveGame();
+    if not game then
+        return;
+    end
+
+    local serializer = Rustbolt.ObjectManager:GetSerializerForObject(Rustbolt.ObjectType.GAME);
+    if not serializer then
+        return;
+    end
+
+    local serializedGame = serializer(game);
+    RustboltGames[game:GetName()] = serializedGame;
+    Registry:TriggerEvent(Events.EDITOR_GAME_SAVED, game);
+end
+
 ------------
 
 Rustbolt.Editor = Editor;
