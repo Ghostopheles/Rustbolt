@@ -148,6 +148,14 @@ function World:GetObjectByGUID(guid)
     return ObjectManager:GetObjectByGUID(guid);
 end
 
+---@param object RustboltObject
+function World:AddObject(object)
+    assert(object, "Cannot add nil object to world");
+    assert(not self.NameToObject[object:GetName()], "Object with the same name already exists in the world");
+
+    self.Objects[object:GetName()] = object;
+end
+
 ------------
 
 local function SerializeWorld(world)
@@ -169,5 +177,21 @@ local function SerializeWorld(world)
     return serializedWorld;
 end
 
+local function DeserializeWorld(serializedWorld)
+    local world = CreateFromMixins(World);
+    world:Init(serializedWorld.Name, serializedWorld.ID);
+    world:SetWorldTiles(serializedWorld.Tiles);
+
+    local objectSerializer = ObjectManager:GetSerializerForObject(Rustbolt.ObjectType.OBJECT);
+    if objectSerializer then
+        for _, object in pairs(world:GetAllObjects()) do
+            world:AddObject(object);
+        end
+    end
+
+    return world;
+end
+
 ObjectManager:RegisterObjectType("World", Rustbolt.ObjectType.WORLD, World);
 ObjectManager:SetObjectTypeSerializer(Rustbolt.ObjectType.WORLD, SerializeWorld);
+ObjectManager:SetObjectTypeDeserializer(Rustbolt.ObjectType.WORLD, DeserializeWorld);

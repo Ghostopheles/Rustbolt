@@ -78,8 +78,20 @@ function Editor:SaveProject()
     Registry:TriggerEvent(Events.EDITOR_GAME_SAVED, game);
 end
 
+---@param projectName string
 function Editor:LoadProject(projectName)
-    
+    local game = RustboltGames[projectName];
+    if not game then
+        return;
+    end
+
+    local deserializer = Rustbolt.ObjectManager:GetDeserializerForObject(Rustbolt.ObjectType.GAME);
+    if not deserializer then
+        return;
+    end
+
+    local loadedGame = deserializer(game);
+    self:LoadGame(loadedGame);
 end
 
 ------------

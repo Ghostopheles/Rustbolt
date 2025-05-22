@@ -120,13 +120,33 @@ local function SerializeGame(game)
 
     local worldSerializer = ObjectManager:GetSerializerForObject(Rustbolt.ObjectType.WORLD);
     if worldSerializer then
-        for _, world in pairs(game:GetWorlds()) do
-            table.insert(serializedGame.Worlds, worldSerializer(world));
+        local worlds = game:GetWorlds();
+        if worlds then
+            for _, world in pairs(worlds) do
+                table.insert(serializedGame.Worlds, worldSerializer(world));
+            end
         end
     end
 
     return serializedGame;
 end
 
+local function DeserializeGame(serializedGame)
+    local game = CreateFromMixins(Game);
+    game:Init(serializedGame.Name, serializedGame.Authors, serializedGame.Version);
+    game:SetStartupWorldID(serializedGame.StartupWorldID);
+
+    local worldDeserializer = ObjectManager:GetDeserializerForObject(Rustbolt.ObjectType.WORLD);
+    if worldDeserializer then
+        for _, serializedWorld in ipairs(serializedGame.Worlds) do
+            local world = worldDeserializer(serializedWorld);
+            game:AddWorld(world);
+        end
+    end
+
+    return game;
+end
+
 ObjectManager:RegisterObjectType("Game", Rustbolt.ObjectType.GAME, Game);
 ObjectManager:SetObjectTypeSerializer(Rustbolt.ObjectType.GAME, SerializeGame);
+ObjectManager:SetObjectTypeDeserializer(Rustbolt.ObjectType.GAME, DeserializeGame);

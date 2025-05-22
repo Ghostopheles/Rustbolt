@@ -12,6 +12,9 @@ local ObjectManager = {};
 ---@type table<RustboltObjectType, function>
 ObjectManager.ObjectSerializers = {};
 
+---@type table<RustboltObjectType, function>
+ObjectManager.ObjectDeserializers = {};
+
 ---@type table<RustboltGUID, RustboltObject>
 ObjectManager.ObjectRegistry = {};
 
@@ -88,6 +91,19 @@ end
 ---@return function? serializer
 function ObjectManager:GetSerializerForObject(objectType)
     return self.ObjectSerializers[objectType];
+end
+
+---@param objectType RustboltObjectType
+---@param deserializer function
+function ObjectManager:SetObjectTypeDeserializer(objectType, deserializer)
+    if not self.ObjectDeserializers[objectType] then
+        self.ObjectDeserializers[objectType] = deserializer;
+    end
+end
+
+---@return function? deserializer
+function ObjectManager:GetDeserializerForObject(objectType)
+    return self.ObjectDeserializers[objectType];
 end
 
 ---@param objectName string Object name
