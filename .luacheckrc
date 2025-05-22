@@ -96,5 +96,8 @@ globals = {
 	"GetKeysArray",
 	"Round",
 	"random",
-	"Clamp"
+	"Clamp",
+	"C_AddOnProfiler",
+	"GetTimePreciseSec",
+	"Enum"
 };

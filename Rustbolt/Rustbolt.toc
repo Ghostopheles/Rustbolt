@@ -21,6 +21,7 @@ Rustbolt.lua
 Localization/enUS.lua
 
 Core/IO.lua
+Core/Profiling.lua
 Core/Enum.lua
 Core/Events.lua
 Core/FunctionUtil.lua

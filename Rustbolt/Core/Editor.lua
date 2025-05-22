@@ -78,6 +78,10 @@ function Editor:SaveProject()
     Registry:TriggerEvent(Events.EDITOR_GAME_SAVED, game);
 end
 
+function Editor:LoadProject(projectName)
+    
+end
+
 ------------
 
 Rustbolt.Editor = Editor;
