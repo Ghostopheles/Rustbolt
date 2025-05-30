@@ -50,4 +50,22 @@
         </Frames>
     </Frame>
 
+    <Frame name="RustboltDialogRowTemplate_ScrollBox" inherits="RustboltDialogRowTemplate_Base"
+        mixin="RustboltDialogRowScrollBoxMixin"
+        virtual="true">
+        <Frames>
+            <Frame parentKey="ScrollBox" inherits="WowScrollBoxList" setAllPoints="true" />
+            <EventFrame parentKey="ScrollBar" inherits="MinimalScrollBar">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.ScrollBox" relativePoint="TOPRIGHT" />
+                    <Anchor point="BOTTOMLEFT" relativeKey="$parent.ScrollBox"
+                        relativePoint="BOTTOMRIGHT" />
+                </Anchors>
+            </EventFrame>
+        </Frames>
+        <Scripts>
+            <OnLoad method="OnLoad" inherit="prepend" />
+        </Scripts>
+    </Frame>
+
 </Ui>

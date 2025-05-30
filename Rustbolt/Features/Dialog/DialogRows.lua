@@ -86,3 +86,45 @@ end
 function RustboltDialogRowCheckboxMixin:GetData()
     return self.Checkbox:GetChecked();
 end
+
+------------
+--- SCROLLBOX
+
+RustboltDialogScrollBoxElementMixin = {};
+
+------------
+
+RustboltDialogRowScrollBoxMixin = CreateFromMixins(RustboltDialogRowBaseMixin);
+
+---@diagnostic disable-next-line: duplicate-set-field
+function RustboltDialogRowScrollBoxMixin:OnLoad()
+    self.ScrollView = CreateScrollBoxListLinearView();
+
+    local function Initializer(frame, data)
+        frame:Init(data);
+    end
+    self.ScrollView:SetElementInitializer(Initializer);
+
+    ScrollUtil.InitScrollBoxListWithScrollBar(self.ScrollBox, self.ScrollBar, self.ScrollView);
+end
+
+function RustboltDialogRowScrollBoxMixin:Init(title, required)
+    self.RowType = RowType.ScrollBox;
+    self.DefaultValue = {};
+
+    self:SetTitle(title);
+    self:SetRequired(required);
+end
+
+function RustboltDialogRowScrollBoxMixin:OnReset()
+    self.ScrollBox:ScrollToStart();
+end
+
+function RustboltDialogRowScrollBoxMixin:GetData()
+    local data = {};
+    self.ScrollBox:ForEachFrame(function(frame)
+        table.insert(data, frame:GetData());
+    end);
+
+    return data;
+end

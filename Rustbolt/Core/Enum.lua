@@ -97,4 +97,11 @@ Rustbolt.Enum.ReflectionEntryType = {
 Rustbolt.Enum.DialogRowType = {
     Editbox = 1,
     Checkbox = 2,
+    ScrollBox = 3
+};
+
+---@enum RustboltDialogScrollBoxType
+Rustbolt.Enum.DialogScrollBoxType = {
+    SINGLE = 1,
+    MULTI = 2
 };
