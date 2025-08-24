@@ -49,7 +49,6 @@ function RustboltNotificationTrayMixin:OnLoad()
     self.DataProvider = CreateDataProvider();
 
     self.ScrollView = CreateScrollBoxListLinearView();
-    self.ScrollView:SetDataProvider(self.DataProvider);
 
     local DEFAULT_EXTENT = 20;
     self.ScrollView:SetPanExtent(DEFAULT_EXTENT);
@@ -60,6 +59,8 @@ function RustboltNotificationTrayMixin:OnLoad()
 
     self.Template = "RustboltNotificationPopupTemplate";
     self.ScrollView:SetElementInitializer(self.Template, Initializer);
+
+    self.ScrollView:SetDataProvider(self.DataProvider);
 
     ScrollUtil.InitScrollBoxListWithScrollBar(self.ScrollBox, self.ScrollBar, self.ScrollView);
 

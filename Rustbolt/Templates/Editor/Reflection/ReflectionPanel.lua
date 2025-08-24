@@ -14,7 +14,6 @@ function RustboltEditorReflectionPanelMixin:OnLoad()
     self.DataProvider = CreateTreeDataProvider();
 
     self.ScrollView = CreateScrollBoxListTreeListView();
-    self.ScrollView:SetDataProvider(self.DataProvider);
 
     local TOP_LEVEL_EXTENT = 20;
     local DEFAULT_EXTENT = 20;
@@ -43,6 +42,8 @@ function RustboltEditorReflectionPanelMixin:OnLoad()
 		local template = data.Template or "RustboltEditorReflectionEntryTemplate";
 		factory(template, Initializer);
 	end);
+
+    self.ScrollView:SetDataProvider(self.DataProvider);
 
     ScrollUtil.InitScrollBoxListWithScrollBar(self.ScrollBox, self.ScrollBar, self.ScrollView);
 
