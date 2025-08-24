@@ -90,8 +90,6 @@ end
 ------------
 --- SCROLLBOX
 
-RustboltDialogScrollBoxElementMixin = {};
-
 ------------
 
 RustboltDialogRowScrollBoxMixin = CreateFromMixins(RustboltDialogRowBaseMixin);
@@ -100,12 +98,20 @@ RustboltDialogRowScrollBoxMixin = CreateFromMixins(RustboltDialogRowBaseMixin);
 function RustboltDialogRowScrollBoxMixin:OnLoad()
     self.ScrollView = CreateScrollBoxListLinearView();
 
+    --TODO: improve this in the future to support more types of data in the scrollbox
     local function Initializer(frame, data)
-        frame:Init(data);
+        frame:SetText(data);
     end
-    self.ScrollView:SetElementInitializer(Initializer);
+    self.ScrollView:SetElementInitializer("RustboltDialogScrollBoxElementTemplate", Initializer);
 
     ScrollUtil.InitScrollBoxListWithScrollBar(self.ScrollBox, self.ScrollBar, self.ScrollView);
+
+    -- readjust title
+    self.Title:ClearAllPoints();
+    self.Title:SetPoint("TOP");
+
+    self.RequiredIcon:ClearAllPoints();
+    self.RequiredIcon:SetPoint("LEFT", self.Title, "RIGHT", 5, 0);
 end
 
 function RustboltDialogRowScrollBoxMixin:Init(title, required)
@@ -118,6 +124,7 @@ end
 
 function RustboltDialogRowScrollBoxMixin:OnReset()
     self.ScrollBox:ScrollToStart();
+    self:ResetDataProvider();
 end
 
 function RustboltDialogRowScrollBoxMixin:GetData()
@@ -127,4 +134,27 @@ function RustboltDialogRowScrollBoxMixin:GetData()
     end);
 
     return data;
+end
+
+function RustboltDialogRowScrollBoxMixin:CheckDataProvider()
+    if not self.DataProvider then
+        self:ResetDataProvider();
+    end
+end
+
+function RustboltDialogRowScrollBoxMixin:ResetDataProvider()
+    self.DataProvider = CreateDataProvider();
+    self.ScrollView:SetDataProvider(self.DataProvider);
+end
+
+function RustboltDialogRowScrollBoxMixin:AddEntry(data)
+    self:CheckDataProvider();
+
+    return self.DataProvider:Insert(data);
+end
+
+function RustboltDialogRowScrollBoxMixin:AddEntries(data)
+    self:CheckDataProvider();
+
+    self.DataProvider:InsertTable(data);
 end

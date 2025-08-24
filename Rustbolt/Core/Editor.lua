@@ -30,11 +30,34 @@ function Editor:LoadGame(game)
     Registry:TriggerEvent(Events.EDITOR_GAME_PRELOAD, game);
 end
 
+---@param projectName string
+function Editor:LoadGameByName(projectName)
+    local game = RustboltGames[projectName];
+    assert(game, "No project found with name: " .. tostring(projectName));
+
+    local deserializer = Rustbolt.ObjectManager:GetDeserializerForObject(Rustbolt.ObjectType.GAME);
+    if not deserializer then
+        return;
+    end
+
+    local loadedGame = deserializer(game);
+    self:LoadGame(loadedGame);
+end
+
 function Editor:NewGame(...)
     ---@type RustboltGame
     local game = Rustbolt.ObjectManager:CreateObject("Game", ...);
     Registry:TriggerEvent(Events.EDITOR_GAME_CREATED, game);
     self:LoadGame(game);
+end
+
+---@return string[] names
+function Editor:GetAllSavedGamesByName()
+    local names = {};
+    for name, _ in pairs(RustboltGames) do
+        tinsert(names, name);
+    end
+    return names;
 end
 
 --[[

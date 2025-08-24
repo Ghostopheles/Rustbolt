@@ -18,7 +18,7 @@ end
 
 function RustboltEditorHomeMixin:RegisterToolbarButtons()
     do -- FILE BUTTON
-        local dialogConfig = {
+        local newProjectDialogConfig = {
             Title = L.DIALOG_NEW_PROJECT_TITLE,
             Tag = "NEW_PROJECT_DIALOG",
             Fields = {
@@ -33,21 +33,38 @@ function RustboltEditorHomeMixin:RegisterToolbarButtons()
                     Title = L.DIALOG_NEW_PROJECT_AUTHOR,
                     Required = true,
                     Tag = "AuthorName"
-                },
+                }
             }
         };
 
-        local function DialogCallback(results)
+        local function NewProjectDialogCallback(results)
             Editor:NewGame(results.Name, {results.AuthorName}, EditorConstants.DefaultGameVersion);
+        end
+
+        local loadProjectDialogConfig = {
+            Title = L.DIALOG_LOAD_PROJECT_TITLE,
+            Tag = "LOAD_PROJECT_DIALOG",
+            Fields = {
+                {
+                    RowType = Enum.DialogRowType.ScrollBox,
+                    Title = L.DIALOG_LOAD_PROJECT_SCROLLBOX_NAME,
+                    Required = true,
+                    Tag = "ProjectName",
+                    ScrollBoxDataFunc = Editor.GetAllSavedGamesByName
+                }
+            }
+        };
+
+        local function LoadProjectDialogCallback(results)
+            Editor:LoadGameByName(results.ProjectName);
         end
 
         local function GenerateMenu(rootDescription)
             rootDescription:CreateButton(L.TOOLBAR_FILE_NEW_PROJECT, function()
-                Rustbolt.Dialog.CreateAndShowDialog(dialogConfig, DialogCallback);
+                Rustbolt.Dialog.CreateAndShowDialog(newProjectDialogConfig, NewProjectDialogCallback);
             end);
             rootDescription:CreateButton(L.TOOLBAR_FILE_LOAD_PROJECT, function()
-                --TODO: implement
-                print("uwu");
+                Rustbolt.Dialog.CreateAndShowDialog(loadProjectDialogConfig, LoadProjectDialogCallback);
             end);
             rootDescription:CreateButton(L.TOOLBAR_FILE_SAVE_PROJECT, function()
                 Editor:SaveProject();

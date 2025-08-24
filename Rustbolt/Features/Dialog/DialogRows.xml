@@ -2,6 +2,7 @@
     xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
 
     <Script file="DialogRows.lua" />
+    <Include file="ScrollTemplates.xml" />
 
     <Frame name="RustboltDialogRowTemplate_Base" mixin="RustboltDialogRowBaseMixin" virtual="true">
         <Size x="225" y="30" />
@@ -53,8 +54,13 @@
     <Frame name="RustboltDialogRowTemplate_ScrollBox" inherits="RustboltDialogRowTemplate_Base"
         mixin="RustboltDialogRowScrollBoxMixin"
         virtual="true">
+        <Size x="225" y="200" />
         <Frames>
-            <Frame parentKey="ScrollBox" inherits="WowScrollBoxList" setAllPoints="true" />
+            <Frame parentKey="ScrollBox" inherits="WowScrollBoxList">
+                <Anchors>
+                    <Anchor point="TOP" relativeKey="$parent.Title" relativePoint="BOTTOM" y="-3" />
+                </Anchors>
+            </Frame>
             <EventFrame parentKey="ScrollBar" inherits="MinimalScrollBar">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeKey="$parent.ScrollBox" relativePoint="TOPRIGHT" />

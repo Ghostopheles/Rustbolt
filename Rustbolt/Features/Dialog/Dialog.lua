@@ -57,6 +57,8 @@ end
 ---@field Title string
 ---@field Tag string
 ---@field Required boolean?
+---@field ScrollBoxData table?
+---@field ScrollBoxDataFunc fun():table?
 
 ---@class RustboltDialogStructure
 ---@field Title string
@@ -137,6 +139,17 @@ function RustboltDialogMixin:CreateAndShow(dialogStructure, callback)
     for _, rowInfo in ipairs(dialogStructure.Fields) do
         local row = ElementFactory:CreateRow(rowInfo.RowType);
         row:Init(rowInfo.Title, rowInfo.Required);
+
+        -- scrollbox shenanigans
+        if rowInfo.RowType == Enum.DialogRowType.ScrollBox then
+            if rowInfo.ScrollBoxData then
+                row:AddEntries(rowInfo.ScrollBoxData);
+            elseif rowInfo.ScrollBoxDataFunc then
+                local data = rowInfo.ScrollBoxDataFunc();
+                row:AddEntries(data);
+            end
+        end
+
         self.TagToRow[rowInfo.Tag] = row;
         tinsert(self.Rows, row);
     end
@@ -163,7 +176,7 @@ Rustbolt.Dialog = Dialog;
 
 ------------
 
-function ExampleDialog()
+local function ExampleDialog()
     local dialog = {
         Title = "uwu",
         Tag = "TEST_DIALOG",
