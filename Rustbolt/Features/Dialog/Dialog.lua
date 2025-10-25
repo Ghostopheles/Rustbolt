@@ -73,7 +73,7 @@ function RustboltDialogMixin:OnLoad()
     self.SubmitButton:SetText(L.DIALOG_SUBMIT_TEXT);
     self.SubmitButton:SetScript("OnClick", function() self:OnSubmit() end);
 
-    self.InitialAnchor = CreateAnchor("TOP", self, "TOP", 0, -20);
+    self.InitialAnchor = CreateAnchor("TOP", self, "TOP", 0, -30);
 
     local direction = GridLayoutMixin.Direction.BottomToTop; -- inverted because ???
     local stride = 5;
