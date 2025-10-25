@@ -59,6 +59,8 @@
             <Frame parentKey="ScrollBox" inherits="WowScrollBoxList">
                 <Anchors>
                     <Anchor point="TOP" relativeKey="$parent.Title" relativePoint="BOTTOM" y="-3" />
+                    <Anchor point="BOTTOMLEFT" />
+                    <Anchor point="BOTTOMRIGHT" />
                 </Anchors>
             </Frame>
             <EventFrame parentKey="ScrollBar" inherits="MinimalScrollBar">

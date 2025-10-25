@@ -46,6 +46,7 @@ function ElementFactory:CreateRow(rowType)
 end
 
 function ElementFactory:Release(row)
+    row:ClearAllPoints();
     local pool = self:GetPoolForRowType(row.RowType);
     pool:Release(row);
 end

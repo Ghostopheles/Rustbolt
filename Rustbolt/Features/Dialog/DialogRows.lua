@@ -123,7 +123,6 @@ function RustboltDialogRowScrollBoxMixin:Init(title, required)
 end
 
 function RustboltDialogRowScrollBoxMixin:OnReset()
-    self.ScrollBox:ScrollToStart();
     self:ResetDataProvider();
 end
 
